@@ -13,11 +13,14 @@ class Character {
     int maxHealth;
     int baseAtk;
     int baseDef;
+    int bonusAtk;
+    int bonusDef;
     int moveSpeed;
     Direction dirLooking;
     AttackType defaultAtk;
+
     public:
-        void attack(Character::AttackType attackType);
-        void move();
+        virtual void attack(AttackType attackType, Character *target);
+        virtual void move(Direction direction);
 };
 #endif
