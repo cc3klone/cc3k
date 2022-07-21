@@ -4,7 +4,7 @@
 #include "../observer.h"
 #include "../subject.h"
 #include "../item/item.h"
-#include "../character/enemy.h"
+#include "../character/enemy/enemy.h"
 
 enum class CellType {Room, Wall, Passage, Stair};
 enum class Direction {North, East, South, West};
