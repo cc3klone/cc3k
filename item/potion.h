@@ -13,8 +13,7 @@ class Potion : public Item {
 
     public:
         Potion(PotionType);
-        void passiveEffect();
-        void consumableEffect();
+        void consumableEffect() override;
 };
 
 #endif

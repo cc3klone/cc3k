@@ -8,8 +8,7 @@ class Gold : public Item {
     int value;
 
     public:
-        void passiveEffect();
-        void consumableEffect();
+        void consumableEffect() override;
 };
 
 #endif

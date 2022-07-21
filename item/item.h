@@ -7,8 +7,8 @@ class Item {
         int uuid;
   
     public:
-        virtual void passiveEffect();
-        virtual void consumableEffect();
+        virtual void passiveEffect() = 0;
+        virtual void consumableEffect() = 0;
 };
 
 #endif

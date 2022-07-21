@@ -7,8 +7,7 @@ class BarrierSuit : public Item {
     const static bool consumable = false;
 
     public:
-        void passiveEffect();
-        void consumableEffect();
+        void passiveEffect() override;
 };
 
 #endif
