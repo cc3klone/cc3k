@@ -61,7 +61,7 @@ CellType Floor::checkCoord(int x, int y) {
     return CellType::Invalid;
 }
 
-Item *Floor::checkItem(int x, int y) {
+Item *Floor::popItem(int x, int y) {
     void *object;
 
     try {
@@ -70,13 +70,17 @@ Item *Floor::checkItem(int x, int y) {
         return nullptr;
     }
 
+    // Checks that the object at x, y is actually an item; Removes it from the map and returns its pointer if so
     auto iter = find(floorItems.begin(), floorItems.end(), object);
     if(iter != floorItems.last()) {
+        map[x][y].first() = '.';
         map[x][y].second() = nullptr;
         floorItems.erase(iter);
+
+        return object;
     }
 
-    return object;
+    return nullptr;
 }
 
 Enemy *Floor::checkEnemy(int x, int y) {
@@ -87,12 +91,8 @@ Enemy *Floor::checkEnemy(int x, int y) {
     } catch(out_of_range &e) {
         return nullptr;
     }
-
-    auto iter = find(floorEnemies.begin(), floorEnemies.end(), object);
-    if(iter != floorEnemies.last()) {
-        map[x][y].second() = nullptr;
-        floorEnemies.erase(iter);
-    }
-
-    return object;
+    
+    // Checks that the object at x, y is actually an enemy
+    if(find(floorEnemies.begin(), floorEnemies.end(), object) != floorEnemies.last()) return object;
+    return nullptr;
 }

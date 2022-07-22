@@ -20,7 +20,7 @@ class Floor : public Observer, public Subject {
     public:
         void cmdDisplay();
         CellType checkCoord(int, int);
-        Item *checkItem(int, int);
+        Item *popItem(int, int);
         Enemy *checkEnemy(int, int);
 };
 
