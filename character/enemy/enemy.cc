@@ -1,23 +1,62 @@
 #include "enemy.h"
 #include <random>
+#include <map>
 
-Direction Enemy::generateDirection() { //requires a vector of directions in floor
+Direction Enemy::generateDirection() {
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine rng{seed};
-    std::uniform_int_distribution<size_t> dis(0, v.size() - 1);
-	Direction randomDirection = v[dis(rng)]; //v is the name of the vector, should be replaced later
+    std::uniform_int_distribution<> distr(0, 7);
+	Direction randomDirection = static_cast<Direction>(distr(rng));
     return randomDirection;
 }
 
-void Enemy::attack(AttackType attackType, Character *target) { //need to be implemented
-    if (didNotMiss) {
-        attack(attackType, target);
-    } else {
-        //do nothing because missed
+bool Enemy::attackMissed() {
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine rng{seed};
+    std::uniform_int_distribution<> distr(0, 1);
+	int randomAttack = static_cast<int>(distr(rng));
+    if (randomAttack == 0) {
+        return true;
     }
+    return false;
 }
 
-void Enemy::move(Direction direction) {
-    Direction randomDirection = generateDirection;
+void Enemy::enemyAttack(AttackType attackType, Character *target) {
+    if (attackMissed()) {
+        return;
+    }
+
+    attack(attackType, target);
+}
+
+//enemyMove moves the enemy in a random direction
+void Enemy::enemyMove() {
+    Direction randomDirection;
+    //uses a map to store the previous failed directions (directions that the enemy cannot move to ie. stairs)
+    std::map<Direction, bool> failedDirections; 
+
+    while (failedDirections.size() != 8) { //if the size of the map = 8 then all directions have failed
+        randomDirection = generateDirection(); 
+
+        if (failedDirections.count(randomDirection) == 1) { //checks if the newly generated direction is already a failed direction
+            continue;
+        }
+
+        int tempX = this->positionX;
+        int tempY = this->positionY;
+        changePosition(randomDirection, tempX, tempY);
+        CellType nextCell = this->thisFloor->checkCoord(tempX, tempY);
+
+        if (nextCell == CellType::Room) { //enemies can only move to the "Room" cell type
+            break;
+        }
+
+        failedDirections[randomDirection] = true;
+    }
+
+    if (failedDirections.size() == 8) {
+        return;
+    }
+
     move(randomDirection);
 }

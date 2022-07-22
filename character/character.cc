@@ -1,16 +1,7 @@
 #include "character.h"
 
-void Character::attack(AttackType attackType, Character *target) {
-    target->health = (target->health + target->baseDef + target->bonusDef) - 
-                     (this->baseAtk + this->bonusAtk);
-}
-
-//Maybe this move method should return bool, true indicating that the move was successful, false otherwise
-void Character::move(Direction direction) {
-    int newPositionX = positionX;
-    int newPositionY = positionY;
-
-    switch (direction) {
+void Character::changePosition(Direction direction, int &newPositionX, int &newPositionY) {
+        switch (direction) {
     case Direction::North:
         newPositionY -= 1;
         break;
@@ -42,12 +33,13 @@ void Character::move(Direction direction) {
     default:
         break;
     }
+}
 
-    //need to be implemented, need size varaible in thisFloor to check if the move is a valid move
-    if (validMove) {
-        positionX = newPositionX;
-        positionY = newPositionY;
-    } else {
-        //invalid move
-    }
+void Character::attack(AttackType attackType, Character *target) {
+    target->health = (target->health + target->baseDef + target->bonusDef) - 
+                     (this->baseAtk + this->bonusAtk);
+}
+
+void Character::move(Direction direction) {
+    changePosition(direction, positionX, positionY);
 }

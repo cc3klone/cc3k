@@ -16,11 +16,11 @@ class Character {
     int bonusAtk;
     int bonusDef;
     int moveSpeed;
-    Direction dirLooking;
     AttackType defaultAtk;
 
+    void changePosition(Direction direction, int &newPositionX, int &newPositionY);
     public:
-        virtual void attack(AttackType attackType, Character *target);
-        virtual void move(Direction direction);
+        void attack(AttackType attackType, Character *target);
+        void move(Direction direction);
 };
 #endif

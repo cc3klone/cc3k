@@ -14,6 +14,7 @@ class Player : public Character {
         void inventoryAdd(Item *item);
         void inventoryDrop(Item *item);
         int inventoryFind(int uuid);
+        void playerAttack(AttackType attackType, Character *target);
         ~Player();
 };
 #endif
