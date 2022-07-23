@@ -4,12 +4,10 @@
 
 class PlayerVisitor {
     public:
-        void intRace(PlayerRaces playerRace); 
-        int getAtk();
-        void setAtk(int setAtk);
-        int getDef();
-        void setDef(int setDef);
-        int getHP();
-        void setHP(int setHP);
+        virtual void setAtk(int &currentAtk, int addAtk);
+        virtual void setDef(int &currentDef, int addDef);
+        virtual void setHP(int &currentHP, int maxHP, int addHP);
+        virtual void setGold(double &currentGold, int addGold);
+        ~PlayerVisitor();
 };
 #endif

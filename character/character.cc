@@ -1,37 +1,37 @@
 #include "character.h"
 
 void Character::changePosition(Direction direction, int &newPositionX, int &newPositionY) {
-        switch (direction) {
-    case Direction::North:
-        newPositionY -= 1;
-        break;
-    case Direction::South:
-        newPositionY += 1;
-        break;
-    case Direction::East:
-        newPositionX += 1;
-        break;
-    case Direction::West:
-        newPositionX -= 1;
-        break;
-    case Direction::NorthEast:
-        newPositionX += 1;
-        newPositionY -= 1;
-        break;
-    case Direction::NorthWest:
-        newPositionX -= 1;
-        newPositionY -= 1;
-        break;
-    case Direction::SouthEast:
-        newPositionX += 1;
-        newPositionY += 1;
-        break;
-    case Direction::SouthWest:
-        newPositionX -= 1;
-        newPositionY += 1;
-        break;
-    default:
-        break;
+    switch (direction) {
+        case Direction::North:
+            newPositionY -= this->moveSpeed;
+            break;
+        case Direction::South:
+            newPositionY += this->moveSpeed;
+            break;
+        case Direction::East:
+            newPositionX += this->moveSpeed;
+            break;
+        case Direction::West:
+            newPositionX -= this->moveSpeed;
+            break;
+        case Direction::NorthEast:
+            newPositionX += this->moveSpeed;
+            newPositionY -= this->moveSpeed;
+            break;
+        case Direction::NorthWest:
+            newPositionX -= this->moveSpeed;
+            newPositionY -= this->moveSpeed;
+            break;
+        case Direction::SouthEast:
+            newPositionX += this->moveSpeed;
+            newPositionY += this->moveSpeed;
+            break;
+        case Direction::SouthWest:
+            newPositionX -= this->moveSpeed;
+            newPositionY += this->moveSpeed;
+            break;
+        default:
+            break;
     }
 }
 

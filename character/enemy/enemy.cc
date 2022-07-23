@@ -22,7 +22,7 @@ bool Enemy::attackMissed() {
 }
 
 void Enemy::enemyAttack(AttackType attackType, Character *target) {
-    if (attackMissed()) {
+    if (attackMissed()) { // 50% chance that enemy misses
         return;
     }
 

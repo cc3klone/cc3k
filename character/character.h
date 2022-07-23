@@ -5,18 +5,19 @@
 enum class AttackType { Melee };
 
 class Character {
-    Floor *thisFloor;
-    int positionX;
-    int positionY;
-    double gold;
-    int health;
-    int maxHealth;
-    int baseAtk;
-    int baseDef;
-    int bonusAtk;
-    int bonusDef;
-    int moveSpeed;
-    AttackType defaultAtk;
+    protected:
+        Floor *thisFloor;
+        int positionX;
+        int positionY;
+        double gold;
+        int health;
+        int maxHealth;
+        int baseAtk;
+        int baseDef;
+        int bonusAtk;
+        int bonusDef;
+        int moveSpeed;
+        AttackType defaultAtk;
 
     void changePosition(Direction direction, int &newPositionX, int &newPositionY);
     public:
