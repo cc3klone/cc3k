@@ -16,5 +16,6 @@ class Enemy : public Character {
         void transferGold(Player *player);
         Item *getInventory();
         void setInventory(Item *inventory);
+        ~Enemy();
 };
 #endif

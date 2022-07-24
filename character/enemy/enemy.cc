@@ -78,3 +78,7 @@ Item *Enemy::getInventory() {
 void Enemy::setInventory(Item *inventory) {
     this->inventory = inventory;
 }
+
+Enemy::~Enemy() {
+    delete this;
+}
