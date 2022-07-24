@@ -1,53 +1,69 @@
 #include "character.h"
 #include <cmath>
+#include <utility>
 
-void Character::changePosition(Direction direction, int &newPositionX, int &newPositionY) {
+std::pair<int, int> Character::changePosition(Direction direction, int currentX, int currentY, int scalar) {
+    int newPositionX, newPositionY;
     switch (direction) {
         case Direction::North:
-            newPositionY -= this->moveSpeed;
+            newPositionY -= scalar;
             break;
         case Direction::South:
-            newPositionY += this->moveSpeed;
+            newPositionY += scalar;
             break;
         case Direction::East:
-            newPositionX += this->moveSpeed;
+            newPositionX += scalar;
             break;
         case Direction::West:
-            newPositionX -= this->moveSpeed;
+            newPositionX -= scalar;
             break;
         case Direction::NorthEast:
-            newPositionX += this->moveSpeed;
-            newPositionY -= this->moveSpeed;
+            newPositionX += scalar;
+            newPositionY -= scalar;
             break;
         case Direction::NorthWest:
-            newPositionX -= this->moveSpeed;
-            newPositionY -= this->moveSpeed;
+            newPositionX -= scalar;
+            newPositionY -= scalar;
             break;
         case Direction::SouthEast:
-            newPositionX += this->moveSpeed;
-            newPositionY += this->moveSpeed;
+            newPositionX += scalar;
+            newPositionY += scalar;
             break;
         case Direction::SouthWest:
-            newPositionX -= this->moveSpeed;
-            newPositionY += this->moveSpeed;
+            newPositionX -= scalar;
+            newPositionY += scalar;
             break;
         default:
             break;
     }
+    return std::make_pair(newPositionX, newPositionY);
 }
 
 void Character::getAttacked(int damage) {
     this->health -= damage;
 }
 
-void Character::attack(AttackType attackType, Character *target) { //needs to be changed
+void Character::attack(Character *target) {
     int damage = ceil((100 / (100 + target->getCurrentDef())) * this->currentAtk);
     target->getAttacked(damage);
 }
 
 
 void Character::move(Direction direction) {
-    changePosition(direction, positionX, positionY);
+    std::pair<int, int> p = changePosition(direction, positionX, positionY, this->moveSpeed);
+    this->positionX = p.first;
+    this->positionY = p.second;
+}
+
+bool Character::isDead() {
+    if (this->health <= 0) {
+        return true;
+    }
+    return false;
+}
+
+std::pair<int, int> Character::getPos() {
+    return std::make_pair(positionX, positionY);
 }
 
 int Character::getHealth () {

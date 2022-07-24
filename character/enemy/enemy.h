@@ -10,7 +10,9 @@ class Enemy : public Character {
 
     public:
         virtual void specialAbility() = 0;
-        void enemyAttack(AttackType attackType, Character *target);
+        void enemyAttack(Character *target);
         void enemyMove();
+        Item *getInventory();
+        void setInventory(Item *inventory);
 };
 #endif

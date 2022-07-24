@@ -22,12 +22,12 @@ bool Enemy::attackMissed() {
     return false;
 }
 
-void Enemy::enemyAttack(AttackType attackType, Character *target) {
+void Enemy::enemyAttack(Character *target) {
     if (attackMissed()) { // 50% chance that enemy misses
         return;
     }
 
-    attack(attackType, target);
+    attack(target);
 }
 
 //enemyMove moves the enemy in a random direction
@@ -60,4 +60,12 @@ void Enemy::enemyMove() {
     }
 
     move(randomDirection);
+}
+
+Item *Enemy::getInventory() {
+    return inventory;
+}
+
+void Enemy::setInventory(Item *inventory) {
+    this->inventory = inventory;
 }

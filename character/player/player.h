@@ -23,11 +23,14 @@ class Player : public Character {
         void inventoryAdd(Item *item);
         void inventoryDrop(Item *item);
         int inventoryFind(int uuid);
-        void playerAttack(AttackType attackType, Character *target);
+        void playerAttack(Direction attackDirection);
+        void playerMove(Direction moveDirection);
+        void playerPickup(Direction pickupDirection);
         void getAttacked(int damage) override;
+        void resetStat();
         void setAtk(int addAtk);
         void setDef(int addDef);
-        void setHP(int addHP);
+        void setHp(int addHP);
         void setGold(int addGold);
         void setHasCompass();
         void setHasBarrierSuit();

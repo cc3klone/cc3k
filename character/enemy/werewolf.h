@@ -2,5 +2,8 @@
 #define _WEREWOLF_H_
 #include "enemy.h"
 
-class Werewolf : public Enemy {};
+class Werewolf : public Enemy {
+    public:
+        Werewolf(int positionX, int positionY, Floor *thisFloor, Item *inventory);
+};
 #endif

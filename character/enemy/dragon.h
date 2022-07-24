@@ -4,6 +4,6 @@
 
 class Dragon : public Enemy {
     public:
-        bool checkSurrounding() override;
+        Dragon(int positionX, int positionY, Floor *thisFloor, Item *inventory);
 };
 #endif

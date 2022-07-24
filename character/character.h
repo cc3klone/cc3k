@@ -18,12 +18,14 @@ class Character {
         int currentDef;
         int moveSpeed;
         AttackType defaultAtk;
+        std::pair<int, int> changePosition(Direction direction, int currentX, int currentY, int scalar);
 
-    void changePosition(Direction direction, int &newPositionX, int &newPositionY);
     public:
         virtual void getAttacked(int damage);
-        void attack(AttackType attackType, Character *target);
+        void attack(Character *target);
         void move(Direction direction);
+        bool isDead();
+        std::pair<int, int> getPos();
         int getHealth();
         int getCurrentAtk();
         int getCurrentDef();

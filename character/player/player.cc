@@ -1,5 +1,6 @@
 #include "player.h"
 #include <cmath>
+#include <utility>
 
 Player::Player(int positionX, int positionY, Floor *thisFloor) {
     this->thisFloor = thisFloor;
@@ -12,7 +13,7 @@ Player::Player(int positionX, int positionY, Floor *thisFloor) {
     this->baseDef = 20;
     this->currentAtk = this->baseAtk;
     this->currentDef = this->baseDef;
-    this->moveSpeed = 0;
+    this->moveSpeed = 1;
     this->defaultAtk = AttackType::Melee;
     this->score = 0;
     this->playerVisitor = HumanVisitor{};
@@ -62,7 +63,7 @@ Player::Player(PlayerRace playerRace, int positionX, int positionY, Floor *thisF
     this->gold = 0;
     this->currentAtk = this->baseAtk;
     this->currentDef = this->baseDef;
-    this->moveSpeed = 0;
+    this->moveSpeed = 1;
     this->defaultAtk = AttackType::Melee;
     this->score = 0;
 }
@@ -82,15 +83,35 @@ void Player::inventoryDrop(Item *item) { //needs to be changed
 
 int Player::inventoryFind(int uuid) {
     for (std::size_t i = 0; i < inventory.size(); ++i) {
-        if (inventory[i]->getId() == uuid) { //need a getter for uuid 
+        if (inventory[i]->getId() == uuid) {
             return i;
         }
     }
     return -1;
 }
 
-void Player::playerAttack(AttackType attackType, Character *target) {
-    attack(attackType, target);
+void Player::playerAttack(Direction attackDirection) {
+    std::pair<int, int> attackPosn = changePosition(attackDirection, this->positionX, this->positionY, 1);
+    Enemy *target = thisFloor->checkEnemy(attackPosn.first, attackPosn.second);
+    if (target == nullptr) return;
+    attack(target);
+}
+
+void Player::playerMove(Direction moveDirection) {
+    std::pair<int, int> movePosn = changePosition(moveDirection, this->positionX, this->positionY, this->moveSpeed);
+    CellType moveCell = thisFloor->checkCoord(movePosn.first, movePosn.second);
+    
+    if (moveCell == CellType::Room || moveCell == CellType::Passage || moveCell == CellType::Stair) {
+        move(moveDirection);
+        return;
+    }
+}
+
+void Player::playerPickup(Direction pickupDirection) {
+    std::pair<int, int> pickupPosn = changePosition(pickupDirection, this->positionX, this->positionY, 1);
+    Item *item = thisFloor->popItem(pickupPosn.first, pickupPosn.second);
+    if (item == nullptr) return;
+    item->onPickup(*this);
 }
 
 void Player::getAttacked(int damage) {
@@ -102,6 +123,12 @@ void Player::getAttacked(int damage) {
     
 }
 
+void Player::resetStat() {
+    this->currentAtk = this->baseAtk;
+    this->currentDef = this->baseDef;
+    this->hasCompass = false;
+}
+
 void Player::setAtk(int addAtk) {
     playerVisitor.setAtk(currentAtk, addAtk);
 }
@@ -110,7 +137,7 @@ void Player::setDef(int addDef) {
     playerVisitor.setDef(currentDef, addDef);
 }
 
-void Player::setHP(int addHP) {
+void Player::setHp(int addHP) {
     playerVisitor.setHP(health, maxHealth, addHP);
 }
 
