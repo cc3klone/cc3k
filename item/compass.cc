@@ -1,6 +1,5 @@
-#include "item.h"
 #include "compass.h"
 
-void Compass::passiveEffect() {
-    
+void Compass::onPickup(Player::Player *player) {
+    Player::inventoryAdd(this);
 }

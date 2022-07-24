@@ -3,11 +3,8 @@
 #include "item.h"
 
 class BarrierSuit : public Item {
-    const static bool passive = true;
-    const static bool consumable = false;
-
     public:
-        void passiveEffect() override;
+        void onPickup(Player::Player *player) override;
 };
 
 #endif
