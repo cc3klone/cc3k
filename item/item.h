@@ -1,14 +1,16 @@
 #ifndef _ITEM_H_
 #define _ITEM_H_
+#include "../character/player/player.h"
 
 class Item {
-        static bool passive;
-        static bool consumable;
+    protected:
         int uuid;
+        int positionX;
+        int positionY;
   
     public:
-        virtual void passiveEffect() = 0;
-        virtual void consumableEffect() = 0;
+        virtual void onPickup(Player::Player *player) = 0;
+        int getId();
 };
 
 #endif

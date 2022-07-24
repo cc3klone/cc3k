@@ -8,7 +8,7 @@ class Gold : public Item {
     int value;
 
     public:
-        void consumableEffect() override;
+        void onPickup(Player::Player *player) override;
 };
 
 #endif

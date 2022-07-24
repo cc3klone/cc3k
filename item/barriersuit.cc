@@ -1,6 +1,5 @@
-#include "item.h"
 #include "barriersuit.h"
 
-void passiveEffect() {
-    
+void BarrierSuit::onPickup(Player::Player *player) {
+    Player::inventoryAdd(this);
 }
