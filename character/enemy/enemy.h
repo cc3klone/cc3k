@@ -7,7 +7,6 @@ class Enemy : public Character {
     bool attackMissed();
 
     public:
-        virtual bool checkSurrounding() = 0;
         virtual void specialAbility() = 0;
         void enemyAttack(AttackType attackType, Character *target);
         void enemyMove();
