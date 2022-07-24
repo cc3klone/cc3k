@@ -17,6 +17,8 @@ Player::Player(int positionX, int positionY, Floor *thisFloor) {
     this->defaultAtk = AttackType::Melee;
     this->score = 0;
     this->playerVisitor = HumanVisitor{};
+    this->hasBarrierSuit = false;
+    this->hasCompass = false;
 }
 
 Player::Player(PlayerRace playerRace, int positionX, int positionY, Floor *thisFloor) {
@@ -66,6 +68,8 @@ Player::Player(PlayerRace playerRace, int positionX, int positionY, Floor *thisF
     this->moveSpeed = 1;
     this->defaultAtk = AttackType::Melee;
     this->score = 0;
+    this->hasBarrierSuit = false;
+    this->hasCompass = false;
 }
 
 void Player::inventoryAdd(Item *item) {
@@ -73,12 +77,15 @@ void Player::inventoryAdd(Item *item) {
 }
 
 void Player::inventoryDrop(Item *item) { //needs to be changed
+    Item *toBeRemoved = nullptr;
     for (std::size_t i = 0; i < inventory.size(); ++i) {
         if (inventory[i] == item) {
+            toBeRemoved = inventory[i];
             inventory.erase(inventory.begin() + i);
             return;
         }
     }
+    delete toBeRemoved;
 }
 
 int Player::inventoryFind(int uuid) {
@@ -111,7 +118,7 @@ void Player::playerPickup(Direction pickupDirection) {
     std::pair<int, int> pickupPosn = changePosition(pickupDirection, this->positionX, this->positionY, 1);
     Item *item = thisFloor->popItem(pickupPosn.first, pickupPosn.second);
     if (item == nullptr) return;
-    item->onPickup(*this);
+    item->onPickup(this);
 }
 
 void Player::getAttacked(int damage) {
@@ -154,5 +161,10 @@ void Player::setHasBarrierSuit() {
 }
 
 bool Player::getHasCompass() {
-    return hasCompass;
+    return this->hasCompass;
+}
+
+double Player::getScore() {
+    this->score = this->gold;
+    return this->score;
 }

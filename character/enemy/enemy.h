@@ -12,6 +12,8 @@ class Enemy : public Character {
         virtual void specialAbility() = 0;
         void enemyAttack(Character *target);
         void enemyMove();
+        void inventoryDrop();
+        void transferGold(Player *player);
         Item *getInventory();
         void setInventory(Item *inventory);
 };

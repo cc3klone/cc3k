@@ -62,6 +62,15 @@ void Enemy::enemyMove() {
     move(randomDirection);
 }
 
+void Enemy::inventoryDrop() {
+
+}
+
+void Enemy::transferGold(Player *player) {
+    player->setGold(this->gold);
+}
+
+
 Item *Enemy::getInventory() {
     return inventory;
 }

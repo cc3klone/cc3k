@@ -14,8 +14,8 @@ class Player : public Character {
     double score;
     std::vector<Item *> inventory;
     PlayerVisitor playerVisitor;
-    bool hasBarrierSuit = false;
-    bool hasCompass = false;
+    bool hasBarrierSuit;
+    bool hasCompass;
 
     public:
         Player(int positionX, int positionY, Floor *thisFloor);
@@ -27,7 +27,7 @@ class Player : public Character {
         void playerMove(Direction moveDirection);
         void playerPickup(Direction pickupDirection);
         void getAttacked(int damage) override;
-        void resetStat();
+        void resetStat(); // delete Compass
         void setAtk(int addAtk);
         void setDef(int addDef);
         void setHp(int addHP);
@@ -35,6 +35,7 @@ class Player : public Character {
         void setHasCompass();
         void setHasBarrierSuit();
         bool getHasCompass();
+        double getScore();
         ~Player();
 };
 #endif
