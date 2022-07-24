@@ -22,6 +22,9 @@ class Floor : public Observer, public Subject {
         CellType checkCoord(int, int);
         Item *popItem(int, int);
         Enemy *checkEnemy(int, int);
+        Player *getPlayer();
+
+        void moveEnemies();
 };
 
 #endif
