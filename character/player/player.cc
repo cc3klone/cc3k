@@ -1,4 +1,5 @@
 #include "player.h"
+#include <cmath>
 
 Player::Player(int positionX, int positionY, Floor *thisFloor) {
     this->thisFloor = thisFloor;
@@ -9,8 +10,8 @@ Player::Player(int positionX, int positionY, Floor *thisFloor) {
     this->gold = 0;
     this->baseAtk = 20;
     this->baseDef = 20;
-    this->bonusAtk = 0;
-    this->bonusDef = 0;
+    this->currentAtk = this->baseAtk;
+    this->currentDef = this->baseDef;
     this->moveSpeed = 0;
     this->defaultAtk = AttackType::Melee;
     this->score = 0;
@@ -59,8 +60,8 @@ Player::Player(PlayerRace playerRace, int positionX, int positionY, Floor *thisF
     this->positionX = positionX;
     this->positionY = positionY;
     this->gold = 0;
-    this->bonusAtk = 0;
-    this->bonusDef = 0;
+    this->currentAtk = this->baseAtk;
+    this->currentDef = this->baseDef;
     this->moveSpeed = 0;
     this->defaultAtk = AttackType::Melee;
     this->score = 0;
@@ -70,7 +71,7 @@ void Player::inventoryAdd(Item *item) {
     this->inventory.push_back(item);
 }
 
-void Player::inventoryDrop(Item *item) {
+void Player::inventoryDrop(Item *item) { //needs to be changed
     for (std::size_t i = 0; i < inventory.size(); ++i) {
         if (inventory[i] == item) {
             inventory.erase(inventory.begin() + i);
@@ -92,12 +93,21 @@ void Player::playerAttack(AttackType attackType, Character *target) {
     attack(attackType, target);
 }
 
+void Player::getAttacked(int damage) {
+    if (hasBarrierSuit) {
+        this->health -= ceil(damage/2);
+    } else {
+        this->health -= damage;
+    }
+    
+}
+
 void Player::setAtk(int addAtk) {
-    playerVisitor.setAtk(bonusAtk, addAtk);
+    playerVisitor.setAtk(currentAtk, addAtk);
 }
 
 void Player::setDef(int addDef) {
-    playerVisitor.setDef(bonusDef, addDef);
+    playerVisitor.setDef(currentDef, addDef);
 }
 
 void Player::setHP(int addHP) {
@@ -106,4 +116,16 @@ void Player::setHP(int addHP) {
 
 void Player::setGold(int addGold) {
     playerVisitor.setGold(gold, addGold);
+}
+
+void Player::setHasCompass() {
+    this->hasCompass = true;
+}
+
+void Player::setHasBarrierSuit() {
+    this->hasBarrierSuit = true;
+}
+
+bool Player::getHasCompass() {
+    return hasCompass;
 }

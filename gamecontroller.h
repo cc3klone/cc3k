@@ -7,11 +7,17 @@
 
 class GameController : public Observer {
     std::vector<Floor> floors;
+    int currentFloor;
+    string path;
 
     public:
-        void loadFloors(std::string);
-        void updateEnemies();
-        void moveEnemies();
+        void initGame();
+        void loadFloor(std::string);
+        void spawnEntities();
+        void listenInput();
+
+        void ascendFloor();
+        void endGame();
 };
 
 #endif

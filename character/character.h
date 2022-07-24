@@ -14,14 +14,18 @@ class Character {
         int maxHealth;
         int baseAtk;
         int baseDef;
-        int bonusAtk;
-        int bonusDef;
+        int currentAtk;
+        int currentDef;
         int moveSpeed;
         AttackType defaultAtk;
 
     void changePosition(Direction direction, int &newPositionX, int &newPositionY);
     public:
+        virtual void getAttacked(int damage);
         void attack(AttackType attackType, Character *target);
         void move(Direction direction);
+        int getHealth();
+        int getCurrentAtk();
+        int getCurrentDef();
 };
 #endif

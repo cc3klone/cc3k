@@ -1,6 +1,7 @@
 #include "enemy.h"
 #include <random>
 #include <map>
+#include <chrono>
 
 Direction Enemy::generateDirection() {
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
