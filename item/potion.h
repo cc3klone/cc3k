@@ -11,6 +11,7 @@ class Potion : public Item {
 
     public:
     Potion(int uuid, EffectType potionEffect, int effectScalar = 0);
+    void onPickup(Player *player) override;
 };
 
 #endif

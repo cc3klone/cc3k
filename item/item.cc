@@ -4,10 +4,10 @@ int Item::getId() {
     return uuid;
 }
 
-Enemy *getGuardingEnemy() {
+Enemy *Item::getGuardingEnemy() {
     return guardingEnemy;
 }
 
-void setGuardingEnemy(Enemy *enemy) {
+void Item::setGuardingEnemy(Enemy *enemy) {
     this->guardingEnemy = enemy;
 }
