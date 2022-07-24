@@ -16,6 +16,14 @@ void Floor::cmddisplay() {
     }
 }
 
+void Floor::setTile(int x, int y, char val) {
+    map[x][y] = val;
+}
+
+Player *Floor::getPlayer() {
+    return player;
+}
+
 CellType Floor::checkCoord(int x, int y) {
     char val;
 
@@ -101,10 +109,6 @@ Enemy *Floor::checkEnemy(int x, int y) {
     // Checks that the object at x, y is actually an enemy
     if(find(checkCoord(x, y) == CellType::Character) return object;
     return nullptr;
-}
-
-Player *Floor::getPlayer() {
-    return player;
 }
 
 void Floor::moveEnemies() {

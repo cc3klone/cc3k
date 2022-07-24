@@ -19,10 +19,11 @@ class Floor : public Observer, public Subject {
 
     public:
         void cmdDisplay();
+        void setCell(int, int, char);
         CellType checkCoord(int, int);
+        Player *getPlayer();
         Item *popItem(int, int);
         Enemy *checkEnemy(int, int);
-        Player *getPlayer();
 
         void moveEnemies();
 };
