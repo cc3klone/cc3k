@@ -3,12 +3,10 @@
 #include "item.h"
 
 class Gold : public Item {
-    const static bool passive = false;
-    const static bool consumable = true;
-    int value;
-
+    private:
+        int value;
     public:
-        void onPickup(Player::Player *player) override;
+        int getGold();
 };
 
 #endif

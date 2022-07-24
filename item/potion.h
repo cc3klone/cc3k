@@ -2,17 +2,15 @@
 #define _POTION_H_
 #include "item.h"
 
-enum class EffectType{HP, AtkDmg};
+enum class EffectType{ HP, AtkDmg, Def };
 
 class Potion : public Item {
-    protected:
+    private:
         EffectType potionEffect;
         int effectScalar;
 
     public:
-        Potion();
-        void onPickup(Player *player) override;
+    Potion(int uuid, EffectType potionEffect, int effectScalar = 0);
 };
 
 #endif
-
