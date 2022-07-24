@@ -15,7 +15,9 @@ void GameController::initGame() {
     // Load floors
     loadFloors(path);
     for(int i = 1; i < 5; i++) floors[i].map = floors[0].map;
-    
+
+    // Spawn player
+
     // Spawn entities
     for(int i = 0; i < 5; i++) floors[i].spawnEntities();
 }
