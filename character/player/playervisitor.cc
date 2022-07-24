@@ -5,6 +5,8 @@ void PlayerVisitor::setAtk(int &currentAtk, int addAtk) {
     tempAtk += addAtk;
     if (tempAtk > 0) {
         currentAtk += addAtk;
+    } else {
+        currentAtk = 0;
     }
 }
 
@@ -13,6 +15,8 @@ void PlayerVisitor::setDef(int &currentDef, int addDef) {
     tempDef += addDef;
     if (tempDef > 0) {
         currentDef += addDef;
+    } else {
+        currentDef = 0;
     }
 }
 

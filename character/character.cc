@@ -1,4 +1,5 @@
 #include "character.h"
+#include <cmath>
 
 void Character::changePosition(Direction direction, int &newPositionX, int &newPositionY) {
     switch (direction) {
@@ -35,11 +36,29 @@ void Character::changePosition(Direction direction, int &newPositionX, int &newP
     }
 }
 
-void Character::attack(AttackType attackType, Character *target) {
-    target->health = (target->health + target->baseDef + target->bonusDef) - 
-                     (this->baseAtk + this->bonusAtk);
+void Character::getAttacked(int damage) {
+    this->health -= damage;
 }
+
+void Character::attack(AttackType attackType, Character *target) { //needs to be changed
+    int damage = ceil((100 / (100 + target->getCurrentDef())) * this->currentAtk);
+    target->getAttacked(damage);
+}
+
 
 void Character::move(Direction direction) {
     changePosition(direction, positionX, positionY);
 }
+
+int Character::getHealth () {
+    return this->health;
+}
+
+int Character::getCurrentAtk() {
+    return this->currentAtk;
+}
+
+int Character::getCurrentDef() {
+    return this->currentDef;
+}
+
