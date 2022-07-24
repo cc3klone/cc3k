@@ -13,7 +13,6 @@ class GameController : public Observer {
     public:
         void initGame();
         void loadFloor(std::string);
-        void spawnEntities();
         void listenInput();
 
         void ascendFloor();

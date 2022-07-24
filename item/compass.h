@@ -3,6 +3,8 @@
 #include "item.h"
 
 class Compass : public Item {
+    public:
+        void onPickup(Player *player) override;
 };
 
 #endif
