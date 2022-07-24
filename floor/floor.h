@@ -9,7 +9,7 @@
 #include "../character/player/player.h"
 
 enum class CellType {Invalid, Room, Wall, Passage, Stair, Item, Character};
-enum class Direction {North, East, South, West};
+enum class Direction {North, East, South, West, Northeast, Northwest, Southeast, Southwest};
 
 class Floor : public Observer, public Subject {
     std::vector<std::vector<pair<char, void *>>> map;
@@ -20,6 +20,8 @@ class Floor : public Observer, public Subject {
     public:
         void cmdDisplay();
         void setCell(int, int, char);
+        void generateEntities();
+
         CellType checkCoord(int, int);
         Player *getPlayer();
         Item *popItem(int, int);
