@@ -14,6 +14,26 @@ Floor::~Floor() {
     delete player;
 }
 
+void Floor::generateEntities() {}
+
+void moveEnemies() {
+    // Empty for now. Enemies wont be able to move or attack but still should be ok for debugging
+}
+
+void killEnemy(pair<int, int> coord) {
+    Item *inventory = map[coord.first, coord.second].second->getInventory();
+    delete map[coord.first, coord.second].second;
+
+    if(inventory == nullptr) {
+        // Remove Item from map
+        map[coord.first, coord.second].first = '.';
+        map[coord.first, coord.second].second = nullptr;
+    } else {
+        // DROP ITEM HERE
+    }
+}
+
+
 void Floor::cmddisplay() {
     for(auto i = map.begin(); i != map.end(); i++) {
         for(auto j = *i.begin(); j != *j.end(); j++) {
