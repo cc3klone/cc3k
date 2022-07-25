@@ -6,7 +6,7 @@ class RNG {
     protected:
         unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     public:
-        static int generateInt(int n);
+        static int generateInt(int end, int start = 0);
 }
 
 #endif
