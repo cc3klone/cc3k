@@ -1,4 +1,5 @@
 #include "player.h"
+#include "../enemy/merchant.h"
 #include <cmath>
 #include <utility>
 
@@ -91,11 +92,18 @@ void Player::inventoryDrop(Item *item) {
 }
 
 
-void Player::playerAttack(Direction attackDirection) {
+bool Player::playerAttack(Direction attackDirection) {
     std::pair<int, int> attackPosn = changePosition(attackDirection, this->positionX, this->positionY, 1);
     Enemy *target = thisFloor->checkEnemy(attackPosn.first, attackPosn.second);
-    if (target == nullptr) return;
+    if (target == nullptr) return false;
     attack(target);
+    Merchant *merchant = nullptr;
+    merchant = dynamic_cast<Merchant *>(target);
+    if (merchant != nullptr) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void Player::playerMove(Direction moveDirection) {
