@@ -1,6 +1,6 @@
 #ifndef _ENEMY_H_
 #define _ENEMY_H_
-#include "character.h"
+#include "../character.h"
 #include "../../item/item.h"
 
 class Enemy : public Character {
