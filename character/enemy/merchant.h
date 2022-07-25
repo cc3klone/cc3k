@@ -5,6 +5,5 @@
 class Merchant : public Enemy {
     public:
         Merchant(int positionX, int positionY, Floor *thisFloor, Item *inventory);
-        void specialAbility() override;
 };
 #endif

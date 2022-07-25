@@ -24,7 +24,6 @@ class Character {
         virtual void getAttacked(int damage) = 0;
         void attack(Character *target);
         void move(Direction direction);
-        bool isDead();
         std::pair<int, int> getPos();
         int getHealth();
         int getCurrentAtk();

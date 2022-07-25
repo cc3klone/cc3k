@@ -52,13 +52,6 @@ void Character::move(Direction direction) {
     this->positionY = p.second;
 }
 
-bool Character::isDead() {
-    if (this->health <= 0) {
-        return true;
-    }
-    return false;
-}
-
 std::pair<int, int> Character::getPos() {
     return std::make_pair(positionX, positionY);
 }

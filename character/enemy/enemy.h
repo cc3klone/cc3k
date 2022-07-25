@@ -7,6 +7,7 @@ class Enemy : public Character {
     Direction generateDirection();
     bool attackMissed();
     Item *inventory;
+    Item *protecting;
 
     public:
         virtual void specialAbility() = 0;
@@ -17,6 +18,8 @@ class Enemy : public Character {
         void transferGold(Player *player);
         Item *getInventory();
         void setInventory(Item *inventory);
+        void setProtect(Item *protectItem);
+        Item *getProtect();
         ~Enemy();
 };
 #endif

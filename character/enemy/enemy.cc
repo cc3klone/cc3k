@@ -1,21 +1,19 @@
 #include "enemy.h"
+#include "../../rng.h"
 #include <random>
 #include <map>
 #include <chrono>
 
 Direction Enemy::generateDirection() {
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::default_random_engine rng{seed};
-    std::uniform_int_distribution<> distr(0, 7);
-	Direction randomDirection = static_cast<Direction>(distr(rng));
+    RNG roll;
+    int randomInt = roll.generateInt(7);
+	Direction randomDirection = static_cast<Direction>(randomInt);
     return randomDirection;
 }
 
 bool Enemy::attackMissed() {
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::default_random_engine rng{seed};
-    std::uniform_int_distribution<> distr(0, 1);
-	int randomAttack = static_cast<int>(distr(rng));
+    RNG roll;
+    int randomAttack = roll.generateInt(1);
     if (randomAttack == 0) {
         return true;
     }
@@ -32,13 +30,10 @@ void Enemy::enemyAttack(Character *target) {
 
 void Enemy::getAttacked(int damage) {
     this->health -= damage;
-    /*
-    if (check if character is dead) {
-        transfer gold into player
-        drop inventory item (kill character function to floor)
-        remove itself from the map and dealloc its memory (kill character function to floor)
+    if (this->health <= 0) {
+        transferGold(this->thisFloor->getPlayer());
+        thisFloor->killEnemy(std::make_pair(this->positionX, this->positionY));
     }
-    */
 }
 
 //enemyMove moves the enemy in a random direction
@@ -56,7 +51,7 @@ void Enemy::enemyMove() {
 
         int tempX = this->positionX;
         int tempY = this->positionY;
-        changePosition(randomDirection, tempX, tempY);
+        changePosition(randomDirection, tempX, tempY, this->moveSpeed);
         CellType nextCell = this->thisFloor->checkCoord(tempX, tempY);
 
         if (nextCell == CellType::Room) { //enemies can only move to the "Room" cell type
@@ -90,6 +85,13 @@ void Enemy::setInventory(Item *inventory) {
     this->inventory = inventory;
 }
 
+void Enemy::setProtect(Item *protectItem) {
+    this->protecting = protectItem;
+}
+
+Item *Enemy::getProtect() {
+    return protecting;
+}
+
 Enemy::~Enemy() {
-    delete this;
 }

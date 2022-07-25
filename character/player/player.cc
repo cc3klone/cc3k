@@ -121,7 +121,6 @@ void Player::getAttacked(int damage) {
     } else {
         this->health -= damage;
     }
-
     
 }
 
@@ -172,4 +171,14 @@ double Player::getScore() {
 
 PlayerRace Player::getRace() {
     return this->myRace;
+}
+
+void Player::setFloor(Floor *floor) {
+    this->thisFloor = floor;
+}
+
+Player::~Player() {
+    for(int i = 0; i < this->inventory.size(); i++) {
+        delete inventory[i];
+    }
 }

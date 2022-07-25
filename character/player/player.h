@@ -37,6 +37,7 @@ class Player : public Character {
         void setHasBarrierSuit();
         bool getHasCompass();
         double getScore();
+        void setFloor(Floor *floor);
         PlayerRace getRace();
         ~Player();
 };
