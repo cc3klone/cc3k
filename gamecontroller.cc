@@ -29,7 +29,7 @@ void GameController::initGame() {
     loadFloors(path);
     for(int i = 1; i < 5; i++) floors[i].map = floors[0].map;
 
-    // Creates player object - DOES NOT SPAWN IT ONTO THE MAP
+    // Creates player object - DOES NOT PLACE IT ONTO THE MAP
     char playerClass;
     cin >> playerClass;
     switch(playerClass) {
@@ -119,7 +119,7 @@ void gameController::listenInput() {
                 }
 
                 if(attack) {
-                    floors[currentFloor].player->playerAttack(target);
+                    if(floors[currentFloor].player->playerAttack(target)) merchantIsHostile = true;
                     attack = false;
 
                     floor[currentFloor].moveEnemies();

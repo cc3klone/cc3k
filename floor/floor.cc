@@ -6,6 +6,14 @@
 #include "../item/item.h"
 using namespace std;
 
+Floor::Floor() {}
+
+Floor::~Floor() {
+    for(auto i = floorItems.begin(); i !- floorItems.end(); i++) delete *i;
+    for(auto i = floorEnemies.begin(); i !- floorEnemies.end(); i++) delete *i;
+    delete player;
+}
+
 void Floor::cmddisplay() {
     for(auto i = map.begin(); i != map.end(); i++) {
         for(auto j = *i.begin(); j != *j.end(); j++) {
