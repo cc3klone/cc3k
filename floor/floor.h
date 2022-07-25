@@ -29,6 +29,7 @@ class Floor {
 
         void generateEntities(); // Still need to track rooms
         void moveEnemies(); // Loop through map, check if enemy is next to player, if so, attack
+        void killEnemy(pair<int, int>);
 };
 
 #endif
