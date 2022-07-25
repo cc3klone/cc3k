@@ -17,19 +17,19 @@ std::pair<int, int> Character::changePosition(Direction direction, int currentX,
         case Direction::West:
             newPositionX -= scalar;
             break;
-        case Direction::NorthEast:
+        case Direction::Northeast:
             newPositionX += scalar;
             newPositionY -= scalar;
             break;
-        case Direction::NorthWest:
+        case Direction::Northwest:
             newPositionX -= scalar;
             newPositionY -= scalar;
             break;
-        case Direction::SouthEast:
+        case Direction::Southeast:
             newPositionX += scalar;
             newPositionY += scalar;
             break;
-        case Direction::SouthWest:
+        case Direction::Southwest:
             newPositionX -= scalar;
             newPositionY += scalar;
             break;
