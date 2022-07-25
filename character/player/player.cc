@@ -88,14 +88,6 @@ void Player::inventoryDrop(Item *item) {
     delete toBeRemoved;
 }
 
-Item *Player::inventoryFind(int uuid) {
-    for (std::size_t i = 0; i < inventory.size(); ++i) {
-        if (inventory[i]->getId() == uuid) {
-            return inventory[i];
-        }
-    }
-    return nullptr;
-}
 
 void Player::playerAttack(Direction attackDirection) {
     std::pair<int, int> attackPosn = changePosition(attackDirection, this->positionX, this->positionY, 1);

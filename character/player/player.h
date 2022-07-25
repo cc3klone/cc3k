@@ -23,7 +23,6 @@ class Player : public Character {
         Player(PlayerRace playerRace, int positionX, int positionY, Floor *thisFloor);
         void inventoryAdd(Item *item);
         void inventoryDrop(Item *item);
-        Item *inventoryFind(int uuid);
         void playerAttack(Direction attackDirection);
         void playerMove(Direction moveDirection);
         void playerPickup(Direction pickupDirection);
