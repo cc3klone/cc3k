@@ -5,12 +5,17 @@
 #include "observer.h"
 #include "floor/floor.h"
 
-class GameController : public Observer {
+class GameController {
     std::vector<Floor> floors;
     int currentFloor;
     string path;
 
+    bool merchantIsHostile;
+
     public:
+        GameController(std::string);
+        ~GameController();
+
         void initGame();
         void loadFloor(std::string);
         void listenInput();

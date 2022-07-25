@@ -12,6 +12,7 @@ int main(int argc, char **argv) {
     string path(argv[1]);
     GameController *controller = new GameController(path);
     controller->initGame();
+    controller->listenInput();
 
     delete controller;
     return 0;
