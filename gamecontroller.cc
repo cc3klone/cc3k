@@ -3,22 +3,51 @@
 #include <sstream>
 #include <vector>
 #include <utility>
+#include "character/player/human.h"
+#include "character/player/elf.h"
+#include "character/player/dwarf.h"
+#include "character/player/orc.h"
 #include "gamecontroller.h"
 using namespace std;
 
+GameController::GameController(string path): path{path} {}
+
+GameController::~GameController() {
+    floors.clear();
+}
+
 void GameController::initGame() {
+    // Resets variables
+    currentFloor = 0;
+    merchantisHostile = false;
+
     // Clear floors
     floors.clear();
-    currentFloor = 0;
     for(int i = 0; i < 5; i++) floors.push_back(Floor());
 
     // Load floors
     loadFloors(path);
     for(int i = 1; i < 5; i++) floors[i].map = floors[0].map;
 
-    // Spawn player
+    // Creates player object - DOES NOT PLACE IT ONTO THE MAP
+    char playerClass;
+    cin >> playerClass;
+    switch(playerClass) {
+        case 'h':
+            floors[0].player = new Human();
+            break;
+        case 'e':
+            floors[0].player = new Elf();
+            break;
+        case 'd':
+            floors[0].player = new Dwarf();
+            break;
+        case 'o':
+            floors[0].player = new Orc();
+            break;
+    }
 
-    // Spawn entities
+    // Spawn entities - Order: Player, Stair, Potion, Gold, Enemy
     for(int i = 0; i < 5; i++) floors[i].spawnEntities();
 }
 
@@ -36,6 +65,8 @@ void GameController::loadFloor(string path) {
 
         i++;
     }
+
+    instream.close();
 }
 
 void gameController::listenInput() {
@@ -88,22 +119,36 @@ void gameController::listenInput() {
                 }
 
                 if(attack) {
-                    floors[currentFloor].player->playerAttack(target);
+                    if(floors[currentFloor].player->playerAttack(target)) merchantIsHostile = true;
                     attack = false;
+
+                    floor[currentFloor].moveEnemies();
                 } else if(potion) {
                     floors[currentFloor].player->playerPickup(target);
                     potion = false;
-                } else floors[currentFloor].player->playerMove(target);
+                } else {
+                    floors[currentFloor].player->playerMove(target);
+                    pair<int, int> coords = floors[currentFloor].player->getPos();
+                    
+                    // Checks if player is on a stair, if so go up a floor
+                    if(floor[currentFloor].checkCoord(coords.first, coords.second) == CellType::Stair) ascendFloor();
+                    else floor[currentFloor].moveEnemies();
+                }
 
                 break;
         }
+        // Output display after each command
+        floor[currentFloor].displayCmd();
     }
 }
 
 void GameController::ascendFloor() {
     floors[currentFloor].player->resetStat();
-
+    
     if(currentFloor != 4) {
+        // Update floor ptr for player
+        floors[currentFloor].player->setFloor(&floors[currentFloor]);
+
         floors[currentFloor + 1].player = floors[currentFloor].player;
         floors[currentFloor].player = nullptr;
         currentFloor++;
@@ -111,6 +156,7 @@ void GameController::ascendFloor() {
         currentFloor++;
         endGame();
     }
+
 }
 
 void GameController::endGame() {
@@ -118,6 +164,8 @@ void GameController::endGame() {
         // Score display on victory
         cout << "You Won." << endl;
         cout << "Score: " << floors[currentFloor].player->getScore << endl;
+
+        cout << endl << "Press 'C' to Continue" << endl;
 
         char cmd = 0;
         while(cmd != 'c' && cmd != 'C') cin >> cmd;
@@ -140,7 +188,6 @@ void GameController::endGame() {
         cout << "GNU General Public License for more details." << endl;
         cout << endl << "You should have received a copy of the GNU General Public License" << endl;
         cout << "Along with this program. If not, see <https://www.gnu.org/licenses/>" << endl;
-
 
     } else {
         // Score display on loss

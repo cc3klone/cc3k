@@ -11,22 +11,24 @@
 enum class CellType {Invalid, Room, Wall, Passage, Stair, Item, Character};
 enum class Direction {North, East, South, West, Northeast, Northwest, Southeast, Southwest};
 
-class Floor : public Observer, public Subject {
+class Floor {
     std::vector<std::vector<pair<char, void *>>> map;
     std::vector<Items *> floorItems;
     std::vector<Enemy *> floorEnemies
     Player *player;
 
     public:
+        Floor();
+        ~Floor();
+
         void cmdDisplay();
-        void setCell(int, int, char);
-        void generateEntities();
         CellType checkCoord(int, int);
         Player *getPlayer();
         Item *popItem(int, int);
         Enemy *checkEnemy(int, int);
 
-        void moveEnemies();
+        void generateEntities(); // Still need to track rooms
+        void moveEnemies(); // Loop through map, check if enemy is next to player, if so, attack
 };
 
 #endif
