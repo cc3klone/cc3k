@@ -30,6 +30,17 @@ void Enemy::enemyAttack(Character *target) {
     attack(target);
 }
 
+void Enemy::getAttacked(int damage) {
+    this->health -= damage;
+    /*
+    if (check if character is dead) {
+        transfer gold into player
+        drop inventory item (kill character function to floor)
+        remove itself from the map and dealloc its memory (kill character function to floor)
+    }
+    */
+}
+
 //enemyMove moves the enemy in a random direction
 void Enemy::enemyMove() {
     Direction randomDirection;

@@ -39,9 +39,6 @@ std::pair<int, int> Character::changePosition(Direction direction, int currentX,
     return std::make_pair(newPositionX, newPositionY);
 }
 
-void Character::getAttacked(int damage) {
-    this->health -= damage;
-}
 
 void Character::attack(Character *target) {
     int damage = ceil((100 / (100 + target->getCurrentDef())) * this->currentAtk);

@@ -21,7 +21,7 @@ class Character {
         std::pair<int, int> changePosition(Direction direction, int currentX, int currentY, int scalar);
 
     public:
-        virtual void getAttacked(int damage);
+        virtual void getAttacked(int damage) = 0;
         void attack(Character *target);
         void move(Direction direction);
         bool isDead();

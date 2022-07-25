@@ -121,6 +121,7 @@ void Player::getAttacked(int damage) {
     } else {
         this->health -= damage;
     }
+
     
 }
 
