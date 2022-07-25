@@ -17,6 +17,7 @@ class Player : public Character {
     PlayerVisitor playerVisitor;
     bool hasBarrierSuit;
     bool hasCompass;
+    PlayerRace myRace;
 
     public:
         Player(int positionX, int positionY, Floor *thisFloor);
@@ -36,6 +37,7 @@ class Player : public Character {
         void setHasBarrierSuit();
         bool getHasCompass();
         double getScore();
+        PlayerRace getRace();
         ~Player();
 };
 #endif

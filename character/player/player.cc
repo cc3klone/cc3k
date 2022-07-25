@@ -19,6 +19,7 @@ Player::Player(int positionX, int positionY, Floor *thisFloor) {
     this->playerVisitor = HumanVisitor{};
     this->hasBarrierSuit = false;
     this->hasCompass = false;
+    this->myRace = PlayerRace::Human;
 }
 
 Player::Player(PlayerRace playerRace, int positionX, int positionY, Floor *thisFloor) {
@@ -70,6 +71,7 @@ Player::Player(PlayerRace playerRace, int positionX, int positionY, Floor *thisF
     this->score = 0;
     this->hasBarrierSuit = false;
     this->hasCompass = false;
+    this->myRace = playerRace;
 }
 
 void Player::inventoryAdd(Item *item) {
@@ -165,4 +167,8 @@ bool Player::getHasCompass() {
 double Player::getScore() {
     this->score = this->gold;
     return this->score;
+}
+
+PlayerRace Player::getRace() {
+    return this->myRace;
 }
