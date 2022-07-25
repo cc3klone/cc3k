@@ -14,4 +14,5 @@ Merchant::Merchant(int positionX, int positionY, Floor *thisFloor, Item *invento
     this->moveSpeed = 1;
     this->defaultAtk = AttackType::Melee;
     setInventory(inventory);
+    setProtect(nullptr);
 }

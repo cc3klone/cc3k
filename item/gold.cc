@@ -1,10 +1,9 @@
-#include "item.h"
 #include "gold.h"
 #include "../rng.h"
 
 Gold::Gold() {
     RNG *rng = new RNG();
-    gType = rng->generateInt(7);
+    int gType = rng->generateInt(7);
     if (gType < 5) {
         this->value = 1;
     } else if (gType == 5) {
@@ -22,5 +21,5 @@ int Gold::getGold() {
 void Gold::onPickup(Player *player) {
     player->setGold(this->value);
     delete this;
-    }
 }
+

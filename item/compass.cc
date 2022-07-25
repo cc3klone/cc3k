@@ -1,4 +1,3 @@
-#include "item.h"
 #include "compass.h"
 
 void Compass::onPickup(Player *player) {

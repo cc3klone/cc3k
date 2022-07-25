@@ -1,7 +1,4 @@
 #include "player.h"
-#include "../enemy/merchant.h"
-#include <cmath>
-#include <utility>
 
 Player::Player(int positionX, int positionY, Floor *thisFloor) {
     this->thisFloor = thisFloor;

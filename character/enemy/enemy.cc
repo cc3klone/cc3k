@@ -1,8 +1,4 @@
 #include "enemy.h"
-#include "../../rng.h"
-#include <random>
-#include <map>
-#include <chrono>
 
 Direction Enemy::generateDirection() {
     RNG roll;

@@ -1,6 +1,4 @@
 #include "character.h"
-#include <cmath>
-#include <utility>
 
 std::pair<int, int> Character::changePosition(Direction direction, int currentX, int currentY, int scalar) {
     int newPositionX, newPositionY;

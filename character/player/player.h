@@ -1,6 +1,5 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
-#include <vector>
 #include "../character.h"
 #include "playervisitor.h"
 #include "humanvisitor.h"
@@ -9,6 +8,8 @@
 #include "orcvisitor.h"
 #include "../../item/item.h"
 #include "../../item/compass.h"
+#include "../enemy/merchant.h"
+#include <vector>
 
 enum class PlayerRace { Human, Dwarf, Elves, Ore };
 class Player : public Character {

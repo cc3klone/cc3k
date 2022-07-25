@@ -3,10 +3,11 @@
 #include <sstream>
 #include <vector>
 #include <utility>
-#include "character/player/human.h"
-#include "character/player/elf.h"
-#include "character/player/dwarf.h"
-#include "character/player/orc.h"
+// #include "character/player/human.h"
+// #include "character/player/elf.h"
+// #include "character/player/dwarf.h"
+// #include "character/player/orc.h"
+#include "character/player/player.h"
 #include "gamecontroller.h"
 using namespace std;
 
@@ -19,15 +20,15 @@ GameController::~GameController() {
 void GameController::initGame() {
     // Resets variables
     currentFloor = 0;
-    merchantisHostile = false;
+    merchantIsHostile = false;
 
     // Clear floors
     floors.clear();
     for(int i = 0; i < 5; i++) floors.push_back(Floor());
 
     // Load floors
-    loadFloors(path);
-    for(int i = 1; i < 5; i++) floors[i].map = floors[0].map;
+    loadFloor(path);
+    for(int i = 1; i < 5; i++) floors[i].gameMap = floors[0].gameMap;
 
     // Creates player object - DOES NOT PLACE IT ONTO THE MAP
     char playerClass;
@@ -48,7 +49,7 @@ void GameController::initGame() {
     }
 
     // Spawn entities - Order: Player, Stair, Potion, Gold, Enemy
-    for(int i = 0; i < 5; i++) floors[i].spawnEntities();
+    for(int i = 0; i < 5; i++) floors[i].generateEntities();
 }
 
 void GameController::loadFloor(string path) {
@@ -60,8 +61,8 @@ void GameController::loadFloor(string path) {
         stringstream ss(line);
         char tile;
 
-        floors[0].map.push_back(vector<pair<char, void *>>());
-        while(ss >> tile) map[i].push_back(pair<char, void *>(tile, nullptr));
+        floors[0].gameMap.push_back(vector<pair<char, void *>>());
+        while(ss >> tile) gameMap[i].push_back(pair<char, void *>(tile, nullptr));
 
         i++;
     }
@@ -69,7 +70,7 @@ void GameController::loadFloor(string path) {
     instream.close();
 }
 
-void gameController::listenInput() {
+void GameController::listenInput() {
     string cmd;
     bool attack = false, potion = false;
     Direction target;
@@ -163,7 +164,7 @@ void GameController::endGame() {
     if(currentFloor == 5) {
         // Score display on victory
         cout << "You Won." << endl;
-        cout << "Score: " << floors[currentFloor].player->getScore << endl;
+        cout << "Score: " << floors[currentFloor].player->getScore() << endl;
 
         cout << endl << "Press 'C' to Continue" << endl;
 
@@ -192,6 +193,6 @@ void GameController::endGame() {
     } else {
         // Score display on loss
         cout << "You Died." << endl;
-        cout << "Score: " << floors[currentFloor].player->getScore << endl;
+        cout << "Score: " << floors[currentFloor].player->getScore() << endl;
     }
 }

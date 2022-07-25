@@ -14,4 +14,5 @@ Dragon::Dragon(int positionX, int positionY, Floor *thisFloor, Item *inventory) 
     this->moveSpeed = 0;
     this->defaultAtk = AttackType::Melee;
     setInventory(inventory);
+    setProtect(nullptr);
 }

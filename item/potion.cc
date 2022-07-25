@@ -6,7 +6,7 @@ Potion::Potion() {
     switch (static_cast<EffectType>(rng->generateInt(2))) {
         case EffectType::HP:
             this->potionEffect = EffectType::HP;
-            this->effectScalar = rng->generateInt(start=1, end=10);
+            this->effectScalar = rng->generateInt(10, 1);
             break;
         case EffectType::AtkDmg:
             this->potionEffect = EffectType::AtkDmg;
@@ -26,13 +26,13 @@ Potion::Potion() {
 void Potion::onPickup(Player *player) {
     switch (this->potionEffect) {
         case EffectType::HP:
-            player->setHP(this->effectScalar);
+            player->setHp(this->effectScalar);
             break;
         case EffectType::AtkDmg:
-            player->setAtk(this->effectScalar):
+            player->setAtk(this->effectScalar);
             break;
         case EffectType::Def:
-            player->setDef(this->effectScalar):
+            player->setDef(this->effectScalar);
             break;
     }
     delete this;

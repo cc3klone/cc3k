@@ -4,13 +4,14 @@
 #include <stdexcept>
 #include "floor.h"
 #include "../item/item.h"
+#include <iostream>
 using namespace std;
 
 Floor::Floor() {}
 
 Floor::~Floor() {
-    for(auto i = floorItems.begin(); i !- floorItems.end(); i++) delete *i;
-    for(auto i = floorEnemies.begin(); i !- floorEnemies.end(); i++) delete *i;
+    for(auto i = floorItems.begin(); i != floorItems.end(); i++) delete *i;
+    for(auto i = floorEnemies.begin(); i != floorEnemies.end(); i++) delete *i;
     delete player;
 }
 
@@ -21,23 +22,23 @@ void moveEnemies() {
 }
 
 void killEnemy(pair<int, int> coord) {
-    Item *inventory = map[coord.first, coord.second].second->getInventory();
-    delete map[coord.first, coord.second].second;
+    Item *inventory = gameMap[coord.first, coord.second].second->getInventory();
+    delete gameMap[coord.first, coord.second].second;
 
     if(inventory == nullptr) {
         // Remove Item from map
-        map[coord.first, coord.second].first = '.';
-        map[coord.first, coord.second].second = nullptr;
+        gameMap[coord.first, coord.second].first = '.';
+        gameMap[coord.first, coord.second].second = nullptr;
     } else {
         // DROP ITEM HERE
     }
 }
 
 
-void Floor::cmddisplay() {
-    for(auto i = map.begin(); i != map.end(); i++) {
+void Floor::cmdDisplay() {
+    for(auto i = gameMap.begin(); i != gameMap.end(); i++) {
         for(auto j = *i.begin(); j != *j.end(); j++) {
-            if(*j == '\' && player->checkHasCompass() == false) cout << '.';
+            if(*j == '\\' && player->getHasCompass() == false) cout << '.';
             cout << *j;
         }
         cout << endl;
@@ -45,7 +46,7 @@ void Floor::cmddisplay() {
 }
 
 void Floor::setTile(int x, int y, char val) {
-    map[x][y] = val;
+    gameMap[x][y] = val;
 }
 
 Player *Floor::getPlayer() {
@@ -56,7 +57,7 @@ CellType Floor::checkCoord(int x, int y) {
     char val;
 
     try {
-        val = map[x][y]i.first;
+        val = gameMap[x][y].first;
     } catch(out_of_range &e) {
         return CellType::Invalid;
     }
@@ -84,7 +85,6 @@ CellType Floor::checkCoord(int x, int y) {
         case 'V':
         case 'W':
         case 'N':
-        case 'M':
         case 'D':
         case 'X':
         case 'T':
@@ -103,20 +103,20 @@ Item *Floor::popItem(int x, int y) {
     void *object;
 
     try {
-        object = map[x][y].second;
+        object = gameMap[x][y].second;
     } catch(out_of_range &e) {
         return nullptr;
     }
 
-    // Checks that the object at x, y is actually an item; Removes it from the map and returns its pointer if so
+    // Checks that the object at x, y is actually an item; Removes it from the gameMap and returns its pointer if so
     auto iter = find(floorItems.begin(), floorItems.end(), object);
     if(iter != floorItems.last()) {
         
         // Checks that the item is not being guarded
         if(*iter->getGuardingEnemy() != nullptr) return nullptr;
 
-        map[x][y].first = '.';
-        map[x][y].second = nullptr;
+        gameMap[x][y].first = '.';
+        gameMap[x][y].second = nullptr;
         floorItems.erase(iter);
 
         return object;
@@ -129,23 +129,23 @@ Enemy *Floor::checkEnemy(int x, int y) {
     void *object;
 
     try {
-        object = map[x][y].second;
+        object = gameMap[x][y].second;
     } catch(out_of_range &e) {
         return nullptr;
     }
     
     // Checks that the object at x, y is actually an enemy
-    if(find(checkCoord(x, y) == CellType::Character) return object;
+    if(find(checkCoord(x, y) == CellType::Character)) return object;
     return nullptr;
 }
 
 void Floor::moveEnemies() {
-    for(auto i = map.begin(); i != map.end(); i++) {
+    for(auto i = gameMap.begin(); i != gameMap.end(); i++) {
         for(auto j = *i.begin(); j != *j.end(); j++) {
             if(checkCoord(i, j) != CellType::Character) continue;
 
-            map[i][j].second->move();
-            if(map[i][j].second->isInRange(player->getPos())) map[i][j].second->attack(player);
+            gameMap[i][j].second->move();
+            if(gameMap[i][j].second->isInRange(player->getPos())) gameMap[i][j].second->attack(player);
         }
     }
 }
