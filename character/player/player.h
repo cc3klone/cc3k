@@ -8,6 +8,7 @@
 #include "elvesvisitor.h"
 #include "orcvisitor.h"
 #include "../../item/item.h"
+#include "../../item/compass.h"
 
 enum class PlayerRace { Human, Dwarf, Elves, Ore };
 class Player : public Character {
@@ -22,12 +23,12 @@ class Player : public Character {
         Player(PlayerRace playerRace, int positionX, int positionY, Floor *thisFloor);
         void inventoryAdd(Item *item);
         void inventoryDrop(Item *item);
-        int inventoryFind(int uuid);
+        Item *inventoryFind(int uuid);
         void playerAttack(Direction attackDirection);
         void playerMove(Direction moveDirection);
         void playerPickup(Direction pickupDirection);
         void getAttacked(int damage) override;
-        void resetStat(); // delete Compass
+        void resetStat();
         void setAtk(int addAtk);
         void setDef(int addDef);
         void setHp(int addHP);

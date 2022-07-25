@@ -21,7 +21,6 @@ class Floor : public Observer, public Subject {
         void cmdDisplay();
         void setCell(int, int, char);
         void generateEntities();
-
         CellType checkCoord(int, int);
         Player *getPlayer();
         Item *popItem(int, int);

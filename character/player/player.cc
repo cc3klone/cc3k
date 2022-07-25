@@ -76,7 +76,7 @@ void Player::inventoryAdd(Item *item) {
     this->inventory.push_back(item);
 }
 
-void Player::inventoryDrop(Item *item) { //needs to be changed
+void Player::inventoryDrop(Item *item) {
     Item *toBeRemoved = nullptr;
     for (std::size_t i = 0; i < inventory.size(); ++i) {
         if (inventory[i] == item) {
@@ -88,13 +88,13 @@ void Player::inventoryDrop(Item *item) { //needs to be changed
     delete toBeRemoved;
 }
 
-int Player::inventoryFind(int uuid) {
+Item *Player::inventoryFind(int uuid) {
     for (std::size_t i = 0; i < inventory.size(); ++i) {
         if (inventory[i]->getId() == uuid) {
-            return i;
+            return inventory[i];
         }
     }
-    return -1;
+    return nullptr;
 }
 
 void Player::playerAttack(Direction attackDirection) {
@@ -130,10 +130,16 @@ void Player::getAttacked(int damage) {
     
 }
 
-void Player::resetStat() {
+void Player::resetStat() { //not sure if this is how you use dynamic_cast might have to change
     this->currentAtk = this->baseAtk;
     this->currentDef = this->baseDef;
     this->hasCompass = false;
+    Compass *toBeRemoved = nullptr;
+    for (int i = 0; i < inventory.size(); i++) {
+        toBeRemoved = dynamic_cast<Compass *> (inventory[i]);
+        if (toBeRemoved != nullptr) break;
+    }
+    delete toBeRemoved;
 }
 
 void Player::setAtk(int addAtk) {
