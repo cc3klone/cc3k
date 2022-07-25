@@ -5,12 +5,11 @@
 
 class Item {
     protected:
-        const int uuid;
         Enemy *guardingEnemy;
   
     public:
+        Item(Enemy *guardingEnemy = nullptr);
         virtual void onPickup(Player *player) = 0;
-        int getId();
         Enemy *getGuardingEnemy();
         void setGuardingEnemy(Enemy *guardingEnemy);
 };

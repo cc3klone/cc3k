@@ -1,9 +1,5 @@
 #include "item.h"
 
-int Item::getId() {
-    return uuid;
-}
-
 Enemy *Item::getGuardingEnemy() {
     return guardingEnemy;
 }

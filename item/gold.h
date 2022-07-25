@@ -6,6 +6,7 @@ class Gold : public Item {
     private:
         int value;
     public:
+        Gold();
         int getGold();
         void onPickup(Player *player) override;
 };
