@@ -64,7 +64,7 @@ void Floor::generateEntities() {
 
         // Generate potion and add to map
         Item *potion = new Potion();
-        
+        this->floorItems.push_back(potion);
         gameMap.at(coord.first).at(coord.second).first = 'P';
         gameMap.at(coord.first).at(coord.second).second = potion;
     }
