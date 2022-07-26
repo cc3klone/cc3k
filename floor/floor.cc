@@ -8,6 +8,12 @@
 #include "../item/potion.h"
 #include "../item/gold.h"
 #include "../character/enemy/enemy.h"
+#include "../character/enemy/werewolf"
+#include "../character/enemy/vampire"
+#include "../character/enemy/goblin"
+#include "../character/enemy/troll"
+#include "../character/enemy/phoenix.h"
+#include "../character/enemy/merchant.h"
 #include "../character/player/player.h"
 #include "../rng.h"
 using namespace std;
