@@ -7,6 +7,7 @@
 #include "../../item/compass.h"
 #include "../enemy/merchant.h"
 #include "../../floor/floor.h"
+#include <math.h>
 
 Player::Player(int positionX, int positionY, Floor *thisFloor) {
     this->thisFloor = thisFloor;
