@@ -143,6 +143,7 @@ bool Player::playerMove(Direction moveDirection) {
             return false;
         } else {
             moveToGold->onPickup(this);
+            std::cout << "Gold: " << this->gold << std::endl;
             move(moveDirection);
         }
         delete moveToGold;
