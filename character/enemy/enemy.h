@@ -16,7 +16,7 @@ class Enemy : public Character {
     Item *protecting;
 
     public:
-        virtual void specialAbility() = 0;
+        //virtual void specialAbility() = 0;
         void enemyAttack(Character *target);
         void getAttacked(int damage) override;
         void enemyMove();
