@@ -25,7 +25,7 @@ class Player : public Character {
         void inventoryAdd(Item *item);
         void inventoryDrop(Item *item);
         bool playerAttack(Direction attackDirection);
-        void playerMove(Direction moveDirection);
+        bool playerMove(Direction moveDirection);
         void playerPickup(Direction pickupDirection);
         void getAttacked(int damage) override;
         void resetStat();

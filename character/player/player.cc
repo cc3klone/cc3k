@@ -113,14 +113,15 @@ bool Player::playerAttack(Direction attackDirection) {
     }
 }
 
-void Player::playerMove(Direction moveDirection) {
+bool Player::playerMove(Direction moveDirection) {
     std::pair<int, int> movePosn = changePosition(moveDirection, this->positionX, this->positionY, this->moveSpeed);
     CellType moveCell = thisFloor->checkCoord(movePosn.first, movePosn.second);
     
     if (moveCell == CellType::Room || moveCell == CellType::Passage || moveCell == CellType::Stair) {
         move(moveDirection);
-        return;
+        return true;
     }
+    return false;
 }
 
 void Player::playerPickup(Direction pickupDirection) {
