@@ -8,32 +8,32 @@ std::pair<int, int> Character::changePosition(Direction direction, int currentX,
     int newPositionY = currentY;
     switch (direction) {
         case Direction::North:
-            newPositionY -= scalar;
+            newPositionX -= scalar;
             break;
         case Direction::South:
-            newPositionY += scalar;
+            newPositionX += scalar;
             break;
         case Direction::East:
-            newPositionX += scalar;
+            newPositionY += scalar;
             break;
         case Direction::West:
-            newPositionX -= scalar;
+            newPositionY -= scalar;
             break;
         case Direction::Northeast:
-            newPositionX += scalar;
-            newPositionY -= scalar;
+            newPositionY += scalar;
+            newPositionX -= scalar;
             break;
         case Direction::Northwest:
-            newPositionX -= scalar;
             newPositionY -= scalar;
+            newPositionX -= scalar;
             break;
         case Direction::Southeast:
-            newPositionX += scalar;
             newPositionY += scalar;
+            newPositionX += scalar;
             break;
         case Direction::Southwest:
-            newPositionX -= scalar;
-            newPositionY += scalar;
+            newPositionY -= scalar;
+            newPositionX += scalar;
             break;
         default:
             break;
