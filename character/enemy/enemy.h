@@ -5,7 +5,9 @@
 
 enum class Direction;
 enum class CellType;
+
 class Item;
+class Player;
 
 class Enemy : public Character {
     Direction generateDirection();

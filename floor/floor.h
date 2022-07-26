@@ -16,8 +16,8 @@ class Floor {
     Player *player;
 
     public:
-        std::vector<std::vector<pair<char, void *>>> gameMap;
-        std::vector<std::vector<pair<char>>> roomTracker;
+        std::vector<std::vector<std::pair<char, void *>>> gameMap;
+        std::vector<std::vector<std::pair<char>>> roomTracker;
 
         Floor();
         ~Floor();
@@ -33,7 +33,7 @@ class Floor {
         
         void generateEntities(); // Still need to track rooms
         void moveEnemies(); // Loop through map, check if enemy is next to player, if so, attack
-        void killEnemy(pair<int, int>);
+        void killEnemy(std::pair<int, int>);
 };
 
 #endif
