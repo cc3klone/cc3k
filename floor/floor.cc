@@ -6,6 +6,7 @@
 #include "floor.h"
 #include "../item/item.h"
 #include "../item/potion.h"
+#include "../item/gold.h"
 #include "../character/enemy/enemy.h"
 #include "../character/player/player.h"
 #include "../rng.h"
@@ -69,7 +70,25 @@ void Floor::generateEntities() {
         gameMap.at(coord.first).at(coord.second).second = potion;
     }
     
+    //
+    for(int i = 0; i < 10; i++) {
+        // Generate gold location
+        int room = random->generateInt(4);
+        pair<int, int> coord;
+        while(roomTracker.at(coord.first).at(coord.second) != room + '0') {
+            coord = randCoord();
+        }
+
+        // Generate gold and add to map
+        Item *gold = new Gold();
+        this->floorItems.push_back(gold);
+        gameMap.at(coord.first).at(coord.second).first = 'G';
+        gameMap.at(coord.first).at(coord.second).second = gold;
+    }
+
     delete random;
+
+    
 
 }
 
