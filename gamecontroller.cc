@@ -69,7 +69,7 @@ void GameController::loadFloor(string path) {
         while(ss >> tile) {
             floors[0].roomTracker[i].push_back(tile);
             if(tile >= '0' && tile <= 9) floors[0].gameMap[i].push_back(pair<char, void *>('.', nullptr));
-            else floors[0]gameMap[i].push_back(pair<char, void *>(tile, nullptr));
+            else floors[0].gameMap[i].push_back(pair<char, void *>(tile, nullptr));
         }
 
         i++;
@@ -131,7 +131,7 @@ void GameController::listenInput() {
                     if(floors[currentFloor].getPlayer()->playerAttack(target)) merchantIsHostile = true;
                     attack = false;
 
-                    floor[currentFloor].moveEnemies();
+                    floors[currentFloor].moveEnemies();
                 } else if(potion) {
                     floors[currentFloor].getPlayer()->playerPickup(target);
                     potion = false;
@@ -140,14 +140,14 @@ void GameController::listenInput() {
                     pair<int, int> coords = floors[currentFloor].getPlayer()->getPos();
                     
                     // Checks if player is on a stair, if so go up a floor
-                    if(floor[currentFloor].checkCoord(coords.first, coords.second) == CellType::Stair) ascendFloor();
-                    else floor[currentFloor].moveEnemies();
+                    if(floors[currentFloor].checkCoord(coords.first, coords.second) == CellType::Stair) ascendFloor();
+                    else floors[currentFloor].moveEnemies();
                 }
 
                 break;
         }
         // Output display after each command
-        floor[currentFloor].displayCmd();
+        floors[currentFloor].displayCmd();
     }
 }
 
@@ -158,7 +158,7 @@ void GameController::ascendFloor() {
         // Update floor ptr for player
         floors[currentFloor].getPlayer()->setFloor(&floors[currentFloor]);
 
-        floors[currentFloor + 1].setPlayer(floors[currentFloor].getPlayer);
+        floors[currentFloor + 1].setPlayer(floors[currentFloor].getPlayer());
         floors[currentFloor].setPlayer(nullptr);
         currentFloor++;
     } else {
