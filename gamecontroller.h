@@ -2,7 +2,6 @@
 #define _GAMECONTROLLER_H_
 #include <vector>
 #include <string>
-#include "observer.h"
 #include "floor/floor.h"
 
 class GameController {

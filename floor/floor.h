@@ -2,8 +2,6 @@
 #define _FLOOR_H_
 #include <vector>
 #include <utility>
-#include "../observer.h"
-#include "../subject.h"
 #include "../item/item.h"
 #include "../character/enemy/enemy.h"
 #include "../character/player/player.h"
