@@ -119,6 +119,7 @@ bool Player::playerMove(Direction moveDirection) {
     CellType moveCell = thisFloor->checkCoord(movePosn.first, movePosn.second);
 
     //test if-statment
+    std::cout << movePosn.first << movePosn.second << std::endl;
     if (moveCell == CellType::Room) {
         std::cout << "room" << std::endl;
     } else if (moveCell == CellType::Passage) {
