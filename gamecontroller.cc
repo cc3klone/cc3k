@@ -149,7 +149,7 @@ void GameController::listenInput() {
                 break;
         }
         // Output display after each command
-        floors[currentFloor].displayCmd();
+        floors[currentFloor].cmdDisplay();
     }
 }
 

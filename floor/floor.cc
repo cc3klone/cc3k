@@ -22,7 +22,7 @@ void Floor::generateEntities() {}
 // Fix this later to account for enemy attack too
 void Floor::moveEnemies() {
     for(auto i = gameMap.begin(); i != gameMap.end(); i++) {
-        for(auto j = *i.begin(); j != *j.end(); j++) {
+        for(auto j = (*i).begin(); j != (*i).end(); j++) {
             if(checkCoord(i, j) != CellType::Character) continue;
 
             gameMap[i][j].second->move();
@@ -32,8 +32,8 @@ void Floor::moveEnemies() {
 }
 
 void Floor::killEnemy(pair<int, int> coord) {
-    Item *inventory = gameMap[coord.first, coord.second].second->getInventory();
-    delete gameMap[coord.first, coord.second].second;
+    Item *inventory = gameMap[coord.first][coord.second].second->getInventory();
+    delete gameMap[coord.first][coord.second].second;
 
     if(inventory == nullptr) {
         // Remove Item from map
@@ -47,9 +47,9 @@ void Floor::killEnemy(pair<int, int> coord) {
 
 void Floor::cmdDisplay() {
     for(auto i = gameMap.begin(); i != gameMap.end(); i++) {
-        for(auto j = *i.begin(); j != *j.end(); j++) {
-            if(*j == '\\' && player->getHasCompass() == false) cout << '.';
-            cout << *j;
+        for(auto j = (*i).begin(); j != (*i).end(); j++) {
+            if((*j).first == '\\' && player->getHasCompass() == false) cout << '.';
+            cout << (*j).first;
         }
         cout << endl;
     }
