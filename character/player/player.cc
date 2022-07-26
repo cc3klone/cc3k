@@ -116,6 +116,7 @@ bool Player::playerAttack(Direction attackDirection) {
 
 bool Player::playerMove(Direction moveDirection) {
     std::pair<int, int> movePosn = changePosition(moveDirection, this->positionX, this->positionY, this->moveSpeed);
+    std::cout << this->positionX << " : " << this->positionY << std::endl;
     CellType moveCell = thisFloor->checkCoord(movePosn.first, movePosn.second);
 
     //test if-statment
