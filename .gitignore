@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+cc3k
 
 # Editor files
 *.swp
