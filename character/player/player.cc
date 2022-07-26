@@ -141,10 +141,7 @@ bool Player::playerMove(Direction moveDirection) {
     }
     if (moveCell == CellType::Item) {
         Gold *item = dynamic_cast<Gold *> (thisFloor->popItem(movePosn.first, movePosn.second));
-        // Gold *moveToGold = new Gold();
-        // moveToGold = dynamic_cast<Gold *>(item);
         if (item == nullptr) {
-            std::cout << "what the fuck is going on" << std::endl;
             return false;
         } else {
             item->onPickup(this);
