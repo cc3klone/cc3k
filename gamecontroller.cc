@@ -27,6 +27,7 @@ void GameController::initGame() {
     // Load floors to first floor, then copies floor layout to all floors
     loadFloor(path);
     for(int i = 1; i < 5; i++) floors[i].gameMap = floors[0].gameMap;
+    for(int i = 1; i < 5; i++) floors[i].roomTracker = floors[0].roomTracker;
 
     // Creates player object and adds it to map
     pair<int, int> coord = floors[0].randCoord();
@@ -105,7 +106,7 @@ void GameController::listenInput() {
     bool attack = false, potion = false;
     Direction target;
 
-    while(cin >> cmd) {
+    while(cin >> cmd && currentFloor != 5) {
         if (cmd == "u") {
             potion = true;
         } else if (cmd == "a") {
@@ -114,7 +115,7 @@ void GameController::listenInput() {
             cout << "Restart signal caught, restarting game" << endl;
             initGame();
         } else if (cmd == "q") {
-            cout << "Quit signal caught, ending game";
+            cout << "Quit signal caught, ending game" << endl << endl;
             endGame();
             return;
         } else {
@@ -157,11 +158,14 @@ void GameController::listenInput() {
                 cout << (int)target << endl;
                 cout << floors[currentFloor].getPlayer()->playerMove(target) << endl;
                 pair<int, int> coords = floors[currentFloor].getPlayer()->getPos();
+
+                CellType newCell = floors[currentFloor].checkCoord(coords.first, coords.second);    // Record CellType before moving character on display
+
                 floors[currentFloor].gameMap[coords.first][coords.second].first = '@';
                 floors[currentFloor].gameMap[coords.first][coords.second].second = floors[currentFloor].getPlayer();
                     
                 // Checks if player is on a stair, if so go up a floor
-                if(floors[currentFloor].checkCoord(coords.first, coords.second) == CellType::Stair) ascendFloor();
+                if(newCell == CellType::Stair) ascendFloor();
                 else floors[currentFloor].moveEnemies();
             }
         }
@@ -179,8 +183,18 @@ void GameController::ascendFloor() {
         floors[currentFloor].getPlayer()->setFloor(&floors[currentFloor]);
 
         floors[currentFloor + 1].setPlayer(floors[currentFloor].getPlayer());
-        floors[currentFloor].setPlayer(nullptr);
+        // DO NOT delete player pointer from previous floors. This is intentional.
         currentFloor++;
+
+        // Add player to next floor map
+        pair<int, int> coords = floors[currentFloor].getPlayer()->getPos();
+        floors[currentFloor].gameMap[coords.first][coords.second].first = '@';
+        floors[currentFloor].gameMap[coords.first][coords.second].second = floors[currentFloor].getPlayer();
+
+        // Move player to the upper floor and generate entities
+        cout << "You have went up a floor! Congrats on floor " << currentFloor + 1 << "!" << endl;
+        
+        floors[currentFloor].generateEntities();
     } else {
         currentFloor++;
         endGame();
@@ -192,7 +206,7 @@ void GameController::endGame() {
     if(currentFloor == 5) {
         // Score display on victory
         cout << "You Won." << endl;
-        cout << "Score: " << floors[currentFloor].getPlayer()->getScore() << endl;
+        cout << "Score: " << floors[currentFloor-1].getPlayer()->getScore() << endl;
 
         cout << endl << "Press 'C' to Continue" << endl;
 
@@ -200,9 +214,9 @@ void GameController::endGame() {
         while(cmd != 'c' && cmd != 'C') cin >> cmd;
         
         // Display credits
-        cout << "Thanks for playing CC3k!" << endl;
+        cout << endl << "Thanks for playing CC3k!" << endl;
         cout << endl << "Credits" << endl;
-        cout << "Frank Tao" << endl;
+        cout << endl << "Frank Tao" << endl;
         cout << "William Zhao" << endl;
         cout << "Lily Cao" << endl;
 
