@@ -128,6 +128,8 @@ bool Player::playerMove(Direction moveDirection) {
         std::cout << "passage" << std::endl;
     } else if (moveCell == CellType::Stair) {
         std::cout << "stair" << std::endl;
+    } else if (moveCell == CellType::Item) {
+        std::cout << "item" << std::endl;
     } else {
         std::cout << "invalid" << std::endl;
     }
@@ -136,18 +138,21 @@ bool Player::playerMove(Direction moveDirection) {
     if (moveCell == CellType::Room || moveCell == CellType::Passage || moveCell == CellType::Stair) {
         move(moveDirection);
         return true;
-    } else if (moveCell == CellType::Item) {
-        Item *item = thisFloor->popItem(movePosn.first, movePosn.second);
-        Gold *moveToGold = dynamic_cast<Gold *>(item);
-        if (moveToGold == nullptr) {
+    }
+    if (moveCell == CellType::Item) {
+        Gold *item = dynamic_cast<Gold *> (thisFloor->popItem(movePosn.first, movePosn.second));
+        // Gold *moveToGold = new Gold();
+        // moveToGold = dynamic_cast<Gold *>(item);
+        if (item == nullptr) {
+            std::cout << "what the fuck is going on" << std::endl;
             return false;
         } else {
-            moveToGold->onPickup(this);
+            item->onPickup(this);
             std::cout << "Gold: " << this->gold << std::endl;
             move(moveDirection);
+            delete item;
+            return true;
         }
-        delete moveToGold;
-        return true;
     }
     return false;
 }
