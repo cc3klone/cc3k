@@ -9,7 +9,6 @@ class Item {
         Enemy *guardingEnemy = nullptr;
   
     public:
-        Item();
         virtual void onPickup(Player *player) = 0;
         Enemy *getGuardingEnemy();
         void setGuardingEnemy(Enemy *guardingEnemy);
