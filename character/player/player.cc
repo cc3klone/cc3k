@@ -9,6 +9,7 @@
 #include "../../item/compass.h"
 #include "../enemy/merchant.h"
 #include "../../floor/floor.h"
+#include <iostream>
 
 Player::Player(int positionX, int positionY, Floor *thisFloor) {
     this->thisFloor = thisFloor;
@@ -116,6 +117,17 @@ bool Player::playerAttack(Direction attackDirection) {
 bool Player::playerMove(Direction moveDirection) {
     std::pair<int, int> movePosn = changePosition(moveDirection, this->positionX, this->positionY, this->moveSpeed);
     CellType moveCell = thisFloor->checkCoord(movePosn.first, movePosn.second);
+
+    //test if-statment
+    if (moveCell == CellType::Room) {
+        std::cout << "room" << std::endl;
+    } else if (moveCell == CellType::Passage) {
+        std::cout << "passage" << std::endl;
+    } else if (moveCell == CellType::Stair) {
+        std::cout << "stair" << std::endl;
+    } else {
+        std::cout << "invalid" << std::endl;
+    }
     
     if (moveCell == CellType::Room || moveCell == CellType::Passage || moveCell == CellType::Stair) {
         move(moveDirection);
