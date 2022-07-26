@@ -70,7 +70,7 @@ void Floor::generateEntities() {
         gameMap.at(coord.first).at(coord.second).second = potion;
     }
     
-    //
+    // Spawn gold
     for(int i = 0; i < 10; i++) {
         // Generate gold location
         int room = random->generateInt(4);
@@ -86,6 +86,55 @@ void Floor::generateEntities() {
         gameMap.at(coord.first).at(coord.second).second = gold;
     }
 
+    // Note: please spawn dragons beforehand so we know how many other enemies to spawn
+    
+    // Spawn enemies
+    int numEnemies = 20 - floorEnemies.size()
+    for(int i = 0; i < numEnemies; i++) {
+        // Generate enemy location
+        int room = random->generateInt(4);
+        pair<int, int> coord;
+        while(roomTracker.at(coord.first).at(coord.second) != room + '0') {
+            coord = randCoord();
+        }
+
+        // Generate gold and add to map
+        int n = random->generateInt(17);
+        if (n < 4) {
+            Werewolf *werewolf = new Werewolf(coord.first, coord.second, this, nullptr);
+            gameMap.at(coord.first).at(coord.second).first = 'W';
+            gameMap.at(coord.first).at(coord.second).second = werewolf;
+            this->floorEnemies.push_back(werewolf);
+        } else if (n < 7) {
+            Vampire *vampire = new Vampire(coord.first, coord.second, this, nullptr);
+            gameMap.at(coord.first).at(coord.second).first = 'V';
+            gameMap.at(coord.first).at(coord.second).second = vampire;
+            this->floorEnemies.push_back(vampire);
+        } else if (n < 12) {
+            Goblin *goblin = new Goblin(coord.first, coord.second, this, nullptr);
+            gameMap.at(coord.first).at(coord.second).first = 'N';
+            gameMap.at(coord.first).at(coord.second).second = goblin;
+            this->floorEnemies.push_back(goblin);
+        } else if (n < 14) {
+            Troll *troll = new Troll(coord.first, coord.second, this, nullptr);
+            gameMap.at(coord.first).at(coord.second).first = 'T';
+            gameMap.at(coord.first).at(coord.second).second = troll;
+            this->floorEnemies.push_back(troll);
+        } else if (n < 16) {
+            Phoenix *phoenix = new Phoenix(coord.first, coord.second, this, nullptr);
+            gameMap.at(coord.first).at(coord.second).first = 'X';
+            gameMap.at(coord.first).at(coord.second).second = phoenix;
+            this->floorEnemies.push_back(phoenix);
+        } else {
+            Merchant *merchant = new Merchant(coord.first, coord.second, this, nullptr);
+            gameMap.at(coord.first).at(coord.second).first = 'M';
+            gameMap.at(coord.first).at(coord.second).second = merchant;
+            this->floorEnemies.push_back(merchant);
+        }
+    }
+    
+    
+    
     delete random;
 
     
