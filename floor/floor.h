@@ -13,6 +13,7 @@ enum class Direction {North, East, South, West, Northeast, Northwest, Southeast,
 
 class Floor {
     std::vector<std::vector<pair<char, void *>>> gameMap;
+    std::vector<std::vector<pair<char>>> roomTracker;
     std::vector<Item *> floorItems;
     std::vector<Enemy *> floorEnemies;
     Player *player;

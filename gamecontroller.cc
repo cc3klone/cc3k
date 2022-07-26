@@ -26,7 +26,7 @@ void GameController::initGame() {
     floors.clear();
     for(int i = 0; i < 5; i++) floors.push_back(Floor());
 
-    // Load floors
+    // Load floors to first floor, then copies floor layout to all floors
     loadFloor(path);
     for(int i = 1; i < 5; i++) floors[i].gameMap = floors[0].gameMap;
 
@@ -53,6 +53,8 @@ void GameController::initGame() {
 }
 
 void GameController::loadFloor(string path) {
+    // Loads floorplan to first floor only
+
     string line;
     ifstream instream(path);
 
@@ -61,8 +63,14 @@ void GameController::loadFloor(string path) {
         stringstream ss(line);
         char tile;
 
+        // Read floor plan to Room Tracker and Game Map
+        floors[0].roomTracker.push_back(vector<char>());
         floors[0].gameMap.push_back(vector<pair<char, void *>>());
-        while(ss >> tile) gameMap[i].push_back(pair<char, void *>(tile, nullptr));
+        while(ss >> tile) {
+            floors[0].roomTracker[i].push_back(tile);
+            if(tile >= '0' && tile <= 9) floors[0].gameMap[i].push_back(pair<char, void *>('.', nullptr));
+            else floors[0]gameMap[i].push_back(pair<char, void *>(tile, nullptr));
+        }
 
         i++;
     }

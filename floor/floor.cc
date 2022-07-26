@@ -17,11 +17,11 @@ Floor::~Floor() {
 
 void Floor::generateEntities() {}
 
-void moveEnemies() {
+void Floor::moveEnemies() {
     // Empty for now. Enemies wont be able to move or attack but still should be ok for debugging
 }
 
-void killEnemy(pair<int, int> coord) {
+void Floor::killEnemy(pair<int, int> coord) {
     Item *inventory = gameMap[coord.first, coord.second].second->getInventory();
     delete gameMap[coord.first, coord.second].second;
 
