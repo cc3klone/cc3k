@@ -143,6 +143,9 @@ void Player::playerPickup(Direction pickupDirection) {
     Item *item = thisFloor->popItem(pickupPosn.first, pickupPosn.second);
     if (item == nullptr) return;
     item->onPickup(this);
+    std::cout << "Atk: " << this->currentAtk << std::endl;
+    std::cout << "HP: " << this->health << std::endl;
+    std::cout << "Def: " << this->currentDef << std::endl;
 }
 
 void Player::getAttacked(int damage) {
