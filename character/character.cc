@@ -4,7 +4,8 @@
 #include <utility>
 
 std::pair<int, int> Character::changePosition(Direction direction, int currentX, int currentY, int scalar) {
-    int newPositionX, newPositionY;
+    int newPositionX = currentX;
+    int newPositionY = currentY;
     switch (direction) {
         case Direction::North:
             newPositionY -= scalar;
