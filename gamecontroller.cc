@@ -3,10 +3,6 @@
 #include <sstream>
 #include <vector>
 #include <utility>
-// #include "character/player/human.h"
-// #include "character/player/elf.h"
-// #include "character/player/dwarf.h"
-// #include "character/player/orc.h"
 #include "character/player/player.h"
 #include "gamecontroller.h"
 #include "floor/floor.h"
@@ -33,25 +29,41 @@ void GameController::initGame() {
     for(int i = 1; i < 5; i++) floors[i].gameMap = floors[0].gameMap;
 
     // Creates player object - DOES NOT PLACE IT ONTO THE MAP
+    cout << "Please pick a class: (H)uman, (E)lf, (D)warf, (O)rc" << endl;
     char playerClass;
     cin >> playerClass;
     switch(playerClass) {
+        case 'H':
         case 'h':
-            floors[0].setPlayer(new Player(PlayerRace::Human, 0, 0, &floors[0])); // create a human
+            floors[0].setPlayer(new Player(PlayerRace::Human, 0, 0, &floors[0]));
+            cout << "You picked the human class!" << endl;
             break;
+        case 'E':
         case 'e':
-            floors[0].setPlayer(new Player(PlayerRace::Elves, 0, 0, &floors[0])); // create an elf
+            floors[0].setPlayer(new Player(PlayerRace::Elves, 0, 0, &floors[0]));
+            cout << "You picked the elf class!" << endl;
             break;
+        case 'D':
         case 'd':
-            floors[0].setPlayer(new Player(PlayerRace::Dwarf, 0, 0, &floors[0])); // etc
+            floors[0].setPlayer(new Player(PlayerRace::Dwarf, 0, 0, &floors[0]));
+            cout << "You picked the dwarf class!" << endl;
             break;
+        case 'O':
         case 'o':
-            floors[0].setPlayer(new Player(PlayerRace::Ore, 0, 0, &floors[0])); // etc
+            floors[0].setPlayer(new Player(PlayerRace::Ore, 0, 0, &floors[0]));
+            cout << "You picked the orc class!" << endl;
+            break;
+        default:
+            // Human class is default
+            floors[0].setPlayer(new Player(PlayerRace::Human, 0, 0, &floors[0]));
+            cout << "You did not pick a valid class. You have been defaulted to the human class!" << endl;
             break;
     }
 
     // Spawn entities - Order: Player, Stair, Potion, Gold, Enemy
     for(int i = 0; i < 5; i++) floors[i].generateEntities();
+
+    floors[0].cmdDisplay();
 }
 
 void GameController::loadFloor(string path) {
@@ -68,9 +80,11 @@ void GameController::loadFloor(string path) {
         // Read floor plan to Room Tracker and Game Map
         floors[0].roomTracker.push_back(vector<char>());
         floors[0].gameMap.push_back(vector<pair<char, void *>>());
-        while(ss >> tile) {
+
+        while(ss.get(tile)) {
+            cout << "|" << tile << "|" << endl;
             floors[0].roomTracker[i].push_back(tile);
-            if(tile >= '0' && tile <= 9) floors[0].gameMap[i].push_back(pair<char, void *>('.', nullptr));
+            if(tile >= '0' && tile <= '9') floors[0].gameMap[i].push_back(pair<char, void *>('.', nullptr));
             else floors[0].gameMap[i].push_back(pair<char, void *>(tile, nullptr));
         }
 
