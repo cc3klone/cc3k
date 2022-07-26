@@ -143,6 +143,7 @@ void Player::playerPickup(Direction pickupDirection) {
     Item *item = thisFloor->popItem(pickupPosn.first, pickupPosn.second);
     if (item == nullptr) return;
     item->onPickup(this);
+    delete item;
 }
 
 void Player::getAttacked(int damage) {
