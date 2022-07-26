@@ -1,6 +1,8 @@
 #ifndef _ITEM_H_
 #define _ITEM_H_
 
+class Enemy;
+
 class Item {
     protected:
         Enemy *guardingEnemy;
