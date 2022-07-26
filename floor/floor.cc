@@ -64,7 +64,7 @@ void Floor::generateEntities() {
 
         // Generate potion and add to map
         Item *potion = new Potion();
-        
+        this->floorItems.push_back(potion);
         gameMap.at(coord.first).at(coord.second).first = 'P';
         gameMap.at(coord.first).at(coord.second).second = potion;
     }
@@ -168,7 +168,6 @@ CellType Floor::checkCoord(int x, int y) {
 
 Item *Floor::popItem(int x, int y) {
     void *object;
-
     try {
         object = gameMap.at(x).at(y).second;
     } catch(out_of_range &e) {

@@ -146,6 +146,7 @@ void Player::playerPickup(Direction pickupDirection) {
     std::cout << "Atk: " << this->currentAtk << std::endl;
     std::cout << "HP: " << this->health << std::endl;
     std::cout << "Def: " << this->currentDef << std::endl;
+    delete item;
 }
 
 void Player::getAttacked(int damage) {
