@@ -89,7 +89,7 @@ void Floor::generateEntities() {
     // Note: please spawn dragons beforehand so we know how many other enemies to spawn
     
     // Spawn enemies
-    int numEnemies = 20 - floorEnemies.size()
+    int numEnemies = 20 - floorEnemies.size();
     for(int i = 0; i < numEnemies; i++) {
         // Generate enemy location
         int room = random->generateInt(4);
