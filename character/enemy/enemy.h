@@ -19,7 +19,7 @@ class Enemy : public Character {
         void getAttacked(int damage) override;
         void enemyMove();
         void inventoryDrop();
-        void transferGold(Player *player);
+        void transferGold();
         Item *getInventory();
         void setInventory(Item *inventory);
         void setProtect(Item *protectItem);

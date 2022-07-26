@@ -70,8 +70,8 @@ void Enemy::inventoryDrop() {
 
 }
 
-void Enemy::transferGold(Player *player) {
-    player->setGold(this->gold);
+void Enemy::transferGold() {
+    thisFloor->getPlayer()->setGold(this->gold);
 }
 
 
