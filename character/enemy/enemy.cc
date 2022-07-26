@@ -1,4 +1,6 @@
 #include "enemy.h"
+#include "../../item/item.h"
+#include "../../rng.h"
 
 Direction Enemy::generateDirection() {
     RNG roll;

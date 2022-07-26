@@ -2,13 +2,6 @@
 #define _PLAYER_H_
 #include "../character.h"
 #include "playervisitor.h"
-#include "humanvisitor.h"
-#include "dwarfvisitor.h"
-#include "elvesvisitor.h"
-#include "orcvisitor.h"
-#include "../../item/item.h"
-#include "../../item/compass.h"
-#include "../enemy/merchant.h"
 #include <vector>
 
 enum class PlayerRace { Human, Dwarf, Elves, Ore };

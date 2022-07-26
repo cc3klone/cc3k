@@ -1,8 +1,6 @@
 #ifndef _ENEMY_H_
 #define _ENEMY_H_
 #include "../character.h"
-#include "../../item/item.h"
-#include "../../rng.h"
 #include <map>
 
 class Enemy : public Character {

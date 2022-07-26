@@ -1,4 +1,11 @@
 #include "player.h"
+#include "humanvisitor.h"
+#include "dwarfvisitor.h"
+#include "elvesvisitor.h"
+#include "orcvisitor.h"
+#include "../../item/item.h"
+#include "../../item/compass.h"
+#include "../enemy/merchant.h"
 
 Player::Player(int positionX, int positionY, Floor *thisFloor) {
     this->thisFloor = thisFloor;
