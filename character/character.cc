@@ -2,6 +2,7 @@
 #include "../floor/floor.h"
 #include <cmath>
 #include <utility>
+#include <iostream>
 
 std::pair<int, int> Character::changePosition(Direction direction, int currentX, int currentY, int scalar) {
     int newPositionX = currentX;
@@ -43,7 +44,10 @@ std::pair<int, int> Character::changePosition(Direction direction, int currentX,
 
 
 void Character::attack(Character *target) {
-    int damage = ceil((100 / (100 + target->getCurrentDef())) * this->currentAtk);
+    std::cout << "Def: " << target->getCurrentDef() << std::endl;
+    std::cout << "Atk: " << this->currentAtk << std::endl;
+    int damage = ceil((100.0 / (100.0 + target->getCurrentDef())) * (this->currentAtk + 0.0));
+    std::cout << damage << std::endl;
     target->getAttacked(damage);
 }
 
