@@ -132,16 +132,20 @@ bool Player::playerMove(Direction moveDirection) {
         std::cout << "invalid" << std::endl;
     }
     
-    if (moveCell == CellType::Room || moveCell == CellType::Passage || moveCell == CellType::Stair || moveCell == CellType::Item) {
+
+    if (moveCell == CellType::Room || moveCell == CellType::Passage || moveCell == CellType::Stair) {
+        move(moveDirection);
+        return true;
+    } else if (moveCell == CellType::Item) {
         Item *item = thisFloor->popItem(movePosn.first, movePosn.second);
         Gold *moveToGold = dynamic_cast<Gold *>(item);
         if (moveToGold == nullptr) {
             return false;
         } else {
             moveToGold->onPickup(this);
+            move(moveDirection);
         }
         delete moveToGold;
-        move(moveDirection);
         return true;
     }
     return false;

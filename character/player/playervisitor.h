@@ -8,6 +8,6 @@ class PlayerVisitor {
         virtual void setDef(int &currentDef, int addDef);
         virtual void setHP(int &currentHP, int maxHP, int addHP);
         virtual void setGold(double &currentGold, int addGold);
-        ~PlayerVisitor();
+        virtual ~PlayerVisitor() = default;
 };
 #endif
