@@ -140,7 +140,7 @@ bool Player::playerMove(Direction moveDirection) {
         return true;
     }
     if (moveCell == CellType::Item) {
-        Gold *item = dynamic_cast<Gold *> (thisFloor->popItem(movePosn.first, movePosn.second));
+        Gold *item = dynamic_cast<Gold *> (thisFloor->checkItem(movePosn.first, movePosn.second));
         if (item == nullptr) {
             return false;
         } else {

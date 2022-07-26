@@ -272,6 +272,21 @@ Item *Floor::popItem(int x, int y) {
     return nullptr;
 }
 
+Item *Floor::checkItem(int x, int y) {
+    void *object;
+
+    // Checks if x, y
+    try {
+        object = gameMap.at(x).at(y).second;
+    } catch(out_of_range &e) {
+        return nullptr;
+    }
+    
+    // Checks that the object at x, y is actually an item
+    if(checkCoord(x, y) == CellType::Item) return static_cast<Item *>(object);
+    return nullptr;
+}
+
 Enemy *Floor::checkEnemy(int x, int y) {
     void *object;
 

@@ -30,6 +30,7 @@ class Floor {
         Player *getPlayer();
         void setPlayer(Player *);
         Item *popItem(int, int);
+        Item *checkItem(int, int);
         Enemy *checkEnemy(int, int);
         
         void generateEntities(); // Still need to track rooms
