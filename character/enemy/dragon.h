@@ -4,6 +4,6 @@
 
 class Dragon : public Enemy {
     public:
-        Dragon(int positionX, int positionY, Floor *thisFloor, Item *inventory);
+        Dragon(int positionX, int positionY, Floor *thisFloor, Item *inventory, Item *protecting);
 };
 #endif
