@@ -96,7 +96,7 @@ void Floor::generateEntities() {
     
     // Spawn enemies
     int numEnemies = 20 - floorEnemies.size();
-    cout << "numEnemies = " numEnemies << endl;
+    cout << "numEnemies = " << numEnemies << endl;
     for(int i = 0; i < numEnemies; i++) {
         // Generate enemy location
         int room = random->generateInt(4);
