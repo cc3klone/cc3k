@@ -8,7 +8,7 @@ class Floor;
 class GameController {
     std::vector<Floor> floors;
     int currentFloor;
-    string path;
+    std::string path;
 
     bool merchantIsHostile;
 
