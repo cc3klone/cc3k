@@ -128,6 +128,8 @@ bool Player::playerMove(Direction moveDirection) {
         std::cout << "passage" << std::endl;
     } else if (moveCell == CellType::Stair) {
         std::cout << "stair" << std::endl;
+    } else if (moveCell == CellType::Item) {
+        std::cout << "item" << std::endl;
     } else {
         std::cout << "invalid" << std::endl;
     }
