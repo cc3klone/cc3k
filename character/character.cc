@@ -1,4 +1,5 @@
 #include "character.h"
+#include "../floor/floor.h"
 #include <cmath>
 #include <utility>
 
