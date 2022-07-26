@@ -173,7 +173,7 @@ void Floor::killEnemy(pair<int, int> coord) {
     //Enemy *enemy = static_cast<Enemy *>(gameMap[coord.first][coord.second].second);
     Enemy *enemy = checkEnemy(coord.first, coord.second);
     Item *inventory = enemy->getInventory();
-    delete gameMap[coord.first][coord.second].second;
+    delete enemy;
     
     if(inventory == nullptr) {
         // Remove Item from map
