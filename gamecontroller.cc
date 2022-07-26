@@ -128,16 +128,16 @@ void GameController::listenInput() {
                 }
 
                 if(attack) {
-                    if(floors[currentFloor].player->playerAttack(target)) merchantIsHostile = true;
+                    if(floors[currentFloor].getPlayer()->playerAttack(target)) merchantIsHostile = true;
                     attack = false;
 
                     floor[currentFloor].moveEnemies();
                 } else if(potion) {
-                    floors[currentFloor].player->playerPickup(target);
+                    floors[currentFloor].getPlayer()->playerPickup(target);
                     potion = false;
                 } else {
-                    floors[currentFloor].player->playerMove(target);
-                    pair<int, int> coords = floors[currentFloor].player->getPos();
+                    floors[currentFloor].getPlayer()->playerMove(target);
+                    pair<int, int> coords = floors[currentFloor].getPlayer()->getPos();
                     
                     // Checks if player is on a stair, if so go up a floor
                     if(floor[currentFloor].checkCoord(coords.first, coords.second) == CellType::Stair) ascendFloor();
@@ -152,14 +152,14 @@ void GameController::listenInput() {
 }
 
 void GameController::ascendFloor() {
-    floors[currentFloor].player->resetStat();
+    floors[currentFloor].getPlayer()->resetStat();
     
     if(currentFloor != 4) {
         // Update floor ptr for player
-        floors[currentFloor].player->setFloor(&floors[currentFloor]);
+        floors[currentFloor].getPlayer()->setFloor(&floors[currentFloor]);
 
-        floors[currentFloor + 1].player = floors[currentFloor].player;
-        floors[currentFloor].player = nullptr;
+        floors[currentFloor + 1].setPlayer(floors[currentFloor].getPlayer);
+        floors[currentFloor].setPlayer(nullptr);
         currentFloor++;
     } else {
         currentFloor++;
@@ -172,7 +172,7 @@ void GameController::endGame() {
     if(currentFloor == 5) {
         // Score display on victory
         cout << "You Won." << endl;
-        cout << "Score: " << floors[currentFloor].player->getScore() << endl;
+        cout << "Score: " << floors[currentFloor].getPlayer()->getScore() << endl;
 
         cout << endl << "Press 'C' to Continue" << endl;
 
@@ -201,6 +201,6 @@ void GameController::endGame() {
     } else {
         // Score display on loss
         cout << "You Died." << endl;
-        cout << "Score: " << floors[currentFloor].player->getScore() << endl;
+        cout << "Score: " << floors[currentFloor].getPlayer()->getScore() << endl;
     }
 }

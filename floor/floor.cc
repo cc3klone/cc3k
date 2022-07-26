@@ -53,6 +53,11 @@ Player *Floor::getPlayer() {
     return player;
 }
 
+void Floor::setPlayer(Player *p) {
+    player = p;
+    return;
+}
+
 CellType Floor::checkCoord(int x, int y) {
     char val;
 

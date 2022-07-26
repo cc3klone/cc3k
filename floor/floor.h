@@ -21,11 +21,14 @@ class Floor {
         ~Floor();
 
         void cmdDisplay();
+
+        // Getters and Setters
         CellType checkCoord(int, int);
         Player *getPlayer();
+        void setPlayer(Player *);
         Item *popItem(int, int);
         Enemy *checkEnemy(int, int);
-        void setTile(int, int, char);
+        
         void generateEntities(); // Still need to track rooms
         void moveEnemies(); // Loop through map, check if enemy is next to player, if so, attack
         void killEnemy(pair<int, int>);
