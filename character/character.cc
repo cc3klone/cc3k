@@ -69,9 +69,5 @@ int Character::getCurrentDef() {
     return this->currentDef;
 }
 
-std::pair<int, int> Character::getPos() {
-    return std::make_pair(this->positionX, this->positionY);
-}
-
 Character::~Character() {}
 

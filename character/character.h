@@ -32,7 +32,6 @@ class Character {
         int getHealth();
         int getCurrentAtk();
         int getCurrentDef();
-        std::pair<int, int> getPos();
         virtual ~Character();
 };
 #endif
