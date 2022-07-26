@@ -6,6 +6,7 @@
 class Item;
 class Enemy;
 class Player;
+class RNG;
 
 enum class CellType {Invalid, Room, Wall, Passage, Stair, Item, Character};
 enum class Direction {North, East, South, West, Northeast, Northwest, Southeast, Southwest};
@@ -34,6 +35,9 @@ class Floor {
         void generateEntities(); // Still need to track rooms
         void moveEnemies(); // Loop through map, check if enemy is next to player, if so, attack
         void killEnemy(std::pair<int, int>);
+        
+        // Generates random (valid) cordinate
+        std::pair<int, int> randCoord();
 };
 
 #endif

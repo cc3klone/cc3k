@@ -28,37 +28,43 @@ void GameController::initGame() {
     loadFloor(path);
     for(int i = 1; i < 5; i++) floors[i].gameMap = floors[0].gameMap;
 
-    // Creates player object - DOES NOT PLACE IT ONTO THE MAP
+    // Creates player object and adds it to map
+    pair<int, int> coord = floors[0].randCoord();
+
     cout << "Please pick a class: (H)uman, (E)lf, (D)warf, (O)rc" << endl;
     char playerClass;
     cin >> playerClass;
     switch(playerClass) {
         case 'H':
         case 'h':
-            floors[0].setPlayer(new Player(PlayerRace::Human, 0, 0, &floors[0]));
+            floors[0].setPlayer(new Player(PlayerRace::Human, coord.first, coord.second, &floors[0]));
             cout << "You picked the human class!" << endl;
             break;
         case 'E':
         case 'e':
-            floors[0].setPlayer(new Player(PlayerRace::Elves, 0, 0, &floors[0]));
+            floors[0].setPlayer(new Player(PlayerRace::Elves, coord.first, coord.second, &floors[0]));
             cout << "You picked the elf class!" << endl;
             break;
         case 'D':
         case 'd':
-            floors[0].setPlayer(new Player(PlayerRace::Dwarf, 0, 0, &floors[0]));
+            floors[0].setPlayer(new Player(PlayerRace::Dwarf, coord.first, coord.second, &floors[0]));
             cout << "You picked the dwarf class!" << endl;
             break;
         case 'O':
         case 'o':
-            floors[0].setPlayer(new Player(PlayerRace::Ore, 0, 0, &floors[0]));
+            floors[0].setPlayer(new Player(PlayerRace::Ore, coord.first, coord.second, &floors[0]));
             cout << "You picked the orc class!" << endl;
             break;
         default:
             // Human class is default
-            floors[0].setPlayer(new Player(PlayerRace::Human, 0, 0, &floors[0]));
+            floors[0].setPlayer(new Player(PlayerRace::Human, coord.first, coord.second, &floors[0]));
             cout << "You did not pick a valid class. You have been defaulted to the human class!" << endl;
             break;
     }
+
+    // Add player to board
+    floors[0].gameMap.at(coord.first).at(coord.second).first = '@';
+    floors[0].gameMap.at(coord.first).at(coord.second).second = floors[0].getPlayer();
 
     // Spawn entities - Order: Player, Stair, Potion, Gold, Enemy
     for(int i = 0; i < 5; i++) floors[i].generateEntities();
@@ -99,70 +105,6 @@ void GameController::listenInput() {
     Direction target;
 
     while(cin >> cmd) {
-        /*
-        switch(cmd) {
-            case "u":
-                potion = true;
-                break;
-            case "a":
-                attack = true; 
-                break;
-            case "r":
-                cout << "Restart signal caught, restarting game" << endl;
-                initGame();
-                break;
-            case "q":
-                cout << "Quit signal caught, ending game";
-                endGame();
-                return;
-            default:
-                switch(cmd) {
-                    case "no":
-                        target = Direction::North;
-                        break;
-                    case "ea":
-                        target = Direction::East;
-                        break;
-                    case "so":
-                        target = Direction::South;
-                        break;
-                    case "we":
-                        target = Direction::West;
-                        break;
-                    case "ne":
-                        target = Direction::Northeast;
-                        break;
-                    case "nw":
-                        target = Direction::Northwest;
-                        break;
-                    case "se":
-                        target = Direction::Southeast;
-                        break;
-                    case "sw":
-                        target = Direction::Southwest;
-                        break;
-                }
-
-                if(attack) {
-                    if(floors[currentFloor].getPlayer()->playerAttack(target)) merchantIsHostile = true;
-                    attack = false;
-
-                    floors[currentFloor].moveEnemies();
-                } else if(potion) {
-                    floors[currentFloor].getPlayer()->playerPickup(target);
-                    potion = false;
-                } else {
-                    floors[currentFloor].getPlayer()->playerMove(target);
-                    pair<int, int> coords = floors[currentFloor].getPlayer()->getPos();
-                    
-                    // Checks if player is on a stair, if so go up a floor
-                    if(floors[currentFloor].checkCoord(coords.first, coords.second) == CellType::Stair) ascendFloor();
-                    else floors[currentFloor].moveEnemies();
-                }
-
-                break;
-        }
-        */
         if (cmd == "u") {
             potion = true;
         } else if (cmd == "a") {
@@ -201,15 +143,23 @@ void GameController::listenInput() {
                 floors[currentFloor].getPlayer()->playerPickup(target);
                 potion = false;
             } else {
+            cout << "TEST" << endl;
+                // Remove old player position from map
+                pair<int, int> oldCoords = floors[currentFloor].getPlayer()->getPos();
+                floors[currentFloor].gameMap[oldCoords.first][oldCoords.second].first = '.';
+                floors[currentFloor].gameMap[oldCoords.first][oldCoords.second].second = nullptr;
+
+                // Move character
                 floors[currentFloor].getPlayer()->playerMove(target);
                 pair<int, int> coords = floors[currentFloor].getPlayer()->getPos();
+                floors[currentFloor].gameMap[coords.first][coords.second].first = '@';
+                floors[currentFloor].gameMap[coords.first][coords.second].second = floors[currentFloor].getPlayer();
                     
                 // Checks if player is on a stair, if so go up a floor
                 if(floors[currentFloor].checkCoord(coords.first, coords.second) == CellType::Stair) ascendFloor();
                 else floors[currentFloor].moveEnemies();
             }
         }
-
 
         // Output display after each command
         floors[currentFloor].cmdDisplay();
