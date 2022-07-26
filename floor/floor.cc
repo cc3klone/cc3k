@@ -59,7 +59,6 @@ void Floor::generateEntities() {
         int room = random->generateInt(4);
         pair<int, int> coord;
         while(roomTracker.at(coord.first).at(coord.second) != room + '0') {
-        cout << "TEST " << (room + '0') << " " << roomTracker[coord.first][coord.second] << endl;
             coord = randCoord();
         }
 
