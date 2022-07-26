@@ -2,6 +2,7 @@
 #include "../../floor/floor.h"
 #include "../../item/item.h"
 #include "../../rng.h"
+#include "../player/player.h"
 
 Direction Enemy::generateDirection() {
     RNG roll;
@@ -30,7 +31,7 @@ void Enemy::enemyAttack(Character *target) {
 void Enemy::getAttacked(int damage) {
     this->health -= damage;
     if (this->health <= 0) {
-        transferGold(this->thisFloor->getPlayer());
+        transferGold();
         thisFloor->killEnemy(std::make_pair(this->positionX, this->positionY));
     }
 }
@@ -72,7 +73,8 @@ void Enemy::inventoryDrop() {
 }
 
 void Enemy::transferGold() {
-    thisFloor->getPlayer()->setGold(this->gold);
+    Player *player = this->thisFloor->getPlayer();
+    player->setGold(this->gold);
 }
 
 
