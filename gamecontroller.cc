@@ -147,7 +147,10 @@ void GameController::listenInput() {
             cout << "TEST" << endl;
                 // Remove old player position from map
                 pair<int, int> oldCoords = floors[currentFloor].getPlayer()->getPos();
-                floors[currentFloor].gameMap[oldCoords.first][oldCoords.second].first = '.';
+
+                char original = floors[currentFloor].roomTracker[oldCoords.first][oldCoords.second];
+                if(original >= '0' && original <= '9') floors[currentFloor].gameMap[oldCoords.first][oldCoords.second].first = '.';
+                else floors[currentFloor].gameMap[oldCoords.first][oldCoords.second].first = original;
                 floors[currentFloor].gameMap[oldCoords.first][oldCoords.second].second = nullptr;
 
                 // Move character
