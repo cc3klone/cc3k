@@ -7,6 +7,7 @@
 #include "../item/item.h"
 #include "../character/enemy/enemy.h"
 #include "../character/player/player.h"
+#include "../rng.h"
 using namespace std;
 
 Floor::Floor() {}
@@ -15,6 +16,21 @@ Floor::~Floor() {
     for(auto i = floorItems.begin(); i != floorItems.end(); i++) delete *i;
     for(auto i = floorEnemies.begin(); i != floorEnemies.end(); i++) delete *i;
     delete player;
+}
+
+pair<int, int> Floor::randCoord() {
+    RNG *random = new RNG();
+
+    pair<int, int> coord(random->generateInt(roomTracker.size() - 1), random->generateInt(roomTracker[0].size() - 1));
+    while(checkCoord(coord.first, coord.second) != CellType::Room) {
+        cout << "TESTING: " << coord.first << " " << coord.second << endl;
+
+        coord.first = random->generateInt(roomTracker.size() - 1);
+        coord.second = random->generateInt(roomTracker[0].size() - 1);
+    }
+
+    delete random;
+    return coord;
 }
 
 void Floor::generateEntities() {
@@ -118,7 +134,7 @@ Item *Floor::popItem(int x, int y) {
     void *object;
 
     try {
-        object = gameMap[x][y].second;
+        object = gameMap.at(x).at(y).second;
     } catch(out_of_range &e) {
         return nullptr;
     }
@@ -145,7 +161,7 @@ Enemy *Floor::checkEnemy(int x, int y) {
 
     // Checks if x, y
     try {
-        object = gameMap[x][y].second;
+        object = gameMap.at(x).at(y).second;
     } catch(out_of_range &e) {
         return nullptr;
     }
