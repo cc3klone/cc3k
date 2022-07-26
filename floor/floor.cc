@@ -169,7 +169,8 @@ void Floor::moveEnemies() {
 }
 
 void Floor::killEnemy(pair<int, int> coord) {
-    Item *inventory = static_cast<Enemy *>(gameMap[coord.first][coord.second].second)->getInventory();
+    Enemy *enemy = static_cast<Enemy *>(gameMap[coord.first][coord.second].second);
+    Item *inventory = enemy->getInventory();
     delete gameMap[coord.first][coord.second].second;
 
     if(inventory == nullptr) {
