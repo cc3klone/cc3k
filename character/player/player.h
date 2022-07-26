@@ -25,7 +25,7 @@ class Player : public Character {
         void inventoryAdd(Item *item);
         void inventoryDrop(Item *item);
         bool playerAttack(Direction attackDirection);
-        std::pair<int, int> playerMove(Direction moveDirection);
+        void playerMove(Direction moveDirection);
         void playerPickup(Direction pickupDirection);
         void getAttacked(int damage) override;
         void resetStat();
