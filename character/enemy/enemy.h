@@ -1,7 +1,7 @@
 #ifndef _ENEMY_H_
 #define _ENEMY_H_
-#include "../character.h"
 #include <map>
+#include "../character.h"
 
 class Enemy : public Character {
     Direction generateDirection();

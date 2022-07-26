@@ -1,6 +1,7 @@
 #ifndef _CHARACTER_H_
 #define _CHARACTER_H_
-#include "../floor/floor.h"
+
+class Floor;
 
 enum class AttackType { Melee };
 

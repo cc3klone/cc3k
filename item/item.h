@@ -2,6 +2,7 @@
 #define _ITEM_H_
 
 class Enemy;
+class Player;
 
 class Item {
     protected:
