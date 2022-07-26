@@ -22,7 +22,7 @@ Player::Player(int positionX, int positionY, Floor *thisFloor) {
     this->moveSpeed = 1;
     this->defaultAtk = AttackType::Melee;
     this->score = 0;
-    this->playerVisitor = HumanVisitor{};
+    this->playerVisitor = new HumanVisitor{};
     this->hasBarrierSuit = false;
     this->hasCompass = false;
     this->myRace = PlayerRace::Human;
@@ -35,7 +35,7 @@ Player::Player(PlayerRace playerRace, int positionX, int positionY, Floor *thisF
         this->maxHealth = 140;
         this->baseAtk = 20;
         this->baseDef = 20;
-        this->playerVisitor = HumanVisitor{};
+        this->playerVisitor = new HumanVisitor{};
         break;
     
     case PlayerRace::Dwarf:
@@ -43,7 +43,7 @@ Player::Player(PlayerRace playerRace, int positionX, int positionY, Floor *thisF
         this->maxHealth = 100;
         this->baseAtk = 20;
         this->baseDef = 30;
-        this->playerVisitor = DwarfVisitor{};
+        this->playerVisitor = new DwarfVisitor{};
         break;
     
     case PlayerRace::Elves:
@@ -51,7 +51,7 @@ Player::Player(PlayerRace playerRace, int positionX, int positionY, Floor *thisF
         this->maxHealth = 140;
         this->baseAtk = 30;
         this->baseDef = 10;
-        this->playerVisitor = ElvesVisitor{};
+        this->playerVisitor = new ElvesVisitor{};
         break;
     
     case PlayerRace::Ore:
@@ -59,7 +59,7 @@ Player::Player(PlayerRace playerRace, int positionX, int positionY, Floor *thisF
         this->maxHealth = 180;
         this->baseAtk = 30;
         this->baseDef = 25;
-        this->playerVisitor = OrcVisitor{};
+        this->playerVisitor = new OrcVisitor{};
         break;
 
     default:
@@ -150,19 +150,19 @@ void Player::resetStat() { //not sure if this is how you use dynamic_cast might 
 }
 
 void Player::setAtk(int addAtk) {
-    playerVisitor.setAtk(currentAtk, addAtk);
+    playerVisitor->setAtk(currentAtk, addAtk);
 }
 
 void Player::setDef(int addDef) {
-    playerVisitor.setDef(currentDef, addDef);
+    playerVisitor->setDef(currentDef, addDef);
 }
 
 void Player::setHp(int addHP) {
-    playerVisitor.setHP(health, maxHealth, addHP);
+    playerVisitor->setHP(health, maxHealth, addHP);
 }
 
 void Player::setGold(int addGold) {
-    playerVisitor.setGold(gold, addGold);
+    playerVisitor->setGold(gold, addGold);
 }
 
 void Player::setHasCompass() {
@@ -194,4 +194,5 @@ Player::~Player() {
     for(int i = 0; i < this->inventory.size(); i++) {
         delete inventory[i];
     }
+    delete playerVisitor;
 }

@@ -14,7 +14,7 @@ enum class PlayerRace { Human, Dwarf, Elves, Ore };
 class Player : public Character {
     double score;
     std::vector<Item *> inventory;
-    PlayerVisitor playerVisitor;
+    PlayerVisitor *playerVisitor;
     bool hasBarrierSuit;
     bool hasCompass;
     PlayerRace myRace;
