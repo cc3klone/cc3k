@@ -21,18 +21,20 @@ void Floor::generateEntities() {}
 
 // Fix this later to account for enemy attack too
 void Floor::moveEnemies() {
+    /*
     for(auto i = gameMap.begin(); i != gameMap.end(); i++) {
         for(auto j = (*i).begin(); j != (*i).end(); j++) {
             if(checkCoord(i, j) != CellType::Character) continue;
 
-            gameMap[i][j].second->move();
-            if(gameMap[i][j].second->isInRange(player->getPos())) gameMap[i][j].second->attack(player);
+            static_cast<Enemy *>((*j).second)->move();
+            if(static_cast<Enemy *>((*j).second)->isInRange(player->getPos())) static_cast<Enemy *>((*j).second)->attack(player);
         }
     }
+    */
 }
 
 void Floor::killEnemy(pair<int, int> coord) {
-    Item *inventory = gameMap[coord.first][coord.second].second->getInventory();
+    Item *inventory = static_cast<Enemy *>(gameMap[coord.first][coord.second].second)->getInventory();
     delete gameMap[coord.first][coord.second].second;
 
     if(inventory == nullptr) {
