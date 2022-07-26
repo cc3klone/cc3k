@@ -172,6 +172,7 @@ void Floor::killEnemy(pair<int, int> coord) {
     Enemy *enemy = static_cast<Enemy *>(gameMap[coord.first][coord.second].second);
     Item *inventory = enemy->getInventory();
     delete gameMap[coord.first][coord.second].second;
+    std::cout << "asdasd" << std::endl;
 
     if(inventory == nullptr) {
         // Remove Item from map
