@@ -37,16 +37,16 @@ void GameController::initGame() {
     cin >> playerClass;
     switch(playerClass) {
         case 'h':
-            floors[0].setPlayer(nullptr); // create a human
+            floors[0].setPlayer(new Player(PlayerRace::Human, 0, 0, &floors[0])); // create a human
             break;
         case 'e':
-            floors[0].setPlayer(nullptr); // create an elf
+            floors[0].setPlayer(new Player(PlayerRace::Elves, 0, 0, &floors[0])); // create an elf
             break;
         case 'd':
-            floors[0].setPlayer(nullptr); // etc
+            floors[0].setPlayer(new Player(PlayerRace::Dwarf, 0, 0, &floors[0])); // etc
             break;
         case 'o':
-            floors[0].setPlayer(nullptr); // etc
+            floors[0].setPlayer(new Player(PlayerRace::Ore, 0, 0, &floors[0])); // etc
             break;
     }
 
