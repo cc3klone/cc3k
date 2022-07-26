@@ -55,10 +55,6 @@ void Floor::cmdDisplay() {
     }
 }
 
-void Floor::setTile(int x, int y, char val) {
-    gameMap[x][y] = val;
-}
-
 Player *Floor::getPlayer() {
     return player;
 }
@@ -128,7 +124,7 @@ Item *Floor::popItem(int x, int y) {
     if(iter != floorItems.end()) {
         
         // Checks that the item is not being guarded
-        if(*iter->getGuardingEnemy() != nullptr) return nullptr;
+        if((*iter)->getGuardingEnemy() != nullptr) return nullptr;
 
         gameMap[x][y].first = '.';
         gameMap[x][y].second = nullptr;

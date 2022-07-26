@@ -1,3 +1,4 @@
+#include <math.h>
 #include "player.h"
 #include "humanvisitor.h"
 #include "dwarfvisitor.h"
