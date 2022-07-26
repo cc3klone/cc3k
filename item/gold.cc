@@ -1,5 +1,7 @@
 #include "gold.h"
 #include "../rng.h"
+#include "../character/player/player.h"
+#include "../character/enemy/enemy.h"
 
 Gold::Gold() {
     RNG *rng = new RNG();

@@ -1,4 +1,6 @@
 #include "item.h"
+#include "../character/player/player.h"
+#include "../character/enemy/enemy.h"
 
 Enemy *Item::getGuardingEnemy() {
     return guardingEnemy;

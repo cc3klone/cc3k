@@ -1,5 +1,7 @@
 #include "potion.h"
 #include "../rng.h"
+#include "../character/player/player.h"
+#include "../character/enemy/enemy.h"
 
 Potion::Potion() {
     RNG *rng = new RNG();

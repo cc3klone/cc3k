@@ -1,8 +1,6 @@
 #ifndef _CHARACTER_H_
 #define _CHARACTER_H_
 #include "../floor/floor.h"
-#include <cmath>
-#include <utility>
 
 enum class AttackType { Melee };
 

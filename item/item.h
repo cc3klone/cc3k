@@ -1,7 +1,5 @@
 #ifndef _ITEM_H_
 #define _ITEM_H_
-#include "../character/player/player.h"
-#include "../character/enemy/enemy.h"
 
 class Item {
     protected:
