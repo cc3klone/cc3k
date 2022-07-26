@@ -13,6 +13,7 @@ class Item {
         virtual void onPickup(Player *player) = 0;
         Enemy *getGuardingEnemy();
         void setGuardingEnemy(Enemy *guardingEnemy);
+        virtual ~Item() = default;
 };
 
 #endif

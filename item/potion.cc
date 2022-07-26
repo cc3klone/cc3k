@@ -37,5 +37,4 @@ void Potion::onPickup(Player *player) {
             player->setDef(this->effectScalar);
             break;
     }
-    delete this;
 }

@@ -22,6 +22,5 @@ int Gold::getGold() {
 
 void Gold::onPickup(Player *player) {
     player->setGold(this->value);
-    delete this;
 }
 
