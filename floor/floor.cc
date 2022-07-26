@@ -37,8 +37,8 @@ void Floor::killEnemy(pair<int, int> coord) {
 
     if(inventory == nullptr) {
         // Remove Item from map
-        gameMap[coord.first, coord.second].first = '.';
-        gameMap[coord.first, coord.second].second = nullptr;
+        gameMap[coord.first][coord.second].first = '.';
+        gameMap[coord.first][coord.second].second = nullptr;
     } else {
         // DROP ITEM HERE
     }

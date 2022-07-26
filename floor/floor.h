@@ -17,7 +17,7 @@ class Floor {
 
     public:
         std::vector<std::vector<std::pair<char, void *>>> gameMap;
-        std::vector<std::vector<std::pair<char>>> roomTracker;
+        std::vector<std::vector<char>> roomTracker;
 
         Floor();
         ~Floor();

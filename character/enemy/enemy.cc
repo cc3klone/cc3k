@@ -1,4 +1,5 @@
 #include "enemy.h"
+#include "../../floor/floor.h"
 #include "../../item/item.h"
 #include "../../rng.h"
 
