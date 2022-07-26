@@ -31,7 +31,7 @@ pair<int, int> Floor::randCoord() {
 
     pair<int, int> coord(random->generateInt(roomTracker.size() - 1), random->generateInt(roomTracker[0].size() - 1));
     while(checkCoord(coord.first, coord.second) != CellType::Room) {
-        cout << "TESTING: " << coord.first << " " << coord.second << endl;
+         cout << "TESTING: " << coord.first << " " << coord.second << endl;
 
         coord.first = random->generateInt(roomTracker.size() - 1);
         coord.second = random->generateInt(roomTracker[0].size() - 1);
@@ -96,6 +96,7 @@ void Floor::generateEntities() {
     
     // Spawn enemies
     int numEnemies = 20 - floorEnemies.size();
+    cout << "numEnemies = " numEnemies << endl;
     for(int i = 0; i < numEnemies; i++) {
         // Generate enemy location
         int room = random->generateInt(4);
@@ -104,34 +105,40 @@ void Floor::generateEntities() {
             coord = randCoord();
         }
 
-        // Generate gold and add to map
+        // Generate enemies and add to map
         int n = random->generateInt(17);
         if (n < 4) {
+	    cout << "W" << endl;
             Werewolf *werewolf = new Werewolf(coord.first, coord.second, this, nullptr);
             gameMap.at(coord.first).at(coord.second).first = 'W';
             gameMap.at(coord.first).at(coord.second).second = werewolf;
             this->floorEnemies.push_back(werewolf);
         } else if (n < 7) {
+	    cout << "V" << endl;
             Vampire *vampire = new Vampire(coord.first, coord.second, this, nullptr);
             gameMap.at(coord.first).at(coord.second).first = 'V';
             gameMap.at(coord.first).at(coord.second).second = vampire;
             this->floorEnemies.push_back(vampire);
         } else if (n < 12) {
+	    cout << "N" << endl;
             Goblin *goblin = new Goblin(coord.first, coord.second, this, nullptr);
             gameMap.at(coord.first).at(coord.second).first = 'N';
             gameMap.at(coord.first).at(coord.second).second = goblin;
             this->floorEnemies.push_back(goblin);
         } else if (n < 14) {
+	    cout << "T" << endl;
             Troll *troll = new Troll(coord.first, coord.second, this, nullptr);
             gameMap.at(coord.first).at(coord.second).first = 'T';
             gameMap.at(coord.first).at(coord.second).second = troll;
             this->floorEnemies.push_back(troll);
         } else if (n < 16) {
+	    cout << "X" << endl;
             Phoenix *phoenix = new Phoenix(coord.first, coord.second, this, nullptr);
             gameMap.at(coord.first).at(coord.second).first = 'X';
             gameMap.at(coord.first).at(coord.second).second = phoenix;
             this->floorEnemies.push_back(phoenix);
         } else {
+	    cout << "M" << endl;
             Merchant *merchant = new Merchant(coord.first, coord.second, this, nullptr);
             gameMap.at(coord.first).at(coord.second).first = 'M';
             gameMap.at(coord.first).at(coord.second).second = merchant;
