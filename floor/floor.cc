@@ -33,8 +33,21 @@ pair<int, int> Floor::randCoord() {
     return coord;
 }
 
+// Generation order: Player, Stair, Potion, Gold, Enemy
+// Player should already be generated at this point
 void Floor::generateEntities() {
+    // Generate stair location
+    pair<int, int> playerCoord = player->getPos();
+    char playerRoom = roomTracker.at(playerCoord.first).at(playerCoord.second);
 
+    pair<int, int> stairCoord = randCoord();
+    while(roomTracker.at(stairCoord.first).at(stairCoord.second) == playerRoom) {
+        stairCoord = randCoord();
+    }
+
+    // Add stairs to map
+    gameMap.at(stairCoord.first).at(stairCoord.second).first = '\\';
+    gameMap.at(stairCoord.first).at(stairCoord.second).second = nullptr;
 }
 
 // Fix this later to account for enemy attack too
@@ -68,8 +81,8 @@ void Floor::killEnemy(pair<int, int> coord) {
 void Floor::cmdDisplay() {
     for(auto i = gameMap.begin(); i != gameMap.end(); i++) {
         for(auto j = (*i).begin(); j != (*i).end(); j++) {
-            if((*j).first == '\\' && player->getHasCompass() == false) cout << '.';
-            cout << (*j).first;
+            // if((*j).first == '\\' && player->getHasCompass() == false) cout << '.';
+            /*else*/ cout << (*j).first;
         }
         cout << endl;
     }

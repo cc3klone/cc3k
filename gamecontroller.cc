@@ -67,7 +67,8 @@ void GameController::initGame() {
     floors[0].gameMap.at(coord.first).at(coord.second).second = floors[0].getPlayer();
 
     // Spawn entities - Order: Player, Stair, Potion, Gold, Enemy
-    for(int i = 0; i < 5; i++) floors[i].generateEntities();
+    // ONLY FOR FIRST FLOOR
+    floors[0].generateEntities();
 
     floors[0].cmdDisplay();
 }
