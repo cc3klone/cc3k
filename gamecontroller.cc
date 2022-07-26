@@ -86,12 +86,13 @@ void GameController::listenInput() {
     Direction target;
 
     while(cin >> cmd) {
+        /*
         switch(cmd) {
             case "u":
                 potion = true;
                 break;
             case "a":
-                attack = true;
+                attack = true; 
                 break;
             case "r":
                 cout << "Restart signal caught, restarting game" << endl;
@@ -148,6 +149,55 @@ void GameController::listenInput() {
 
                 break;
         }
+        */
+        if (cmd == "u") {
+            potion = true;
+        } else if (cmd == "a") {
+            attack = true;
+        } else if (cmd == "r") {
+            cout << "Restart signal caught, restarting game" << endl;
+            initGame();
+        } else if (cmd == "q") {
+            cout << "Quit signal caught, ending game";
+            endGame();
+            return;
+        } else {
+            if (cmd == "no") {
+                target = Direction::North;
+            } else if (cmd == "ea") {
+                target = Direction::East;
+            } else if (cmd == "so") {
+                target = Direction::South;
+            } else if (cmd == "we") {
+                target = Direction::West;
+            } else if (cmd == "ne") {
+                target = Direction::Northeast;
+            } else if (cmd == "nw") {
+                target = Direction::Northwest;
+            } else if (cmd == "se") {
+                target = Direction::Southeast;
+            } else if (cmd == "sw") {
+                target = Direction::Southwest;
+            }
+
+            if(attack) {
+                if(floors[currentFloor].getPlayer()->playerAttack(target)) merchantIsHostile = true;
+                attack = false;
+                floors[currentFloor].moveEnemies();
+            } else if(potion) {
+                floors[currentFloor].getPlayer()->playerPickup(target);
+                potion = false;
+            } else {
+                floors[currentFloor].getPlayer()->playerMove(target);
+                pair<int, int> coords = floors[currentFloor].getPlayer()->getPos();
+                    
+                // Checks if player is on a stair, if so go up a floor
+                if(floors[currentFloor].checkCoord(coords.first, coords.second) == CellType::Stair) ascendFloor();
+                else floors[currentFloor].moveEnemies();
+            }
+        }
+
+
         // Output display after each command
         floors[currentFloor].cmdDisplay();
     }
