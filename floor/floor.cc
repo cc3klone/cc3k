@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include "floor.h"
 #include "../item/item.h"
+#include "../item/potion.h"
 #include "../character/enemy/enemy.h"
 #include "../character/player/player.h"
 #include "../rng.h"
@@ -48,6 +49,29 @@ void Floor::generateEntities() {
     // Add stairs to map
     gameMap.at(stairCoord.first).at(stairCoord.second).first = '\\';
     gameMap.at(stairCoord.first).at(stairCoord.second).second = nullptr;
+
+
+    RNG *random = new RNG();
+    
+    // Spawn potions
+    for(int i = 0; i < 10; i++) {
+        // Generate potion location
+        int room = random->generateInt(4);
+        pair<int, int> coord;
+        while(roomTracker.at(coord.first).at(coord.second) != room + '0') {
+        cout << "TEST " << (room + '0') << " " << roomTracker[coord.first][coord.second] << endl;
+            coord = randCoord();
+        }
+
+        // Generate potion and add to map
+        Item *potion = new Potion();
+        
+        gameMap.at(coord.first).at(coord.second).first = 'P';
+        gameMap.at(coord.first).at(coord.second).second = potion;
+    }
+    
+    delete random;
+
 }
 
 // Fix this later to account for enemy attack too
