@@ -17,7 +17,9 @@ Floor::~Floor() {
     delete player;
 }
 
-void Floor::generateEntities() {}
+void Floor::generateEntities() {
+
+}
 
 // Fix this later to account for enemy attack too
 void Floor::moveEnemies() {
@@ -70,8 +72,8 @@ CellType Floor::checkCoord(int x, int y) {
     char val;
 
     try {
-        val = gameMap[x][y].first;
-    } catch(out_of_range &e) {
+        val = gameMap.at(x).at(y).first;
+    } catch(exception &e) {
         return CellType::Invalid;
     }
 
