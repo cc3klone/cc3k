@@ -9,6 +9,8 @@
 // #include "character/player/orc.h"
 #include "character/player/player.h"
 #include "gamecontroller.h"
+#include "floor/floor"
+
 using namespace std;
 
 GameController::GameController(string path): path{path} {}

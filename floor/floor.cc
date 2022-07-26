@@ -1,10 +1,12 @@
+#include <iostream>
 #include <vector>
 #include <algorithm>
 #include <utility>
 #include <stdexcept>
 #include "floor.h"
 #include "../item/item.h"
-#include <iostream>
+#include "../character/enemy/enemy.h"
+#include "../character/player/player.h"
 using namespace std;
 
 Floor::Floor() {}

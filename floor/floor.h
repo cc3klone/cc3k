@@ -2,9 +2,10 @@
 #define _FLOOR_H_
 #include <vector>
 #include <utility>
-#include "../item/item.h"
-#include "../character/enemy/enemy.h"
-#include "../character/player/player.h"
+
+class Item;
+class Enemy;
+class Player;
 
 enum class CellType {Invalid, Room, Wall, Passage, Stair, Item, Character};
 enum class Direction {North, East, South, West, Northeast, Northwest, Southeast, Southwest};

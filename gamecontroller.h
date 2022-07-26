@@ -2,7 +2,8 @@
 #define _GAMECONTROLLER_H_
 #include <vector>
 #include <string>
-#include "floor/floor.h"
+
+class Floor;
 
 class GameController {
     std::vector<Floor> floors;
