@@ -32,5 +32,6 @@ class Character {
         int getHealth();
         int getCurrentAtk();
         int getCurrentDef();
+        virtual ~Character();
 };
 #endif

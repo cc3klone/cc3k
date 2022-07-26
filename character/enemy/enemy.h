@@ -26,6 +26,6 @@ class Enemy : public Character {
         void setInventory(Item *inventory);
         void setProtect(Item *protectItem);
         Item *getProtect();
-        ~Enemy();
+        virtual ~Enemy();
 };
 #endif

@@ -69,3 +69,5 @@ int Character::getCurrentDef() {
     return this->currentDef;
 }
 
+Character::~Character() {}
+
