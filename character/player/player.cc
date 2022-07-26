@@ -144,6 +144,7 @@ bool Player::playerMove(Direction moveDirection) {
         // Gold *moveToGold = new Gold();
         // moveToGold = dynamic_cast<Gold *>(item);
         if (item == nullptr) {
+            std::cout << "what the fuck is going on" << std::endl;
             return false;
         } else {
             item->onPickup(this);
