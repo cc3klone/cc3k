@@ -82,7 +82,6 @@ void GameController::loadFloor(string path) {
         floors[0].gameMap.push_back(vector<pair<char, void *>>());
 
         while(ss.get(tile)) {
-            cout << "|" << tile << "|" << endl;
             floors[0].roomTracker[i].push_back(tile);
             if(tile >= '0' && tile <= '9') floors[0].gameMap[i].push_back(pair<char, void *>('.', nullptr));
             else floors[0].gameMap[i].push_back(pair<char, void *>(tile, nullptr));
