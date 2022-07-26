@@ -7,6 +7,7 @@
 #include "orcvisitor.h"
 #include "../../item/item.h"
 #include "../../item/compass.h"
+#include "../../item/gold.h"
 #include "../enemy/merchant.h"
 #include "../../floor/floor.h"
 #include <iostream>
@@ -131,7 +132,15 @@ bool Player::playerMove(Direction moveDirection) {
         std::cout << "invalid" << std::endl;
     }
     
-    if (moveCell == CellType::Room || moveCell == CellType::Passage || moveCell == CellType::Stair) {
+    if (moveCell == CellType::Room || moveCell == CellType::Passage || moveCell == CellType::Stair || moveCell == CellType::Item) {
+        Item *item = thisFloor->popItem(movePosn.first, movePosn.second);
+        Gold *moveToGold = dynamic_cast<Gold *>(item);
+        if (moveToGold == nullptr) {
+            return false;
+        } else {
+            moveToGold->onPickup(this);
+        }
+        delete moveToGold;
         move(moveDirection);
         return true;
     }
