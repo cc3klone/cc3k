@@ -1,7 +1,10 @@
 #ifndef _CHARACTER_H_
 #define _CHARACTER_H_
+#include <utility>
 
 class Floor;
+
+enum class Direction;
 
 enum class AttackType { Melee };
 

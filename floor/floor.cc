@@ -125,7 +125,7 @@ Item *Floor::popItem(int x, int y) {
 
     // Checks that the object at x, y is actually an item; Removes it from the gameMap and returns its pointer if so
     auto iter = find(floorItems.begin(), floorItems.end(), object);
-    if(iter != floorItems.last()) {
+    if(iter != floorItems.end()) {
         
         // Checks that the item is not being guarded
         if(*iter->getGuardingEnemy() != nullptr) return nullptr;

@@ -11,13 +11,14 @@ enum class CellType {Invalid, Room, Wall, Passage, Stair, Item, Character};
 enum class Direction {North, East, South, West, Northeast, Northwest, Southeast, Southwest};
 
 class Floor {
-    std::vector<std::vector<pair<char, void *>>> gameMap;
-    std::vector<std::vector<pair<char>>> roomTracker;
     std::vector<Item *> floorItems;
     std::vector<Enemy *> floorEnemies;
     Player *player;
 
     public:
+        std::vector<std::vector<pair<char, void *>>> gameMap;
+        std::vector<std::vector<pair<char>>> roomTracker;
+
         Floor();
         ~Floor();
 
