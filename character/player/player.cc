@@ -1,4 +1,5 @@
 #include <math.h>
+#include <utility>
 #include "player.h"
 #include "humanvisitor.h"
 #include "dwarfvisitor.h"
@@ -112,14 +113,15 @@ bool Player::playerAttack(Direction attackDirection) {
     }
 }
 
-void Player::playerMove(Direction moveDirection) {
+std::pair<int, int> Player::playerMove(Direction moveDirection) {
     std::pair<int, int> movePosn = changePosition(moveDirection, this->positionX, this->positionY, this->moveSpeed);
     CellType moveCell = thisFloor->checkCoord(movePosn.first, movePosn.second);
     
     if (moveCell == CellType::Room || moveCell == CellType::Passage || moveCell == CellType::Stair) {
         move(moveDirection);
-        return;
     }
+    return std::make_pair(this->positionX, this->positionY);
+
 }
 
 void Player::playerPickup(Direction pickupDirection) {
