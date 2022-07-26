@@ -150,7 +150,8 @@ void GameController::listenInput() {
                 floors[currentFloor].gameMap[oldCoords.first][oldCoords.second].second = nullptr;
 
                 // Move character
-                floors[currentFloor].getPlayer()->playerMove(target);
+                cout << (int)target << endl;
+                cout << floors[currentFloor].getPlayer()->playerMove(target) << endl;
                 pair<int, int> coords = floors[currentFloor].getPlayer()->getPos();
                 floors[currentFloor].gameMap[coords.first][coords.second].first = '@';
                 floors[currentFloor].gameMap[coords.first][coords.second].second = floors[currentFloor].getPlayer();
