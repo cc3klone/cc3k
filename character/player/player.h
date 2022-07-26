@@ -7,6 +7,7 @@
 enum class Direction;
 class Item;
 class Floor;
+class PlayerVisitor;
 
 enum class PlayerRace { Human, Dwarf, Elves, Ore };
 
