@@ -2,8 +2,6 @@
 #define _RNG_H_
 
 class RNG {
-    protected:
-        unsigned seed;
     public:
         int generateInt(int end, int start = 0);
 };
