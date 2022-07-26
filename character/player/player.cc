@@ -137,17 +137,17 @@ bool Player::playerMove(Direction moveDirection) {
         move(moveDirection);
         return true;
     } else if (moveCell == CellType::Item) {
-        Item *item = thisFloor->popItem(movePosn.first, movePosn.second);
-        Gold *moveToGold = new Gold();
-        moveToGold = dynamic_cast<Gold *>(item);
-        if (moveToGold == nullptr) {
+        Gold *item = dynamic_cast<Gold *> (thisFloor->popItem(movePosn.first, movePosn.second));
+        // Gold *moveToGold = new Gold();
+        // moveToGold = dynamic_cast<Gold *>(item);
+        if (item == nullptr) {
             return false;
         } else {
-            moveToGold->onPickup(this);
+            item->onPickup(this);
             std::cout << "Gold: " << this->gold << std::endl;
             move(moveDirection);
         }
-        delete moveToGold;
+        delete item;
         return true;
     }
     return false;
