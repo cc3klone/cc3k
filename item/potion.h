@@ -4,6 +4,7 @@
 
 enum class EffectType{ HP, AtkDmg, Def };
 
+
 class Potion : public Item {
     private:
         EffectType potionEffect;

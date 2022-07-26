@@ -6,10 +6,10 @@ class Player;
 
 class Item {
     protected:
-        Enemy *guardingEnemy;
+        Enemy *guardingEnemy = nullptr;
   
     public:
-        Item(Enemy *guardingEnemy = nullptr);
+        Item();
         virtual void onPickup(Player *player) = 0;
         Enemy *getGuardingEnemy();
         void setGuardingEnemy(Enemy *guardingEnemy);
