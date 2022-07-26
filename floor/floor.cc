@@ -19,8 +19,16 @@ Floor::~Floor() {
 
 void Floor::generateEntities() {}
 
+// Fix this later to account for enemy attack too
 void Floor::moveEnemies() {
-    // Empty for now. Enemies wont be able to move or attack but still should be ok for debugging
+    for(auto i = gameMap.begin(); i != gameMap.end(); i++) {
+        for(auto j = *i.begin(); j != *j.end(); j++) {
+            if(checkCoord(i, j) != CellType::Character) continue;
+
+            gameMap[i][j].second->move();
+            if(gameMap[i][j].second->isInRange(player->getPos())) gameMap[i][j].second->attack(player);
+        }
+    }
 }
 
 void Floor::killEnemy(pair<int, int> coord) {
@@ -126,7 +134,7 @@ Item *Floor::popItem(int x, int y) {
         gameMap[x][y].second = nullptr;
         floorItems.erase(iter);
 
-        return object;
+        return static_cast<Item *>(object);
     }
 
     return nullptr;
@@ -135,6 +143,7 @@ Item *Floor::popItem(int x, int y) {
 Enemy *Floor::checkEnemy(int x, int y) {
     void *object;
 
+    // Checks if x, y
     try {
         object = gameMap[x][y].second;
     } catch(out_of_range &e) {
@@ -142,19 +151,7 @@ Enemy *Floor::checkEnemy(int x, int y) {
     }
     
     // Checks that the object at x, y is actually an enemy
-    if(find(checkCoord(x, y) == CellType::Character)) return object;
+    if(checkCoord(x, y) == CellType::Character) return static_cast<Enemy *>(object);
     return nullptr;
 }
-
-void Floor::moveEnemies() {
-    for(auto i = gameMap.begin(); i != gameMap.end(); i++) {
-        for(auto j = *i.begin(); j != *j.end(); j++) {
-            if(checkCoord(i, j) != CellType::Character) continue;
-
-            gameMap[i][j].second->move();
-            if(gameMap[i][j].second->isInRange(player->getPos())) gameMap[i][j].second->attack(player);
-        }
-    }
-}
-
 

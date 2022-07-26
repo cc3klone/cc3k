@@ -3,6 +3,10 @@
 #include <map>
 #include "../character.h"
 
+enum class Direction;
+enum class CellType;
+class Item;
+
 class Enemy : public Character {
     Direction generateDirection();
     bool attackMissed();

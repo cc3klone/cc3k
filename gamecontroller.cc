@@ -9,7 +9,7 @@
 // #include "character/player/orc.h"
 #include "character/player/player.h"
 #include "gamecontroller.h"
-#include "floor/floor"
+#include "floor/floor.h"
 
 using namespace std;
 

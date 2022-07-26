@@ -4,7 +4,12 @@
 #include "playervisitor.h"
 #include <vector>
 
+enum class Direction;
+class Item;
+class Floor;
+
 enum class PlayerRace { Human, Dwarf, Elves, Ore };
+
 class Player : public Character {
     double score;
     std::vector<Item *> inventory;
