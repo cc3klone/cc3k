@@ -1,6 +1,6 @@
 #include "dragon.h"
 
-Dragon::Dragon(int positionX, int positionY, Floor *thisFloor, Item *inventory, Item *protecting) {
+Dragon::Dragon(int positionX, int positionY, Floor *thisFloor, Item *inventory, Item *protecting, int protectingX, int protectingY) {
     this->thisFloor = thisFloor;
     this->positionX = positionX;
     this->positionY = positionY;
@@ -15,4 +15,6 @@ Dragon::Dragon(int positionX, int positionY, Floor *thisFloor, Item *inventory, 
     this->defaultAtk = AttackType::Melee;
     setInventory(inventory);
     setProtect(protecting);
+    this->protectingX = protectingX;
+    this->protectingY = protectingY;
 }
