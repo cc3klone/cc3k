@@ -159,13 +159,15 @@ void GameController::listenInput() {
                 floors[currentFloor].gameMap[oldCoords.first][oldCoords.second].second = nullptr;
 
                 // Move character
+                cout << (int)target << endl;
+                cout << floors[currentFloor].getPlayer()->playerMove(target) << endl;
                 pair<int, int> coords = floors[currentFloor].getPlayer()->getPos();
 
                 CellType newCell = floors[currentFloor].checkCoord(coords.first, coords.second);    // Record CellType before moving character on display
 
                 floors[currentFloor].gameMap[coords.first][coords.second].first = '@';
                 floors[currentFloor].gameMap[coords.first][coords.second].second = floors[currentFloor].getPlayer();
-                    
+                
                 // Checks if player is on a stair, if so go up a floor
                 if(newCell == CellType::Stair) ascendFloor();
                 else floors[currentFloor].moveEnemies();
