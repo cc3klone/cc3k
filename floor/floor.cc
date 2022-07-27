@@ -267,8 +267,8 @@ void Floor::killEnemy(pair<int, int> coord) {
 void Floor::cmdDisplay() {
     for(auto i = gameMap.begin(); i != gameMap.end(); i++) {
         for(auto j = (*i).begin(); j != (*i).end(); j++) {
-            // if((*j).first == '\\' && player->getHasCompass() == false) cout << '.';
-            /*else*/ cout << (*j).first;
+            if((*j).first == '\\' && player->getHasCompass() == false) cout << '.';
+            else cout << (*j).first;
         }
         cout << endl;
     }
