@@ -58,6 +58,20 @@ void Enemy::enemyMove() {
         changePosition(randomDirection, tempX, tempY, this->moveSpeed);
         CellType nextCell = this->thisFloor->checkCoord(tempX, tempY);
 
+        std::cout << "failedDirection size: " << failedDirections.size(); << std::endl;
+
+        if (nextCell == CellType::Room) {
+            std::cout << "enemy room" << std::endl;
+        } else if (nextCell == CellType::Passage) {
+            std::cout << "enemy passage" << std::endl;
+        } else if (nextCell == CellType::Stair) {
+            std::cout << "enemy stair" << std::endl;
+        } else if (nextCell == CellType::Item) {
+            std::cout << "enemy item" << std::endl;
+        } else {
+            std::cout << "enemy invalid" << std::endl;
+        }
+
         if (nextCell == CellType::Room) { //enemies can only move to the "Room" cell type
             break;
         }
