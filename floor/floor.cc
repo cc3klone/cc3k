@@ -192,7 +192,8 @@ void Floor::moveEnemies() {
 	    int enemyX;
 	    int enemyY;
 	    if (dragon != nullptr) {
-		    // how to find coordinates of item??
+            enemyX = dragon->protectingX;
+            enemyY = dragon->protectingY;
 	    } else {
 		    enemyX = enemy->getPos().first;
 		    enemyY = enemy->getPos().second;
