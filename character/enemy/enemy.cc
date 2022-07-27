@@ -58,7 +58,7 @@ void Enemy::enemyMove() {
         changePosition(randomDirection, tempX, tempY, this->moveSpeed);
         CellType nextCell = this->thisFloor->checkCoord(tempX, tempY);
 
-        std::cout << "failedDirection size: " << failedDirections.size(); << std::endl;
+        std::cout << "failedDirection size: " << failedDirections.size() << std::endl;
 
         if (nextCell == CellType::Room) {
             std::cout << "enemy room" << std::endl;
