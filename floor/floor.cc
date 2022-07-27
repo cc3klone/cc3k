@@ -175,7 +175,14 @@ void Floor::moveEnemies() {
 		    enemy->enemyAttack(player);
 	    } else {
 		    if (dragon == nullptr) {
+                pair<int, int> coord = enemy->getPos();
+                char e = gameMap.at(coord.first).at(coord.second).first;
+                gameMap.at(coord.first).at(coord.second).first = '.';
+                gameMap.at(coord.first).at(coord.second).second = nullptr;
 			    enemy->enemyMove();
+                coord = enemy->getPos();
+                gameMap.at(coord.first).at(coord.second).first = e;
+                gameMap.at(coord.first).at(coord.second).second = *i;
 		    }
 	    }
     }
