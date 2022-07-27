@@ -227,7 +227,7 @@ void Player::setFloor(Floor *floor) {
 }
 
 Player::~Player() {
-    for(int i = 0; i < this->inventory.size(); i++) {
+    for(unsigned i = 0; i < this->inventory.size(); i++) {
         delete inventory[i];
     }
     delete playerVisitor;
