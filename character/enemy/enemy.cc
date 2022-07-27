@@ -63,7 +63,7 @@ void Enemy::enemyMove() {
         std::pair<int, int> p = changePosition(randomDirection, tempX, tempY, this->moveSpeed);
         CellType nextCell = this->thisFloor->checkCoord(p.first, p.second);
 
-        std::cout << "failedDirection size: " << failedDirections.size() << std::endl;
+        //std::cout << "failedDirection size: " << failedDirections.size() << std::endl;
 
         // if (nextCell == CellType::Room) {
         //     std::cout << "enemy room" << std::endl;
@@ -78,25 +78,27 @@ void Enemy::enemyMove() {
         // }
 
         if (nextCell == CellType::Room) { //enemies can only move to the "Room" cell type
-        if (randomDirection == Direction::North) {
-            std::cout << "random direction north" << std::endl;
-        } else if (randomDirection == Direction::East) {
-            std::cout << "random direction east" << std::endl;
-        } else if (randomDirection == Direction::West) {
-            std::cout << "random direction west" << std::endl;
-        } else if (randomDirection == Direction::South) {
-            std::cout << "random direction south" << std::endl;
-        } else if (randomDirection == Direction::Northeast) {
-            std::cout << "random direction northeast" << std::endl;
-        } else if (randomDirection == Direction::Northwest) {
-            std::cout << "random direction northwest" << std::endl;
-        } else if (randomDirection == Direction::Southeast) {
-            std::cout << "random direction southeasat" << std::endl;
-        } else if (randomDirection == Direction::Southwest) {
-            std::cout << "random direction southwest" << std::endl;
-        }
+        // if (randomDirection == Direction::North) {
+        //     std::cout << "random direction north" << std::endl;
+        // } else if (randomDirection == Direction::East) {
+        //     std::cout << "random direction east" << std::endl;
+        // } else if (randomDirection == Direction::West) {
+        //     std::cout << "random direction west" << std::endl;
+        // } else if (randomDirection == Direction::South) {
+        //     std::cout << "random direction south" << std::endl;
+        // } else if (randomDirection == Direction::Northeast) {
+        //     std::cout << "random direction northeast" << std::endl;
+        // } else if (randomDirection == Direction::Northwest) {
+        //     std::cout << "random direction northwest" << std::endl;
+        // } else if (randomDirection == Direction::Southeast) {
+        //     std::cout << "random direction southeasat" << std::endl;
+        // } else if (randomDirection == Direction::Southwest) {
+        //     std::cout << "random direction southwest" << std::endl;
+        // }
             std::cout << positionX << " " << positionY << std::endl;
             move(randomDirection);  
+            std::cout << "second: " << std::endl;
+            std::cout << positionX << " " << positionY << std::endl;
             return;
         }
 
