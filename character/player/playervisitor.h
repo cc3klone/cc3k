@@ -11,3 +11,4 @@ class PlayerVisitor {
         virtual ~PlayerVisitor() = default;
 };
 #endif
+

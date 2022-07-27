@@ -33,3 +33,4 @@ void PlayerVisitor::setHP(int &currentHP, int maxHP, int addHP) {
 void PlayerVisitor::setGold(double &currentGold, int addGold) {
     currentGold += addGold;
 }
+

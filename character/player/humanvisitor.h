@@ -5,3 +5,4 @@
 class HumanVisitor : public PlayerVisitor{};
 
 #endif
+

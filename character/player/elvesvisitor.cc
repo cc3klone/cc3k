@@ -17,3 +17,4 @@ void ElvesVisitor::setHP(int &currentHP, int maxHP, int addHP) {
         currentHP += abs(addHP);
     }
 }
+

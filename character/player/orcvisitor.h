@@ -8,3 +8,4 @@ class OrcVisitor : public PlayerVisitor{
 };
 
 #endif
+
