@@ -277,7 +277,7 @@ void Floor::cmdDisplay() {
     } else if (r == PlayerRace::Ore) {
         cout << "Race: Ore" << endl;
     }
-    cout << "Gold: " << player->getGold() << endl;
+    //cout << "Gold: " << player->getGold() << endl;
     cout << "HP: " << player->getHealth() << endl;
     cout << "Atk: " << player->getCurrentAtk() << endl;
     cout << "Def: " << player->getCurrentDef() << endl;
