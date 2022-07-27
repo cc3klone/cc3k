@@ -144,14 +144,12 @@ void GameController::listenInput() {
             if(attack) {
                 if(floors[currentFloor].getPlayer()->playerAttack(target)) merchantIsHostile = true;
                 attack = false;
-                std::cout << "asdasd" << std::endl;
                 floors[currentFloor].moveEnemies();
                 
             } else if(potion) {
                 floors[currentFloor].getPlayer()->playerPickup(target);
                 potion = false;
             } else {
-            cout << "TEST" << endl;
                 // Remove old player position from map
                 pair<int, int> oldCoords = floors[currentFloor].getPlayer()->getPos();
 
@@ -161,8 +159,6 @@ void GameController::listenInput() {
                 floors[currentFloor].gameMap[oldCoords.first][oldCoords.second].second = nullptr;
 
                 // Move character
-                cout << (int)target << endl;
-                cout << floors[currentFloor].getPlayer()->playerMove(target) << endl;
                 pair<int, int> coords = floors[currentFloor].getPlayer()->getPos();
 
                 CellType newCell = floors[currentFloor].checkCoord(coords.first, coords.second);    // Record CellType before moving character on display
@@ -178,10 +174,7 @@ void GameController::listenInput() {
 
         // Output display after each command
         int playerHp = floors.at(currentFloor).getPlayer()->getHealth();
-        std::cout << "playerHp " << playerHp << std::endl;
-        if (playerHp <= 0) {
-            break;
-        }
+        if (playerHp <= 0) break;
         floors[currentFloor].cmdDisplay();
     }
     endGame();
