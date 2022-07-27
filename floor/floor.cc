@@ -212,7 +212,7 @@ void Floor::moveEnemies() {
         if (enemyX <= playerX + 1 && enemyX >= playerX - 1 && enemyY <= playerY + 1 && enemyY >= playerY -1) {
             std::cout << "attacking the player" << std::endl;
             //std::cout << "player health " << player->getHealth() << std::endl;
-            //enemy->enemyAttack(player);
+            enemy->enemyAttack(player);
             } else {
                 if (dragon == nullptr) {
                     pair<int, int> coord = enemy->getPos();
@@ -262,9 +262,8 @@ void Floor::killEnemy(pair<int, int> coord) {
 void Floor::cmdDisplay() {
     for(auto i = gameMap.begin(); i != gameMap.end(); i++) {
         for(auto j = (*i).begin(); j != (*i).end(); j++) {
-            //if((*j).first == '\\' && player->getHasCompass() == false) cout << '.';
-            //else 
-            cout << (*j).first;
+            if((*j).first == '\\' && player->getHasCompass() == false) cout << '.';
+            else cout << (*j).first;
         }
         cout << endl;
     }
