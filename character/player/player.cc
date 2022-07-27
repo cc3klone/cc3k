@@ -178,7 +178,7 @@ void Player::resetStat() {
     this->currentDef = this->baseDef;
     this->hasCompass = false;
     Compass *toBeRemoved = nullptr;
-    for (int i = 0; i < inventory.size(); i++) {
+    for (unsigned i = 0; i < inventory.size(); i++) {
         toBeRemoved = dynamic_cast<Compass *> (inventory[i]);
         if (toBeRemoved != nullptr) break;
     }
