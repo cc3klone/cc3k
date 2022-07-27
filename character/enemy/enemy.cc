@@ -24,7 +24,9 @@ bool Enemy::attackMissed() {
 }
 
 void Enemy::enemyAttack(Character *target) {
+    bool temp = attackMissed();
     if (attackMissed()) { // 50% chance that enemy misses
+        std::cout << "enemy missed" << std::endl;
         return;
     }
 
