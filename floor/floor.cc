@@ -170,16 +170,14 @@ void Floor::moveEnemies() {
 
 void Floor::killEnemy(pair<int, int> coord) {
     std::cout << "enemy posn: " << coord.first << " " << coord.second << std::endl;
-    //Enemy *enemy = static_cast<Enemy *>(gameMap[coord.first][coord.second].second);
-    Enemy *enemy = checkEnemy(coord.first, coord.second);
+    Enemy *enemy = static_cast<Enemy *>(gameMap[coord.first][coord.second].second);
     Item *inventory = enemy->getInventory();
-    delete enemy;
+    delete gameMap[coord.first][coord.second].second;
     
     if(inventory == nullptr) {
         // Remove Item from map
         gameMap[coord.first][coord.second].first = '.';
         gameMap[coord.first][coord.second].second = nullptr;
-        std::cout << "asdasd" << std::endl;
     } else {
         // DROP ITEM HERE
     }
