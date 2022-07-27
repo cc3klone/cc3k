@@ -142,10 +142,6 @@ void GameController::listenInput() {
                 attack = false;
                 std::cout << "asdasd" << std::endl;
                 floors[currentFloor].moveEnemies();
-                int playerHp = floors.at(currentFloor).getPlayer()->getHealth();
-                if (playerHp <= 0) {
-                    endGame();
-                }
                 
             } else if(potion) {
                 floors[currentFloor].getPlayer()->playerPickup(target);
@@ -177,6 +173,11 @@ void GameController::listenInput() {
         }
 
         // Output display after each command
+        int playerHp = floors.at(currentFloor).getPlayer()->getHealth();
+        std::cout << "playerHp " << playerHp << std::endl;
+        if (playerHp <= 0) {
+            endGame();
+        }
         floors[currentFloor].cmdDisplay();
     }
 }
