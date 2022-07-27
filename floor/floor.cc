@@ -22,7 +22,7 @@
 #include "../rng.h"
 using namespace std;
 
-Floor::Floor() {}
+Floor::Floor(bool hasBarrier): hasBarrier{hasBarrier} {}
 
 Floor::~Floor() {
     for(auto i = floorItems.begin(); i != floorItems.end(); i++) delete *i;
@@ -35,8 +35,6 @@ pair<int, int> Floor::randCoord() {
 
     pair<int, int> coord(random->generateInt(roomTracker.size() - 1), random->generateInt(roomTracker[0].size() - 1));
     while(checkCoord(coord.first, coord.second) != CellType::Room) {
-         cout << "TESTING: " << coord.first << " " << coord.second << endl;
-
         coord.first = random->generateInt(roomTracker.size() - 1);
         coord.second = random->generateInt(roomTracker[0].size() - 1);
     }
@@ -74,6 +72,14 @@ void Floor::generateEntities() {
 
 
     RNG *random = new RNG();
+
+    // Spawn barrier suit
+    if(hasBarrier) {
+        pair<int, int> coords = randCoord();
+        BarrierSuit *suit = new BarrierSuit();
+        gameMap.at(stairCoord.first).at(stairCoord.second).first = 'B';
+        gameMap.at(stairCoord.first).at(stairCoord.second).second = suit;
+    }
     
     // Spawn potions
     for(int i = 0; i < 10; i++) {
@@ -133,7 +139,6 @@ void Floor::generateEntities() {
     
     // Spawn non-dragon enemies
     int numEnemies = 20 - floorEnemies.size();
-    cout << "numEnemies = " << numEnemies << endl;
     for(int i = 0; i < numEnemies; i++) {
         // Generate enemy location
         int room = random->generateInt(4);
@@ -145,37 +150,31 @@ void Floor::generateEntities() {
         // Generate enemies and add to map
         int n = random->generateInt(17);
         if (n < 4) {
-	    cout << "W" << endl;
             Werewolf *werewolf = new Werewolf(coord.first, coord.second, this, nullptr);
             gameMap.at(coord.first).at(coord.second).first = 'W';
             gameMap.at(coord.first).at(coord.second).second = werewolf;
             this->floorEnemies.push_back(werewolf);
         } else if (n < 7) {
-	    cout << "V" << endl;
             Vampire *vampire = new Vampire(coord.first, coord.second, this, nullptr);
             gameMap.at(coord.first).at(coord.second).first = 'V';
             gameMap.at(coord.first).at(coord.second).second = vampire;
             this->floorEnemies.push_back(vampire);
         } else if (n < 12) {
-	    cout << "N" << endl;
             Goblin *goblin = new Goblin(coord.first, coord.second, this, nullptr);
             gameMap.at(coord.first).at(coord.second).first = 'N';
             gameMap.at(coord.first).at(coord.second).second = goblin;
             this->floorEnemies.push_back(goblin);
         } else if (n < 14) {
-	    cout << "T" << endl;
             Troll *troll = new Troll(coord.first, coord.second, this, nullptr);
             gameMap.at(coord.first).at(coord.second).first = 'T';
             gameMap.at(coord.first).at(coord.second).second = troll;
             this->floorEnemies.push_back(troll);
         } else if (n < 16) {
-	    cout << "X" << endl;
             Phoenix *phoenix = new Phoenix(coord.first, coord.second, this, nullptr);
             gameMap.at(coord.first).at(coord.second).first = 'X';
             gameMap.at(coord.first).at(coord.second).second = phoenix;
             this->floorEnemies.push_back(phoenix);
         } else {
-	    cout << "M" << endl;
             Merchant *merchant = new Merchant(coord.first, coord.second, this, nullptr);
             gameMap.at(coord.first).at(coord.second).first = 'M';
             gameMap.at(coord.first).at(coord.second).second = merchant;
@@ -233,11 +232,9 @@ void Floor::moveEnemies() {
 }
 
 void Floor::killEnemy(pair<int, int> coord) {
-    std::cout << "enemy posn: " << coord.first << " " << coord.second << std::endl;
     Enemy *enemy = static_cast<Enemy *>(gameMap[coord.first][coord.second].second);
     Item *inventory = enemy->getInventory();
     int x = floorEnemies.size();
-    std::cout << "enemy size " << x << std::endl;
     for (int i = 0; i < floorEnemies.size(); i++) {
         if (floorEnemies.at(i) == enemy) {
             floorEnemies.erase(floorEnemies.begin() + i);
@@ -261,15 +258,14 @@ void Floor::killEnemy(pair<int, int> coord) {
         this->floorItems.push_back(inventory);
     }
     x = floorEnemies.size();
-    std::cout << "enemy size " << x << std::endl;
 }
 
 
 void Floor::cmdDisplay() {
     for(auto i = gameMap.begin(); i != gameMap.end(); i++) {
         for(auto j = (*i).begin(); j != (*i).end(); j++) {
-            // if((*j).first == '\\' && player->getHasCompass() == false) cout << '.';
-            /*else*/ cout << (*j).first;
+            if((*j).first == '\\' && player->getHasCompass() == false) cout << '.';
+            else cout << (*j).first;
         }
         cout << endl;
     }

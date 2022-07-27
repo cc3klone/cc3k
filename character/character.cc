@@ -44,10 +44,7 @@ std::pair<int, int> Character::changePosition(Direction direction, int currentX,
 
 
 void Character::attack(Character *target) {
-    std::cout << "Def: " << target->getCurrentDef() << std::endl;
-    std::cout << "Atk: " << this->currentAtk << std::endl;
     int damage = ceil((100.0 / (100.0 + target->getCurrentDef())) * (this->currentAtk + 0.0));
-    std::cout << damage << std::endl;
     target->getAttacked(damage);
 }
 

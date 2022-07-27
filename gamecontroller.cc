@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <utility>
+#include "rng.h"
 #include "character/player/player.h"
 #include "gamecontroller.h"
 #include "floor/floor.h"
@@ -20,9 +21,12 @@ void GameController::initGame() {
     currentFloor = 0;
     merchantIsHostile = false;
 
-    // Clear floors
+    // Clear floors and constructs 5 floors
     floors.clear();
-    for(int i = 0; i < 5; i++) floors.push_back(Floor());
+    
+    RNG *random = new RNG();
+    int suitFloor = random->generateInt(4);
+    for(int i = 0; i < 5; i++) floors.push_back(Floor(i == suitFloor));
 
     // Load floors to first floor, then copies floor layout to all floors
     loadFloor(path);
@@ -140,14 +144,12 @@ void GameController::listenInput() {
             if(attack) {
                 if(floors[currentFloor].getPlayer()->playerAttack(target)) merchantIsHostile = true;
                 attack = false;
-                std::cout << "asdasd" << std::endl;
                 floors[currentFloor].moveEnemies();
                 
             } else if(potion) {
                 floors[currentFloor].getPlayer()->playerPickup(target);
                 potion = false;
             } else {
-            cout << "TEST" << endl;
                 // Remove old player position from map
                 pair<int, int> oldCoords = floors[currentFloor].getPlayer()->getPos();
 
@@ -157,8 +159,6 @@ void GameController::listenInput() {
                 floors[currentFloor].gameMap[oldCoords.first][oldCoords.second].second = nullptr;
 
                 // Move character
-                cout << (int)target << endl;
-                cout << floors[currentFloor].getPlayer()->playerMove(target) << endl;
                 pair<int, int> coords = floors[currentFloor].getPlayer()->getPos();
 
                 CellType newCell = floors[currentFloor].checkCoord(coords.first, coords.second);    // Record CellType before moving character on display
@@ -174,10 +174,7 @@ void GameController::listenInput() {
 
         // Output display after each command
         int playerHp = floors.at(currentFloor).getPlayer()->getHealth();
-        std::cout << "playerHp " << playerHp << std::endl;
-        if (playerHp <= 0) {
-            break;
-        }
+        if (playerHp <= 0) break;
         floors[currentFloor].cmdDisplay();
     }
     endGame();
