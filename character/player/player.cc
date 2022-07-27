@@ -116,24 +116,8 @@ bool Player::playerAttack(Direction attackDirection) {
 
 bool Player::playerMove(Direction moveDirection) {
     std::pair<int, int> movePosn = changePosition(moveDirection, this->positionX, this->positionY, this->moveSpeed);
-    std::cout << this->positionX << " : " << this->positionY << std::endl;
     CellType moveCell = thisFloor->checkCoord(movePosn.first, movePosn.second);
-
-    //test if-statment
-    std::cout << movePosn.first << " : " << movePosn.second << std::endl;
-    if (moveCell == CellType::Room) {
-        std::cout << "room" << std::endl;
-    } else if (moveCell == CellType::Passage) {
-        std::cout << "passage" << std::endl;
-    } else if (moveCell == CellType::Stair) {
-        std::cout << "stair" << std::endl;
-    } else if (moveCell == CellType::Item) {
-        std::cout << "item" << std::endl;
-    } else {
-        std::cout << "invalid" << std::endl;
-    }
     
-
     if (moveCell == CellType::Room || moveCell == CellType::Passage || moveCell == CellType::Stair) {
         move(moveDirection);
         return true;
@@ -144,7 +128,6 @@ bool Player::playerMove(Direction moveDirection) {
             return false;
         } else {
             item->onPickup(this);
-            std::cout << "Gold: " << this->gold << std::endl;
             move(moveDirection);
             delete item;
             return true;
@@ -158,9 +141,6 @@ void Player::playerPickup(Direction pickupDirection) {
     Item *item = thisFloor->popItem(pickupPosn.first, pickupPosn.second);
     if (item == nullptr) return;
     item->onPickup(this);
-    std::cout << "Atk: " << this->currentAtk << std::endl;
-    std::cout << "HP: " << this->health << std::endl;
-    std::cout << "Def: " << this->currentDef << std::endl;
     delete item;
 }
 
