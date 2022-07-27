@@ -49,6 +49,24 @@ void Enemy::enemyMove() {
     while (failedDirections.size() <= 8) { //if the size of the map = 8 then all directions have failed
         randomDirection = generateDirection(); 
 
+        if (randomDirection == Direction::North) {
+            std::cout << "random direction north" << std::endl;
+        } else if (randomDirection == Direction::East) {
+            std::cout << "random direction east" << std::endl;
+        } else if (randomDirection == Direction::West) {
+            std::cout << "random direction west" << std::endl;
+        } else if (randomDirection == Direction::South) {
+            std::cout << "random direction south" << std::endl;
+        } else if (randomDirection == Direction::Northeast) {
+            std::cout << "random direction northeast" << std::endl;
+        } else if (randomDirection == Direction::Northwest) {
+            std::cout << "random direction northwest" << std::endl;
+        } else if (randomDirection == Direction::Southeast) {
+            std::cout << "random direction southeasat" << std::endl;
+        } else if (randomDirection == Direction::Southwest) {
+            std::cout << "random direction southwest" << std::endl;
+        }
+
         if (failedDirections.count(randomDirection) == 1) { //checks if the newly generated direction is already a failed direction
             continue;
         }
