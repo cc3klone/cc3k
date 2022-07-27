@@ -14,6 +14,7 @@
 #include "../character/enemy/troll.h"
 #include "../character/enemy/phoenix.h"
 #include "../character/enemy/merchant.h"
+#include "../character/enemy/dragon.h"
 #include "../character/player/player.h"
 #include "../rng.h"
 using namespace std;
@@ -154,18 +155,30 @@ void Floor::generateEntities() {
 
 }
 
-// Fix this later to account for enemy attack too
-void Floor::moveEnemies() {
-    /*
-    for(auto i = gameMap.begin(); i != gameMap.end(); i++) {
-        for(auto j = (*i).begin(); j != (*i).end(); j++) {
-            if(checkCoord(i, j) != CellType::Character) continue;
 
-            static_cast<Enemy *>((*j).second)->move();
-            if(static_cast<Enemy *>((*j).second)->isInRange(player->getPos())) static_cast<Enemy *>((*j).second)->attack(player);
-        }
+void Floor::moveEnemies() {
+    Player *player = getPlayer();
+    int playerX = player->getPos().first;
+    int playerY = player->getPos().second;
+    for(auto i = floorEnemies.begin(); i != floorEnemies.end(); i++) {
+	    Enemy *enemy = static_cast<Enemy *>(*i);
+	    Dragon *dragon = dynamic_cast<Dragon *>(*i);
+	    int enemyX;
+	    int enemyY;
+	    if (dragon != nullptr) {
+		    // how to find coordinates of item??
+	    } else {
+		    enemyX = enemy->getPos().first;
+		    enemyY = enemy->getPos().second;
+	    }
+	    if (enemyX <= playerX + 1 && enemyX >= playerX - 1 && enemyY <= playerY + 1 && enemyY >= playerY -1) {
+		    enemy->enemyAttack(player);
+	    } else {
+		    if (dragon == nullptr) {
+			    enemy->enemyMove();
+		    }
+	    }
     }
-    */
 }
 
 void Floor::killEnemy(pair<int, int> coord) {
