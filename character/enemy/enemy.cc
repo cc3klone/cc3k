@@ -97,12 +97,12 @@ void Enemy::enemyMove() {
         // } else if (randomDirection == Direction::Southwest) {
         //     std::cout << "random direction southwest" << std::endl;
         // }
-            std::cout << "first: " << std::endl;
-            std::cout << positionX << " " << positionY << std::endl;
+            // std::cout << "first: " << std::endl;
+            // std::cout << positionX << " " << positionY << std::endl;
             move(randomDirection);  
-            std::cout << "second: " << std::endl;
-            std::cout << positionX << " " << positionY << std::endl;
-            std::cout << std::endl;
+            // std::cout << "second: " << std::endl;
+            // std::cout << positionX << " " << positionY << std::endl;
+            // std::cout << std::endl;
             return;
         }
 
