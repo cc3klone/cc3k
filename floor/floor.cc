@@ -200,35 +200,34 @@ void Floor::moveEnemies() {
     int playerX = player->getPos().first;
     int playerY = player->getPos().second;
     for(auto i = floorEnemies.begin(); i != floorEnemies.end(); i++) {
-	    if (*i != nullptr) {
-		    Enemy *enemy = static_cast<Enemy *>(*i);
-		    Dragon *dragon = dynamic_cast<Dragon *>(*i);
-		    int enemyX;
-		    int enemyY;
-		    if (dragon != nullptr) {
-			    enemyX = dragon->protectingX;
-			    enemyY = dragon->protectingY;
-		    } else {
-			    enemyX = enemy->getPos().first;
-			    enemyY = enemy->getPos().second;
-		    }
-		    if (enemyX <= playerX + 1 && enemyX >= playerX - 1 && enemyY <= playerY + 1 && enemyY >= playerY -1) {
-			    std::cout << "attacking the player" << std::endl;
-			    //std::cout << "player health " << player->getHealth() << std::endl;
-			    //enemy->enemyAttack(player);
-			    //} else {
-			    if (dragon == nullptr) {
-				    pair<int, int> coord = enemy->getPos();
-				    char e = gameMap.at(coord.first).at(coord.second).first;
-				    gameMap.at(coord.first).at(coord.second).first = '.';
-				    gameMap.at(coord.first).at(coord.second).second = nullptr;
-			    	    enemy->enemyMove();
-                	    coord = enemy->getPos();
-                	    gameMap.at(coord.first).at(coord.second).first = e;
-                	    gameMap.at(coord.first).at(coord.second).second = *i;
-			    }
-		    }
-	    }
+        Enemy *enemy = static_cast<Enemy *>(*i);
+        Dragon *dragon = dynamic_cast<Dragon *>(*i);
+        int enemyX;
+        int enemyY;
+        if (dragon != nullptr) {
+            enemyX = dragon->protectingX;
+            enemyY = dragon->protectingY;
+        } else {
+            enemyX = enemy->getPos().first;
+            enemyY = enemy->getPos().second;
+        }
+        if (enemyX <= playerX + 1 && enemyX >= playerX - 1 && enemyY <= playerY + 1 && enemyY >= playerY -1) {
+            std::cout << "attacking the player" << std::endl;
+            //std::cout << "player health " << player->getHealth() << std::endl;
+            //enemy->enemyAttack(player);
+            //} else {
+            if (dragon == nullptr) {
+                pair<int, int> coord = enemy->getPos();
+                char e = gameMap.at(coord.first).at(coord.second).first;
+                gameMap.at(coord.first).at(coord.second).first = '.';
+                gameMap.at(coord.first).at(coord.second).second = nullptr;
+                    enemy->enemyMove();
+                    coord = enemy->getPos();
+                    gameMap.at(coord.first).at(coord.second).first = e;
+                    gameMap.at(coord.first).at(coord.second).second = *i;
+            }
+        }
+    
     }
 }
 
@@ -239,6 +238,9 @@ void Floor::killEnemy(pair<int, int> coord) {
     int x = floorEnemies.size();
     std::cout << "enemy size " << x << std::endl;
     delete gameMap[coord.first][coord.second].second;
+    x = floorEnemies.size();
+    std::cout << "enemy size 2 " << x << std::endl;
+
     if(inventory == nullptr) {
         // Remove Item from map
         gameMap[coord.first][coord.second].first = '.';
