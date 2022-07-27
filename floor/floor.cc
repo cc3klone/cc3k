@@ -189,6 +189,7 @@ void Floor::generateEntities() {
     while(floorEnemies.at(rand)->getInventory() != nullptr) random->generateInt(floorEnemies.size() - 1);
     floorEnemies.at(rand)->setInventory(compass);
 
+    std::cout << "floor enemy size:" << floorEnemies.size() << std::endl;
     
     delete random;
 
