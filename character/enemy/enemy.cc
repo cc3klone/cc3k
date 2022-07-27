@@ -5,6 +5,7 @@
 #include "../player/player.h"
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 Direction Enemy::generateDirection() {
     RNG roll;
