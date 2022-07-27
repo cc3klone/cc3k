@@ -179,7 +179,15 @@ void Floor::killEnemy(pair<int, int> coord) {
         gameMap[coord.first][coord.second].first = '.';
         gameMap[coord.first][coord.second].second = nullptr;
     } else {
-        // DROP ITEM HERE
+        Gold *gold = dynamic_cast<Gold *>(inventory);
+        if (gold == nullptr) { //it is a compass
+            gameMap[coord.first][coord.second].first = 'C';
+            gameMap[coord.first][coord.second].second = inventory;
+        } else {
+            gameMap[coord.first][coord.second].first = 'G';
+            gameMap[coord.first][coord.second].second = inventory;
+        }
+        this->floorItems.push_back(inventory);
     }
 }
 
