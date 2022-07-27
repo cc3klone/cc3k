@@ -38,3 +38,4 @@ void Potion::onPickup(Player *player) {
             break;
     }
 }
+

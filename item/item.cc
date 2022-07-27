@@ -9,3 +9,4 @@ Enemy *Item::getGuardingEnemy() {
 void Item::setGuardingEnemy(Enemy *enemy) {
     this->guardingEnemy = enemy;
 }
+

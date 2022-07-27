@@ -4,7 +4,7 @@
 #include <vector>
 #include <utility>
 #include "rng.h"
-#include "character/player/player.h"
+#include "./character/player/player.h"
 #include "gamecontroller.h"
 #include "floor/floor.h"
 
