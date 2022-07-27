@@ -39,6 +39,7 @@ class Floor {
         
         // Generates random (valid) cordinate
         std::pair<int, int> randCoord();
+        std::pair<int, int> getNearby(int, int);
 };
 
 #endif
