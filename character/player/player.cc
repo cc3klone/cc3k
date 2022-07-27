@@ -102,17 +102,16 @@ void Player::inventoryDrop(Item *item) {
 
 
 bool Player::playerAttack(Direction attackDirection) {
+    bool attackedMerchant = false;
     std::pair<int, int> attackPosn = changePosition(attackDirection, this->positionX, this->positionY, 1);
     Enemy *target = thisFloor->checkEnemy(attackPosn.first, attackPosn.second);
     if (target == nullptr) return false;
-    attack(target);
-    Merchant *merchant = nullptr;
-    merchant = dynamic_cast<Merchant *>(target);
+    Merchant *merchant = dynamic_cast<Merchant *>(target);
     if (merchant != nullptr) {
-        return true;
-    } else {
-        return false;
+        attackedMerchant = true;
     }
+    attack(target);
+    return attackedMerchant;
 }
 
 bool Player::playerMove(Direction moveDirection) {

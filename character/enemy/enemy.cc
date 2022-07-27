@@ -35,6 +35,7 @@ void Enemy::getAttacked(int damage) {
     std::cout << "Enemy HP: " << this->health << std::endl;
     if (this->health <= 0) {
         transferGold();
+        std::cout << "enemy posn: " << positionX << " " << positionY << std::endl;
         thisFloor->killEnemy(std::make_pair(this->positionX, this->positionY));
     }
 }

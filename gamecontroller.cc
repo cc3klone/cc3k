@@ -140,6 +140,7 @@ void GameController::listenInput() {
             if(attack) {
                 if(floors[currentFloor].getPlayer()->playerAttack(target)) merchantIsHostile = true;
                 attack = false;
+                std::cout << "asdasd" << std::endl;
                 floors[currentFloor].moveEnemies();
             } else if(potion) {
                 floors[currentFloor].getPlayer()->playerPickup(target);
