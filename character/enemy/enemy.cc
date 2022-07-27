@@ -37,7 +37,6 @@ void Enemy::getAttacked(int damage) {
         transferGold();
         std::cout << "enemy posn: " << positionX << " " << positionY << std::endl;
         thisFloor->killEnemy(std::make_pair(this->positionX, this->positionY));
-        std::cout << "bro why does this shit not work" << std::endl;
     }
 }
 
