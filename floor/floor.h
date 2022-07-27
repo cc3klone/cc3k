@@ -16,11 +16,13 @@ class Floor {
     std::vector<Enemy *> floorEnemies;
     Player *player;
 
+    bool hasBarrier;
+
     public:
         std::vector<std::vector<std::pair<char, void *>>> gameMap;
         std::vector<std::vector<char>> roomTracker;
 
-        Floor();
+        Floor(bool);
         ~Floor();
 
         void cmdDisplay();

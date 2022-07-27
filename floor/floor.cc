@@ -22,7 +22,7 @@
 #include "../rng.h"
 using namespace std;
 
-Floor::Floor() {}
+Floor::Floor(bool hasBarrier): hasBarrier{hasBarrier} {}
 
 Floor::~Floor() {
     for(auto i = floorItems.begin(); i != floorItems.end(); i++) delete *i;
@@ -74,6 +74,14 @@ void Floor::generateEntities() {
 
 
     RNG *random = new RNG();
+
+    // Spawn barrier suit
+    if(hasBarrier) {
+        pair<int, int> coords = randCoord();
+        BarrierSuit *suit = new BarrierSuit();
+        gameMap.at(stairCoord.first).at(stairCoord.second).first = 'B';
+        gameMap.at(stairCoord.first).at(stairCoord.second).second = suit;
+    }
     
     // Spawn potions
     for(int i = 0; i < 10; i++) {

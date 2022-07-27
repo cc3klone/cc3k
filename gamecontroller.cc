@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <utility>
+#include "rng.h"
 #include "character/player/player.h"
 #include "gamecontroller.h"
 #include "floor/floor.h"
@@ -20,9 +21,12 @@ void GameController::initGame() {
     currentFloor = 0;
     merchantIsHostile = false;
 
-    // Clear floors
+    // Clear floors and constructs 5 floors
     floors.clear();
-    for(int i = 0; i < 5; i++) floors.push_back(Floor());
+    
+    RNG *random = new RNG();
+    int suitFloor = random->generateInt(4);
+    for(int i = 0; i < 5; i++) floors.push_back(Floor(i == suitFloor));
 
     // Load floors to first floor, then copies floor layout to all floors
     loadFloor(path);
