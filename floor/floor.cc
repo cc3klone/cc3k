@@ -267,6 +267,20 @@ void Floor::cmdDisplay() {
         }
         cout << endl;
     }
+    PlayerRace r = player->getRace();
+    if (r == PlayerRace::Human) {
+        cout << "Race: Human" << endl;
+    } else if (r == PlayerRace::Dwarf) {
+        cout << "Race: Dwarf" << endl;
+    } else if (r == PlayerRace::Elves) {
+        cout << "Race: Elves" << endl;
+    } else if (r == PlayerRace::Ore) {
+        cout << "Race: Ore" << endl;
+    }
+    cout << "Gold: " << player->getGold() << endl;
+    cout << "HP: " << player->getHealth() << endl;
+    cout << "Atk: " << player->getCurrentAtk() << endl;
+    cout << "Def: " << player->getCurrentDef() << endl;
 }
 
 Player *Floor::getPlayer() {
