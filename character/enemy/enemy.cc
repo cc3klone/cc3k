@@ -68,15 +68,15 @@ void Enemy::enemyMove() {
         //     std::cout << "random direction southwest" << std::endl;
         // }
 
-        if (std::find(failedDirections.begin(), failedDirections.end(), randomDirection) != failedDirections.end()) { //checks if the newly generated direction is already a failed direction
+        if (std::count(failedDirections.begin(), failedDirections.end(), randomDirection)) { //checks if the newly generated direction is already a failed direction
             std::cout << "direction already invalid" << std::endl;
             continue;
         }
 
         int tempX = this->positionX;
         int tempY = this->positionY;
-        changePosition(randomDirection, tempX, tempY, this->moveSpeed);
-        CellType nextCell = this->thisFloor->checkCoord(tempX, tempY);
+        std::pair<int, int> p = changePosition(randomDirection, tempX, tempY, this->moveSpeed);
+        CellType nextCell = this->thisFloor->checkCoord(p.first, p.second);
 
         std::cout << "failedDirection size: " << failedDirections.size() << std::endl;
 
@@ -98,7 +98,7 @@ void Enemy::enemyMove() {
         }
 
         failedDirections.push_back(randomDirection);
-        
+
     }
 
     if (failedDirections.size() == 8) {
