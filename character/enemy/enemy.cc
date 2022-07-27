@@ -46,7 +46,7 @@ void Enemy::enemyMove() {
     //uses a map to store the previous failed directions (directions that the enemy cannot move to ie. stairs)
     std::map<Direction, bool> failedDirections; 
 
-    while (failedDirections.size() != 8) { //if the size of the map = 8 then all directions have failed
+    while (failedDirections.size() <= 8) { //if the size of the map = 8 then all directions have failed
         randomDirection = generateDirection(); 
 
         if (failedDirections.count(randomDirection) == 1) { //checks if the newly generated direction is already a failed direction
