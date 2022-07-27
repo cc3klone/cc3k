@@ -210,7 +210,7 @@ void Floor::moveEnemies() {
             enemyY = enemy->getPos().second;
         }
         if (enemyX <= playerX + 1 && enemyX >= playerX - 1 && enemyY <= playerY + 1 && enemyY >= playerY -1) {
-            std::cout << "attacking the player" << std::endl;
+            //std::cout << "attacking the player" << std::endl;
             //std::cout << "player health " << player->getHealth() << std::endl;
             enemy->enemyAttack(player);
             } else {
