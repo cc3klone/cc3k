@@ -24,7 +24,9 @@ bool Enemy::attackMissed() {
 }
 
 void Enemy::enemyAttack(Character *target) {
+    bool temp = attackMissed();
     if (attackMissed()) { // 50% chance that enemy misses
+        std::cout << "enemy missed" << std::endl;
         return;
     }
 
@@ -95,12 +97,12 @@ void Enemy::enemyMove() {
         // } else if (randomDirection == Direction::Southwest) {
         //     std::cout << "random direction southwest" << std::endl;
         // }
-            std::cout << "first: " << std::endl;
-            std::cout << positionX << " " << positionY << std::endl;
+            // std::cout << "first: " << std::endl;
+            // std::cout << positionX << " " << positionY << std::endl;
             move(randomDirection);  
-            std::cout << "second: " << std::endl;
-            std::cout << positionX << " " << positionY << std::endl;
-            std::cout << std::endl;
+            // std::cout << "second: " << std::endl;
+            // std::cout << positionX << " " << positionY << std::endl;
+            // std::cout << std::endl;
             return;
         }
 

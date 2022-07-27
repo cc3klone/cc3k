@@ -166,7 +166,7 @@ void Player::playerPickup(Direction pickupDirection) {
 
 void Player::getAttacked(int damage) {
     if (hasBarrierSuit) {
-        this->health -= ceil(damage/2);
+        this->health -= ceil(damage/2.0);
     } else {
         this->health -= damage;
     }
