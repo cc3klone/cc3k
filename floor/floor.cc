@@ -238,8 +238,6 @@ void Floor::killEnemy(pair<int, int> coord) {
     int x = floorEnemies.size();
     std::cout << "enemy size " << x << std::endl;
     delete gameMap[coord.first][coord.second].second;
-    x = floorEnemies.size();
-    std::cout << "enemy size 2 " << x << std::endl;
 
     if(inventory == nullptr) {
         // Remove Item from map
