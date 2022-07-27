@@ -173,7 +173,7 @@ void Player::getAttacked(int damage) {
     
 }
 
-void Player::resetStat() { //not sure if this is how you use dynamic_cast might have to change
+void Player::resetStat() {
     this->currentAtk = this->baseAtk;
     this->currentDef = this->baseDef;
     this->hasCompass = false;

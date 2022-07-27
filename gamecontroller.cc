@@ -176,10 +176,11 @@ void GameController::listenInput() {
         int playerHp = floors.at(currentFloor).getPlayer()->getHealth();
         std::cout << "playerHp " << playerHp << std::endl;
         if (playerHp <= 0) {
-            endGame();
+            break;
         }
         floors[currentFloor].cmdDisplay();
     }
+    endGame();
 }
 
 void GameController::ascendFloor() {
