@@ -8,6 +8,7 @@
 #include "../item/potion.h"
 #include "../item/gold.h"
 #include "../item/barriersuit.h"
+#include "../item/compass.h"
 #include "../character/enemy/enemy.h"
 #include "../character/enemy/dragon.h"
 #include "../character/enemy/werewolf.h"
@@ -96,17 +97,17 @@ void Floor::generateEntities() {
     }
 
     // Dragons are spawned before other player types.
-    for(int i = 0; i < gameMaps.size(); i++) {
-        for(int j = 0; j < gameMaps.at(i).size(); j++) {
-            Gold *goldPtr = dynamic_cast<Gold *>(gameMaps.at(i).at(j).second);
-            BarrierSuit *barrierPtr = dynamic_cast<BarrierSuit *>(gameMaps.at(i).at(j).second);
+    for(int i = 0; i < gameMap.size(); i++) {
+        for(int j = 0; j < gameMap.at(i).size(); j++) {
+            Gold *goldPtr = dynamic_cast<Gold *>(gameMap.at(i).at(j).second);
+            BarrierSuit *barrierPtr = dynamic_cast<BarrierSuit *>(gameMap.at(i).at(j).second);
 
             if((goldPtr != nullptr && goldPtr->getGold() >= 6) || barrierPtr != nullptr) {
                 pair<int, int> coord = getNearby(i, j);
                 
                 // Creates Dragon class and handles headers
-                Dragon *dragon = new Dragon(coord.first, coord.second, this, nullptr, (goldPtr == null) ? barrierPtr : goldPtr);
-                Item *item = static_cast<Item *>(gameMaps.at(i).at(j).second);
+                Dragon *dragon = new Dragon(coord.first, coord.second, this, nullptr, (goldPtr == nullptr) ? static_cast<Item *>(barrierPtr) : static_cast<Item *>(goldPtr));
+                Item *item = static_cast<Item *>(gameMap.at(i).at(j).second);
                 item->setGuardingEnemy(dragon);
 
                 // Adds Dragon to map
@@ -172,8 +173,8 @@ void Floor::generateEntities() {
     // Spawn Compass and gives it to a random enemy
     Compass *compass = new Compass();
     int rand = random->generateInt(floorEnemies.size() - 1);
-    while(floorEnemies.at(rand).getInventory() != nullptr) random->generateInt(floorEnemies.size() - 1);
-    floorEnemies.at(rand).setInventory(compass);
+    while(floorEnemies.at(rand)->getInventory() != nullptr) random->generateInt(floorEnemies.size() - 1);
+    floorEnemies.at(rand)->setInventory(compass);
 
     
     delete random;
