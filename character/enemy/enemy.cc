@@ -51,26 +51,10 @@ void Enemy::enemyMove() {
     while (failedDirections.size() <= 8) { //if the size of the map = 8 then all directions have failed
         randomDirection = generateDirection(); 
 
-        // if (randomDirection == Direction::North) {
-        //     std::cout << "random direction north" << std::endl;
-        // } else if (randomDirection == Direction::East) {
-        //     std::cout << "random direction east" << std::endl;
-        // } else if (randomDirection == Direction::West) {
-        //     std::cout << "random direction west" << std::endl;
-        // } else if (randomDirection == Direction::South) {
-        //     std::cout << "random direction south" << std::endl;
-        // } else if (randomDirection == Direction::Northeast) {
-        //     std::cout << "random direction northeast" << std::endl;
-        // } else if (randomDirection == Direction::Northwest) {
-        //     std::cout << "random direction northwest" << std::endl;
-        // } else if (randomDirection == Direction::Southeast) {
-        //     std::cout << "random direction southeasat" << std::endl;
-        // } else if (randomDirection == Direction::Southwest) {
-        //     std::cout << "random direction southwest" << std::endl;
-        // }
+
 
         if (std::count(failedDirections.begin(), failedDirections.end(), randomDirection)) { //checks if the newly generated direction is already a failed direction
-            std::cout << "direction already invalid" << std::endl;
+            //std::cout << "direction already invalid" << std::endl;
             continue;
         }
 
@@ -81,19 +65,37 @@ void Enemy::enemyMove() {
 
         std::cout << "failedDirection size: " << failedDirections.size() << std::endl;
 
-        if (nextCell == CellType::Room) {
-            std::cout << "enemy room" << std::endl;
-        } else if (nextCell == CellType::Passage) {
-            std::cout << "enemy passage" << std::endl;
-        } else if (nextCell == CellType::Stair) {
-            std::cout << "enemy stair" << std::endl;
-        } else if (nextCell == CellType::Item) {
-            std::cout << "enemy item" << std::endl;
-        } else {
-            std::cout << "enemy invalid" << std::endl;
-        }
+        // if (nextCell == CellType::Room) {
+        //     std::cout << "enemy room" << std::endl;
+        // } else if (nextCell == CellType::Passage) {
+        //     std::cout << "enemy passage" << std::endl;
+        // } else if (nextCell == CellType::Stair) {
+        //     std::cout << "enemy stair" << std::endl;
+        // } else if (nextCell == CellType::Item) {
+        //     std::cout << "enemy item" << std::endl;
+        // } else {
+        //     std::cout << "enemy invalid" << std::endl;
+        // }
 
         if (nextCell == CellType::Room) { //enemies can only move to the "Room" cell type
+        if (randomDirection == Direction::North) {
+            std::cout << "random direction north" << std::endl;
+        } else if (randomDirection == Direction::East) {
+            std::cout << "random direction east" << std::endl;
+        } else if (randomDirection == Direction::West) {
+            std::cout << "random direction west" << std::endl;
+        } else if (randomDirection == Direction::South) {
+            std::cout << "random direction south" << std::endl;
+        } else if (randomDirection == Direction::Northeast) {
+            std::cout << "random direction northeast" << std::endl;
+        } else if (randomDirection == Direction::Northwest) {
+            std::cout << "random direction northwest" << std::endl;
+        } else if (randomDirection == Direction::Southeast) {
+            std::cout << "random direction southeasat" << std::endl;
+        } else if (randomDirection == Direction::Southwest) {
+            std::cout << "random direction southwest" << std::endl;
+        }
+            std::cout << positionX << " " << positionY << std::endl;
             move(randomDirection);  
             return;
         }
