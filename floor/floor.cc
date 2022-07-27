@@ -45,6 +45,17 @@ pair<int, int> Floor::randCoord() {
     return coord;
 }
 
+pair<int, int> Floor::getNearby(int x, int y) {
+    for(int i = x - 1; i <= x + 1; i++) {
+        for(int j = y - 1; j <= y + 1; j++) {
+            if(checkCoord(i, j) == CellType::Room) return pair<int, int>(i, j);
+        }
+    }
+
+    // Returns -1, -1 if no valid nearby coords are found. This should never happen in a normal setting;
+    return pair<int, int>(-1, -1);
+}
+
 // Generation order: Player, Stair, Potion, Gold, Enemy
 // Player should already be generated at this point
 void Floor::generateEntities() {
@@ -99,15 +110,17 @@ void Floor::generateEntities() {
     // Dragons are spawned before other player types.
     for(int i = 0; i < gameMap.size(); i++) {
         for(int j = 0; j < gameMap.at(i).size(); j++) {
-            Gold *goldPtr = dynamic_cast<Gold *>(gameMap.at(i).at(j).second);
-            BarrierSuit *barrierPtr = dynamic_cast<BarrierSuit *>(gameMap.at(i).at(j).second);
+            if(checkCoord(i, j) != CellType::Item) continue;
+            Item *item = static_cast<Item *>(gameMap.at(i).at(j).second);
+
+            Gold *goldPtr = dynamic_cast<Gold *>(item);
+            BarrierSuit *barrierPtr = dynamic_cast<BarrierSuit *>(item);
 
             if((goldPtr != nullptr && goldPtr->getGold() >= 6) || barrierPtr != nullptr) {
                 pair<int, int> coord = getNearby(i, j);
                 
                 // Creates Dragon class and handles headers
-                Dragon *dragon = new Dragon(coord.first, coord.second, this, nullptr, (goldPtr == nullptr) ? static_cast<Item *>(barrierPtr) : static_cast<Item *>(goldPtr));
-                Item *item = static_cast<Item *>(gameMap.at(i).at(j).second);
+                Dragon *dragon = new Dragon(coord.first, coord.second, this, nullptr, item, i, j);
                 item->setGuardingEnemy(dragon);
 
                 // Adds Dragon to map
