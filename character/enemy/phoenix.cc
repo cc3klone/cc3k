@@ -16,3 +16,4 @@ Phoenix::Phoenix(int positionX, int positionY, Floor *thisFloor, Item *inventory
     setInventory(inventory);
     setProtect(nullptr);
 }
+

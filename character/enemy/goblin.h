@@ -7,3 +7,4 @@ class Goblin : public Enemy {
         Goblin(int positionX, int positionY, Floor *thisFloor, Item *inventory);
 };
 #endif
+

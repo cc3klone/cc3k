@@ -35,3 +35,4 @@ class Character {
         virtual ~Character();
 };
 #endif
+

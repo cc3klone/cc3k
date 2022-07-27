@@ -8,3 +8,4 @@ int RNG::generateInt(int end, int start) {
     std::uniform_int_distribution<> distr(start, end);
     return distr(rng);
 }
+

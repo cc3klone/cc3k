@@ -243,3 +243,4 @@ void GameController::endGame() {
         cout << "Score: " << floors[currentFloor].getPlayer()->getScore() << endl;
     }
 }
+

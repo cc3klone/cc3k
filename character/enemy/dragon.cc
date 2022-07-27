@@ -18,3 +18,4 @@ Dragon::Dragon(int positionX, int positionY, Floor *thisFloor, Item *inventory, 
     this->protectingX = protectingX;
     this->protectingY = protectingY;
 }
+

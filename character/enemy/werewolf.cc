@@ -16,3 +16,4 @@ Werewolf::Werewolf(int positionX, int positionY, Floor *thisFloor, Item *invento
     setInventory(inventory);
     setProtect(nullptr);
 }
+

@@ -7,3 +7,4 @@ class Troll : public Enemy {
         Troll(int positionX, int positionY, Floor *thisFloor, Item *inventory);
 };
 #endif
+

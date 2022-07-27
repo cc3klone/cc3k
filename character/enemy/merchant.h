@@ -7,3 +7,4 @@ class Merchant : public Enemy {
         Merchant(int positionX, int positionY, Floor *thisFloor, Item *inventory);
 };
 #endif
+

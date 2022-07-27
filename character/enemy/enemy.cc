@@ -106,3 +106,4 @@ Item *Enemy::getProtect() {
 
 Enemy::~Enemy() {
 }
+

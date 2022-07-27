@@ -29,3 +29,4 @@ class Enemy : public Character {
         virtual ~Enemy();
 };
 #endif
+

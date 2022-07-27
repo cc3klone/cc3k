@@ -7,3 +7,4 @@ class Werewolf : public Enemy {
         Werewolf(int positionX, int positionY, Floor *thisFloor, Item *inventory);
 };
 #endif
+

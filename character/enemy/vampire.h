@@ -7,3 +7,4 @@ class Vampire : public Enemy {
         Vampire(int positionX, int positionY, Floor *thisFloor, Item *inventory);
 };
 #endif
+

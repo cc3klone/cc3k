@@ -16,3 +16,4 @@ Merchant::Merchant(int positionX, int positionY, Floor *thisFloor, Item *invento
     setInventory(inventory);
     setProtect(nullptr);
 }
+

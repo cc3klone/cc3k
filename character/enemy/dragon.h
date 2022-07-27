@@ -9,3 +9,4 @@ class Dragon : public Enemy {
         Dragon(int positionX, int positionY, Floor *thisFloor, Item *inventory, Item *protecting, int protectingX, int protectingY);
 };
 #endif
+

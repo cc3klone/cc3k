@@ -7,3 +7,4 @@ class Phoenix : public Enemy {
         Phoenix(int positionX, int positionY, Floor *thisFloor, Item *inventory);
 };
 #endif
+
